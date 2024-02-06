@@ -9,3 +9,7 @@ Features
 - return waitiing list reference number
 - return which age section the child will be joining
 - allow user to check their position using the ref number
+
+## Lucidchart Flowchart
+
+![Lucidchart flowchart version 1](assets/images/readme/flowchart_v1.png)
