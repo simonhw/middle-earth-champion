@@ -30,11 +30,11 @@ def register_details():
     print('--------------------------------------------')
     print('You chose: Add my child to the waiting list.')
     print('--------------------------------------------\n')
-    fname = input('Please enter your first name: ')
-    lname = input('Please enter your last name: ')
+    fname = validate_name('Please enter your first name: ', 'first name')
+    lname = validate_name('Please enter your last name: ', 'last name')
     email = input('Please enter your email address: ')
-    cfname = input('Please enter your child\'s first name: ')
-    clname = input('Please enter your child\'s last name: ')
+    cfname = validate_name('Please enter your child\'s first name: ', 'first name')
+    clname = validate_name('Please enter your child\'s last name: ', 'last name')
     dob = input('Please enter your child\'s date of birth in the format '
                 'DD/MM/YYYY: ')
     print(f'Your details are as follows:\n'
@@ -44,6 +44,24 @@ def register_details():
           f'Child\'s DOB: : {dob}\n'
           'Are these details correct? (y/n)\n'
           )
+
+def validate_name(message, parameter):
+    '''
+    Takes in a custom message and parameter description as strings.
+    Check that the user input is a string made up only of letters.
+    While loop will continue to run until a valid name is entered
+    by the user.
+    '''
+
+    invalid = True
+    while invalid:
+        user_input = input(message)
+        if user_input.isalpha():
+            print(f'"{user_input}" is a valid {parameter}.')
+            invalid = False
+            return user_input
+        else:
+            print(f'"{user_input}" is not a valid {parameter}. Only letters without spaces are accepted.\n')
 
 print('------------------------------------------------------------------')
 print('Welcome to the Waiting List system for the 1st Dublin Scout Group.')
