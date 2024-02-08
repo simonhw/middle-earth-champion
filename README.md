@@ -13,3 +13,10 @@ Features
 ## Lucidchart Flowchart
 
 ![Lucidchart flowchart version 1](assets/images/readme/flowchart_v1.png)
+
+## Depenencies
+[Colorama](https://pypi.org/project/colorama/)
+
+## Bugs
+Validating user choice crashed the code passing a letter into int(). 
+Set choice check to '1' '2' '3' to avoid this.
