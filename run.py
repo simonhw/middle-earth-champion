@@ -1,3 +1,5 @@
+from datetime import datetime
+
 def get_user_choice():
     '''
     Get user's chosen option.
@@ -36,10 +38,11 @@ def register_details():
         fname = validate_name('Please enter your first name: ', 'first name')
         lname = validate_name('Please enter your last name: ', 'last name')
         email = input('Please enter your email address: ')
-        cfname = validate_name('Please enter your child\'s first name: ', 'first name')
-        clname = validate_name('Please enter your child\'s last name: ', 'last name')
-        dob = input('Please enter your child\'s date of birth in the format '
-                    'DD/MM/YYYY: ')
+        cfname = validate_name('Please enter your child\'s first name: ', 
+                                'first name')
+        clname = validate_name('Please enter your child\'s last name: ',
+                                'last name')
+        dob = validate_dob()
         print(f'Your details are as follows:\n'
             f'Full Name: {fname} {lname}\n'
             f'Contact email: {email}\n'
@@ -63,7 +66,8 @@ def validate_name(message, parameter):
             invalid = False
             return user_input
         else:
-            print(f'"{user_input}" is not a valid {parameter}. Only letters without spaces are accepted.\n')
+            print(f'"{user_input}" is not a valid {parameter}. '
+                   'Only letters without spaces are accepted.\n')
 
 
 def validate_yes_no(message):
@@ -81,8 +85,28 @@ def validate_yes_no(message):
             invalid = False
             return True if user_input == 'y' else False
         else:
-            print(f'"{user_input}" is not a valid choice. Only "y" or "n" are accepted.\n')
+            print(f'"{user_input}" is not a valid choice. '
+                   'Only "y" or "n" are accepted.\n')
             invalid = True
+
+
+def validate_dob():
+    '''
+    Takes in user input and check if it is a valid date of birth
+    in the specified format of DD/MM/YYYY.
+    Checks if the date of birth reflects an age of less than 18
+    years.
+    '''
+
+    invalid = True
+    while invalid:
+        user_input = input('Please enter your child\'s date of birth '
+                           'in the format DD/MM/YYYY:\n')
+        try:
+            return datetime.strptime(user_input, "%d/%m/%Y").date()
+            invalid = False
+        except ValueError:
+            print('Date of birth format must be DD/MM/YYYY.')
 
 
 print('------------------------------------------------------------------')
