@@ -1,7 +1,19 @@
 # Title Pending
 
-(Waiting List Idea)
+## Initial Discussion
 This application is designed to be run in a terminal environment. Its purpose is to take in user information and add it to a database for a club membership waiting list. The application can also be used to check if their position on the waiting list has changed.
+
+## User Stories
+### First-time Visitor Goals
+- To understand the purpose of the program.
+- To enter data without error or confusion.
+
+### Returning Visitor Goals
+- To edit incorrect data in their entry
+- To check their data and position in list
+
+### Frequent Visitor Goals
+- To edit and amend entries on the list
 
 Features
 - Take in user details: name, phone number, child's name, date of birth
