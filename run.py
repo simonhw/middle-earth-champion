@@ -30,20 +30,23 @@ def register_details():
     print('--------------------------------------------')
     print('You chose: Add my child to the waiting list.')
     print('--------------------------------------------\n')
-    fname = validate_name('Please enter your first name: ', 'first name')
-    lname = validate_name('Please enter your last name: ', 'last name')
-    email = input('Please enter your email address: ')
-    cfname = validate_name('Please enter your child\'s first name: ', 'first name')
-    clname = validate_name('Please enter your child\'s last name: ', 'last name')
-    dob = input('Please enter your child\'s date of birth in the format '
-                'DD/MM/YYYY: ')
-    print(f'Your details are as follows:\n'
-          f'Full Name: {fname} {lname}\n'
-          f'Contact email: {email}\n'
-          f'Child\'s Full Name: {cfname} {clname}\n'
-          f'Child\'s DOB: : {dob}\n'
-          'Are these details correct? (y/n)\n'
-          )
+    
+    correct = False
+    while not correct:
+        fname = validate_name('Please enter your first name: ', 'first name')
+        lname = validate_name('Please enter your last name: ', 'last name')
+        email = input('Please enter your email address: ')
+        cfname = validate_name('Please enter your child\'s first name: ', 'first name')
+        clname = validate_name('Please enter your child\'s last name: ', 'last name')
+        dob = input('Please enter your child\'s date of birth in the format '
+                    'DD/MM/YYYY: ')
+        print(f'Your details are as follows:\n'
+            f'Full Name: {fname} {lname}\n'
+            f'Contact email: {email}\n'
+            f'Child\'s Full Name: {cfname} {clname}\n'
+            f'Child\'s DOB: : {dob}\n')
+        correct = validate_yes_no('Are these details correct? (y/n)\n')
+          
 
 def validate_name(message, parameter):
     '''
@@ -57,11 +60,30 @@ def validate_name(message, parameter):
     while invalid:
         user_input = input(message)
         if user_input.isalpha():
-            print(f'"{user_input}" is a valid {parameter}.')
             invalid = False
             return user_input
         else:
             print(f'"{user_input}" is not a valid {parameter}. Only letters without spaces are accepted.\n')
+
+
+def validate_yes_no(message):
+    '''
+    Takes in a custom message and return a True or False for the 
+    user's response to a Yes/No question.
+    Validates the user's response to only be the letter y or the
+    letter n.
+    '''
+
+    invalid = True
+    while invalid:
+        user_input = input(message)
+        if user_input == 'y' or user_input == 'n':
+            invalid = False
+            return True if user_input == 'y' else False
+        else:
+            print(f'"{user_input}" is not a valid choice. Only "y" or "n" are accepted.\n')
+            invalid = True
+
 
 print('------------------------------------------------------------------')
 print('Welcome to the Waiting List system for the 1st Dublin Scout Group.')
