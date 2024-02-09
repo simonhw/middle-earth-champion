@@ -30,5 +30,6 @@ Features
 [Colorama](https://pypi.org/project/colorama/)
 
 ## Bugs
-Validating user choice crashed the code passing a letter into int(). 
+- Validating user choice crashed the code passing a letter into int(). 
 Set choice check to '1' '2' '3' to avoid this.
+- dob had time at the end in 0s. adding .date() to the end removed them.
