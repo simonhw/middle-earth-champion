@@ -1,20 +1,20 @@
-import gspread
-from google.oauth2.service_account import Credentials
+#import gspread
+#from google.oauth2.service_account import Credentials
 from datetime import datetime
 import math
 import random
 from colorama import Fore, Style
 
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
+#SCOPE = [
+#    "https://www.googleapis.com/auth/spreadsheets",
+#    "https://www.googleapis.com/auth/drive.file",
+#    "https://www.googleapis.com/auth/drive"
+#    ]
 
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
+#CREDS = Credentials.from_service_account_file('creds.json')
+#SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+#GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+#SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
 
 
 def get_user_choice():
@@ -46,9 +46,10 @@ def register_details():
     in the spreadsheet and given an unique reference number.
     '''
 
-    print('--------------------------------------------')
-    print('You chose: Add my child to the waiting list.')
-    print('--------------------------------------------')
+    title = 'You chose: Add my child to the waiting list.'
+    print(Fore.BLUE + generate_line(title))
+    print(title)
+    print(generate_line(title) + '\n' + Style.RESET_ALL)
     
     details = []
 
@@ -201,9 +202,10 @@ def get_details():
     If it does return the associated waiting list position.
     '''
 
-    print('----------------------------------------------------------')
-    print('You chose: Check my child\'s position on the waiting list.')
-    print('----------------------------------------------------------')
+    title = 'You chose: Check my child\'s position on the waiting list.'
+    print(Fore.BLUE + generate_line(title))
+    print(title)
+    print(generate_line(title) + '\n' + Style.RESET_ALL)
     
     invalid = True
     while invalid:
@@ -240,7 +242,21 @@ def get_details():
         else:
             print(Fore.RED + 'That reference does not exist. Please try again.\n'
                    + Style.RESET_ALL)
-    #print(beaver_ref)
+
+
+def generate_line(string_length):
+    '''
+    Generates a line of hypens as long as the string to be wrapped up
+    to a maximum length of 80 characters.
+    '''
+
+    hypen_string = ''
+    i = 0
+    while (i < len(string_length) and len(string_length) < 79):
+        hypen_string += '-'
+        i += 1
+    return hypen_string
+
 
 def main():
     '''
@@ -262,10 +278,9 @@ def main():
             print('Exiting program...')
         
 
-print(Fore.BLUE + '----------------------------------------------------------'
-        '--------')
-print('Welcome to the Waiting List system for the 1st Dublin Scout Group.')
-print(Fore.BLUE + '----------------------------------------------------------'
-        '--------\n' + Style.RESET_ALL)
+title = 'Welcome to the Waiting List system for the 1st Dublin Scout Group.'
+print(Fore.BLUE + generate_line(title))
+print(title)
+print(generate_line(title) + '\n' + Style.RESET_ALL)
 
 main()
