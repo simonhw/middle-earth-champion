@@ -61,11 +61,13 @@ def register_details():
         #cfname = validate_name('Your child\'s first name: ', 'first name')
         #clname = validate_name('Your child\'s last name: ', 'last name')
         dob = validate_dob()
-        #print(f'Your details are as follows:\n'
+        section = age_section(dob)
+        print(f'Your details are as follows:\n'
         #    f'Full Name: {fname} {lname}\n'
         #    f'Contact email: {email}\n'
         #    f'Child\'s Full Name: {cfname} {clname}\n'
-        #    f'Child\'s DOB: : {dob}\n')
+            f'Child\'s DOB: {dob}\n'
+            f'Section: {section}\n')
         correct = validate_yes_no('Are these details correct? (y/n)\n')
         if correct:
             print(f'Thank you, {cfname} has been added to the waiting list!')
@@ -151,6 +153,23 @@ def date_diff(date):
     '''
 
     return (datetime.now() - datetime.strptime(date, "%d/%m/%Y")).days
+
+
+def age_section(dob):
+    '''
+    Calculate the age of the person based on the input date. Returns
+    the appropriate section name for the age.
+    '''
+    str_dob = dob.strftime("%d/%m/%Y")
+    age = date_diff(str_dob) / 365.25
+    if age < 8:
+        return 'Beavers'
+    elif age < 12:
+        return 'Cubs'
+    elif age < 15:
+        return 'Scouts'
+    else:
+        return 'Ventures'
 
 
 print('------------------------------------------------------------------')
