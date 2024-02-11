@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 import math
 import random
+from colorama import Fore, Style
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -15,10 +16,6 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
 
-#beavers = SHEET.worksheet('Beavers')
-#cubs = SHEET.worksheet('Cubs')
-#scouts = SHEET.worksheet('Scouts')
-#ventures = SHEET.worksheet('Ventures')
 
 def get_user_choice():
     '''
@@ -38,8 +35,8 @@ def get_user_choice():
             #print(f'You chose option {choice}')
             break
         else:
-            print(f'\nINVALID INPUT: "{choice}". You must enter a '
-                  'number between 1 and 3.\n')
+            print(Fore.RED + f'\nINVALID INPUT: "{choice}".' + Style.RESET_ALL
+                   + ' You must enter a number between 1 and 3.\n')
     return choice
 
 def register_details():
@@ -78,10 +75,7 @@ def register_details():
             details.append(cfname)
             details.append(clname)
             details.append(str_dob)
-            #print(f'Thank you, {cfname} has been added to the {section} '
-            #       'waiting list!')
             ref = generate_reference_no(lname)
-            #print('Your reference is: ' + ref)
             details.append(ref)
             details.append(section)
             return details
@@ -102,9 +96,9 @@ def validate_name(message, parameter):
             invalid = False
             return user_input
         else:
-            print(f'"{user_input}" is not a valid {parameter}. '
-                   'Names must be at least 2 characters in length'
-                   ' and cannot contain any numbers.\n')
+            print(Fore.RED + f'"{user_input}" is not a valid {parameter}. '
+                   + Style.RESET_ALL + 'Names must be at least 2 characters '
+                   ' in length and cannot contain any numbers.\n')
 
 
 def validate_yes_no(message):
@@ -122,8 +116,8 @@ def validate_yes_no(message):
             invalid = False
             return True if user_input == 'y' else False
         else:
-            print(f'"{user_input}" is not a valid choice. '
-                   'Only "y" or "n" are accepted.\n')
+            print(Fore.RED + f'"{user_input}" is not a valid choice. '
+                  + Style.RESET_ALL + 'Only "y" or "n" are accepted.\n')
             invalid = True
 
 
@@ -141,12 +135,14 @@ def validate_dob():
                            'in the format DD/MM/YYYY:\n')
         try:
             if date_diff(user_input) < 0:
-                print('Date of birth must be in the past.')
+                print(Fore.RED + 'Invalid date: ' + Style.RESET_ALL + 
+                      'Date of birth must be in the past.')
             else:
                 return datetime.strptime(user_input, "%d/%m/%Y").date()
                 invalid = False
         except ValueError:
-            print('Date of birth format must be DD/MM/YYYY.')
+            print(Fore.RED + 'Invalid format: ' + Style.RESET_ALL + 
+                      'Date of birth format must be DD/MM/YYYY.')
 
 
 def generate_reference_no(lname):
@@ -219,35 +215,38 @@ def get_details():
         venture_refs = SHEET.worksheet('Ventures').col_values(7)
         if user_ref in beaver_refs:
             index_of_details = beaver_refs.index(user_ref)
-            print(f'Your child is number {index_of_details + 1} on the Beaver'
+            print(f'Your child is number {index_of_details} on the Beaver'
                    ' waiting list')
             invalid = False
             break
         elif user_ref in cub_refs:
             index_of_details = cub_refs.index(user_ref)
-            print(f'Your child is number {index_of_details + 1} on the Cub'
+            print(f'Your child is number {index_of_details} on the Cub'
                    ' waiting list')
             invalid = False
             break
         elif user_ref in scout_refs:
             index_of_details = scout_refs.index(user_ref)
-            print(f'Your child is number {index_of_details + 1} on the Scout'
+            print(f'Your child is number {index_of_details} on the Scout'
                    ' waiting list')
             invalid = False
             break
         elif user_ref in venture_refs:
             index_of_details = venture_refs.index(user_ref)
-            print(f'Your child is number {index_of_details + 1} on the Venture'
+            print(f'Your child is number {index_of_details} on the Venture'
                    ' waiting list')
             invalid = False
             break
         else:
-            print('That reference does not exist. Please try again.')
+            print(Fore.RED + 'That reference does not exist. Please try again.\n'
+                   + Style.RESET_ALL)
     #print(beaver_ref)
 
-print('------------------------------------------------------------------')
+print(Fore.BLUE + '----------------------------------------------------------'
+        '--------')
 print('Welcome to the Waiting List system for the 1st Dublin Scout Group.')
-print('------------------------------------------------------------------\n')
+print(Fore.BLUE + '----------------------------------------------------------'
+        '--------\n' + Style.RESET_ALL)
 
 choice = get_user_choice()
 if choice == '1':
