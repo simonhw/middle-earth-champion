@@ -37,13 +37,11 @@ def register_details():
     
     correct = False
     while not correct:
-        fname = validate_name('Please enter your first name: ', 'first name')
-        lname = validate_name('Please enter your last name: ', 'last name')
-        email = input('Please enter your email address: ')
-        cfname = validate_name('Please enter your child\'s first name: ', 
-                                'first name')
-        clname = validate_name('Please enter your child\'s last name: ',
-                                'last name')
+        fname = validate_name('Your first name: ', 'first name')
+        lname = validate_name('Your last name: ', 'last name')
+        email = input('Your email address: ')
+        cfname = validate_name('Your child\'s first name: ', 'first name')
+        clname = validate_name('Your child\'s last name: ', 'last name')
         dob = validate_dob()
         print(f'Your details are as follows:\n'
             f'Full Name: {fname} {lname}\n'
@@ -66,13 +64,14 @@ def validate_name(message, parameter):
 
     invalid = True
     while invalid:
-        user_input = input(message)
-        if user_input.isalpha():
+        user_input = input(message).strip()
+        if (user_input.isalpha() and len(user_input) > 1):
             invalid = False
             return user_input
         else:
             print(f'"{user_input}" is not a valid {parameter}. '
-                   'Only letters without spaces are accepted.\n')
+                   'Names must be at least 2 characters in length'
+                   ' and cannot contain any numbers.\n')
 
 
 def validate_yes_no(message):
