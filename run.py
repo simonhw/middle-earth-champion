@@ -242,18 +242,30 @@ def get_details():
                    + Style.RESET_ALL)
     #print(beaver_ref)
 
+def main():
+    '''
+    Run program functions until user wants to exit.
+    '''
+    user_continue = True
+    while user_continue:
+        choice = get_user_choice()
+        if choice == '1':
+            data_entered = register_details()
+            #print(data_entered)
+            push_details(data_entered)
+        elif choice == '2':
+            get_details()
+        else:
+            print(f'Choice: {choice}')
+        user_continue = validate_yes_no('Do you want to return to the main menu? (y/n)\n')
+        if not user_continue:
+            print('Exiting program...')
+        
+
 print(Fore.BLUE + '----------------------------------------------------------'
         '--------')
 print('Welcome to the Waiting List system for the 1st Dublin Scout Group.')
 print(Fore.BLUE + '----------------------------------------------------------'
         '--------\n' + Style.RESET_ALL)
 
-choice = get_user_choice()
-if choice == '1':
-    data_entered = register_details()
-    #print(data_entered)
-    push_details(data_entered)
-elif choice == '2':
-    get_details()
-else:
-    print(f'Choice: {choice}')
+main()
