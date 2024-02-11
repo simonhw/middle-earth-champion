@@ -1,20 +1,20 @@
-#import gspread
-#from google.oauth2.service_account import Credentials
+import gspread
+from google.oauth2.service_account import Credentials
 from datetime import datetime
 import math
 import random
 from colorama import Fore, Style
 
-#SCOPE = [
-#    "https://www.googleapis.com/auth/spreadsheets",
-#    "https://www.googleapis.com/auth/drive.file",
-#    "https://www.googleapis.com/auth/drive"
-#    ]
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
 
-#CREDS = Credentials.from_service_account_file('creds.json')
-#SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-#GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-#SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
 
 
 def get_user_choice():
@@ -32,7 +32,6 @@ def get_user_choice():
         choice = input('Enter a number from the options above and press '
                        'enter:\n')
         if choice == '1' or choice == '2' or choice == '3':
-            #print(f'You chose option {choice}')
             break
         else:
             print(Fore.RED + f'\nINVALID INPUT: "{choice}".' + Style.RESET_ALL
@@ -267,7 +266,6 @@ def main():
         choice = get_user_choice()
         if choice == '1':
             data_entered = register_details()
-            #print(data_entered)
             push_details(data_entered)
         elif choice == '2':
             get_details()
