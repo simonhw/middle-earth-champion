@@ -1,19 +1,24 @@
-import gspread
-from google.oauth2.service_account import Credentials
+#import gspread
+#from google.oauth2.service_account import Credentials
 from datetime import datetime
 import math
 import random
 
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
+#SCOPE = [
+#    "https://www.googleapis.com/auth/spreadsheets",
+#    "https://www.googleapis.com/auth/drive.file",
+#    "https://www.googleapis.com/auth/drive"
+#    ]
 
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
+#CREDS = Credentials.from_service_account_file('creds.json')
+#SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+#GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+#SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
+
+#beavers = SHEET.worksheet('Beavers')
+#cubs = SHEET.worksheet('Cubs')
+#scouts = SHEET.worksheet('Scouts')
+#ventures = SHEET.worksheet('Ventures')
 
 def get_user_choice():
     '''
@@ -50,17 +55,17 @@ def register_details():
     
     correct = False
     while not correct:
-        fname = validate_name('Your first name: ', 'first name')
-        lname = validate_name('Your last name: ', 'last name')
-        email = input('Your email address: ')
-        cfname = validate_name('Your child\'s first name: ', 'first name')
-        clname = validate_name('Your child\'s last name: ', 'last name')
+        #fname = validate_name('Your first name: ', 'first name')
+        #lname = validate_name('Your last name: ', 'last name')
+        #email = input('Your email address: ')
+        #cfname = validate_name('Your child\'s first name: ', 'first name')
+        #clname = validate_name('Your child\'s last name: ', 'last name')
         dob = validate_dob()
-        print(f'Your details are as follows:\n'
-            f'Full Name: {fname} {lname}\n'
-            f'Contact email: {email}\n'
-            f'Child\'s Full Name: {cfname} {clname}\n'
-            f'Child\'s DOB: : {dob}\n')
+        #print(f'Your details are as follows:\n'
+        #    f'Full Name: {fname} {lname}\n'
+        #    f'Contact email: {email}\n'
+        #    f'Child\'s Full Name: {cfname} {clname}\n'
+        #    f'Child\'s DOB: : {dob}\n')
         correct = validate_yes_no('Are these details correct? (y/n)\n')
         if correct:
             print(f'Thank you, {cfname} has been added to the waiting list!')
@@ -120,8 +125,11 @@ def validate_dob():
         user_input = input('Please enter your child\'s date of birth '
                            'in the format DD/MM/YYYY:\n')
         try:
-            return datetime.strptime(user_input, "%d/%m/%Y").date()
-            invalid = False
+            if date_diff(user_input) < 0:
+                print('Date of birth must be in the past.')
+            else:
+                return datetime.strptime(user_input, "%d/%m/%Y").date()
+                invalid = False
         except ValueError:
             print('Date of birth format must be DD/MM/YYYY.')
 
@@ -134,6 +142,15 @@ def generate_reference_no(lname):
     '''
 
     return lname + str(random.randrange(1000,9999))
+
+
+def date_diff(date):
+    '''
+    Calculate the difference between a given date and today and returns 
+    the result in the form of an integer number of days.
+    '''
+
+    return (datetime.now() - datetime.strptime(date, "%d/%m/%Y")).days
 
 
 print('------------------------------------------------------------------')
