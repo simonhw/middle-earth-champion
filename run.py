@@ -1,4 +1,6 @@
 from datetime import datetime
+import math
+import random
 
 def get_user_choice():
     '''
@@ -31,7 +33,7 @@ def register_details():
 
     print('--------------------------------------------')
     print('You chose: Add my child to the waiting list.')
-    print('--------------------------------------------\n')
+    print('--------------------------------------------')
     
     correct = False
     while not correct:
@@ -49,6 +51,9 @@ def register_details():
             f'Child\'s Full Name: {cfname} {clname}\n'
             f'Child\'s DOB: : {dob}\n')
         correct = validate_yes_no('Are these details correct? (y/n)\n')
+        if correct:
+            print(f'Thank you, {cfname} has been added to the waiting list!')
+            print('Your reference is: ' + generate_reference_no(lname))
           
 
 def validate_name(message, parameter):
@@ -107,6 +112,16 @@ def validate_dob():
             invalid = False
         except ValueError:
             print('Date of birth format must be DD/MM/YYYY.')
+
+
+def generate_reference_no(lname):
+    '''
+    Generates a unique reference number for an entry on the waiting
+    list. User can enter this number to check their details and position
+    on the waiting list.
+    '''
+
+    return lname + str(random.randrange(1000,9999))
 
 
 print('------------------------------------------------------------------')
