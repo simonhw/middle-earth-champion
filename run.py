@@ -196,14 +196,65 @@ def push_details(list):
     print(f'Thank you, {list[3]} has been added to the {worksheet} '
                    'waiting list!')
     print('Your reference is: ' + list[-2])
+    print(f'We will be in touch when we have capacity for {list[3]} to join.')
 
+
+def get_details():
+    '''
+    Take user input ref number and check if it exists in the worksheet.
+    If it does return the associated waiting list position.
+    '''
+
+    print('----------------------------------------------------------')
+    print('You chose: Check my child\'s position on the waiting list.')
+    print('----------------------------------------------------------')
+    
+    invalid = True
+    while invalid:
+        user_ref = input('Please enter your reference code: \n')
+        print('Checking reference...')
+        beaver_refs = SHEET.worksheet('Beavers').col_values(7)
+        cub_refs = SHEET.worksheet('Cubs').col_values(7)
+        scout_refs = SHEET.worksheet('Scouts').col_values(7)
+        venture_refs = SHEET.worksheet('Ventures').col_values(7)
+        if user_ref in beaver_refs:
+            index_of_details = beaver_refs.index(user_ref)
+            print(f'Your child is number {index_of_details + 1} on the Beaver'
+                   ' waiting list')
+            invalid = False
+            break
+        elif user_ref in cub_refs:
+            index_of_details = cub_refs.index(user_ref)
+            print(f'Your child is number {index_of_details + 1} on the Cub'
+                   ' waiting list')
+            invalid = False
+            break
+        elif user_ref in scout_refs:
+            index_of_details = scout_refs.index(user_ref)
+            print(f'Your child is number {index_of_details + 1} on the Scout'
+                   ' waiting list')
+            invalid = False
+            break
+        elif user_ref in venture_refs:
+            index_of_details = venture_refs.index(user_ref)
+            print(f'Your child is number {index_of_details + 1} on the Venture'
+                   ' waiting list')
+            invalid = False
+            break
+        else:
+            print('That reference does not exist. Please try again.')
+    #print(beaver_ref)
 
 print('------------------------------------------------------------------')
 print('Welcome to the Waiting List system for the 1st Dublin Scout Group.')
 print('------------------------------------------------------------------\n')
 
 choice = get_user_choice()
-
-data_entered = register_details() if choice == '1' else print(f'Choice: {choice}')
-push_details(data_entered)
-#print(data_entered)
+if choice == '1':
+    data_entered = register_details()
+    #print(data_entered)
+    push_details(data_entered)
+elif choice == '2':
+    get_details()
+else:
+    print(f'Choice: {choice}')
