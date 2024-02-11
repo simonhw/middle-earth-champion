@@ -53,25 +53,36 @@ def register_details():
     print('You chose: Add my child to the waiting list.')
     print('--------------------------------------------')
     
+    details = []
+
     correct = False
     while not correct:
-        #fname = validate_name('Your first name: ', 'first name')
-        #lname = validate_name('Your last name: ', 'last name')
-        #email = input('Your email address: ')
-        #cfname = validate_name('Your child\'s first name: ', 'first name')
-        #clname = validate_name('Your child\'s last name: ', 'last name')
+        fname = validate_name('Your first name: ', 'first name')
+        lname = validate_name('Your last name: ', 'last name')
+        email = input('Your email address: ')
+        cfname = validate_name('Your child\'s first name: ', 'first name')
+        clname = validate_name('Your child\'s last name: ', 'last name')
         dob = validate_dob()
         section = age_section(dob)
         print(f'Your details are as follows:\n'
-        #    f'Full Name: {fname} {lname}\n'
-        #    f'Contact email: {email}\n'
-        #    f'Child\'s Full Name: {cfname} {clname}\n'
+            f'Full Name: {fname} {lname}\n'
+            f'Contact email: {email}\n'
+            f'Child\'s Full Name: {cfname} {clname}\n'
             f'Child\'s DOB: {dob}\n'
             f'Section: {section}\n')
         correct = validate_yes_no('Are these details correct? (y/n)\n')
         if correct:
+            details.append(fname)
+            details.append(lname)
+            details.append(email)
+            details.append(cfname)
+            details.append(cfname)
+            details.append(dob)
             print(f'Thank you, {cfname} has been added to the waiting list!')
-            print('Your reference is: ' + generate_reference_no(lname))
+            ref = generate_reference_no(lname)
+            print('Your reference is: ' + ref)
+            details.append(ref)
+            return details
           
 
 def validate_name(message, parameter):
@@ -178,4 +189,5 @@ print('------------------------------------------------------------------\n')
 
 choice = get_user_choice()
 
-register_details() if choice == '1' else print(f'Choice: {choice}')
+data_entered = register_details() if choice == '1' else print(f'Choice: {choice}')
+print(data_entered)
