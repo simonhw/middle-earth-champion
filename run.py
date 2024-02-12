@@ -130,7 +130,6 @@ def validate_email():
             print(Fore.RED + f'"{user_input}" is not a valid email. '
                   + Style.RESET_ALL + 'Emails must contain an @ and a .'
                   ' e.g. example@email.com\n')
-    
 
 
 def validate_yes_no(message):
@@ -309,9 +308,9 @@ def main():
             print('Exiting program...')
 
 
-title = 'Welcome to the Waiting List system for the 1st Dublin Scout Group.'
-print(Fore.BLUE + generate_line(title))
-print(title)
-print(generate_line(title) + '\n' + Style.RESET_ALL)
-
-main()
+if __name__ == "__main__":
+    title = 'Welcome to the Waiting List system for the 1st Dublin Scout Group.'
+    print(Fore.BLUE + generate_line(title))
+    print(title)
+    print(generate_line(title) + '\n' + Style.RESET_ALL)
+    main()
