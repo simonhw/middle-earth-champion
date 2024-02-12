@@ -1,20 +1,20 @@
-import gspread
-from google.oauth2.service_account import Credentials
+#import gspread
+#from google.oauth2.service_account import Credentials
 from datetime import datetime
 import math
 import random
 from colorama import Fore, Style
 
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
+#SCOPE = [
+#    "https://www.googleapis.com/auth/spreadsheets",
+#    "https://www.googleapis.com/auth/drive.file",
+#    "https://www.googleapis.com/auth/drive"
+#    ]
 
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
+#CREDS = Credentials.from_service_account_file('creds.json')
+#SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+#GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+#SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
 
 
 def get_user_choice():
@@ -85,9 +85,12 @@ def register_details():
 def validate_name(message, parameter):
     '''
     Takes in a custom message and parameter description as strings.
-    Check that the user input is a string made up only of letters.
+    Checks that the user input is a string made up only of letters and
+    has at least two characters.
+    Strips any leading and trailing whitespaces.
     While loop will continue to run until a valid name is entered
     by the user.
+    Returns the string with the first letter capitalised.
     '''
 
     invalid = True
@@ -95,7 +98,7 @@ def validate_name(message, parameter):
         user_input = input(message).strip()
         if (user_input.isalpha() and len(user_input) > 1):
             invalid = False
-            return user_input
+            return user_input.title()
         else:
             print(Fore.RED + f'"{user_input}" is not a valid {parameter}. '
                   + Style.RESET_ALL + 'Names must be at least 2 characters '
@@ -112,7 +115,7 @@ def validate_yes_no(message):
 
     invalid = True
     while invalid:
-        user_input = input(message)
+        user_input = input(message).lower()
         if user_input == 'y' or user_input == 'n':
             invalid = False
             return True if user_input == 'y' else False
