@@ -3,6 +3,7 @@
 from datetime import datetime
 import math
 import random
+import re
 from colorama import Fore, Style
 
 #SCOPE = [
@@ -57,7 +58,7 @@ def register_details():
     while not correct:
         fname = validate_name('Your first name: ', 'first name')
         lname = validate_name('Your last name: ', 'last name')
-        email = input('Your email address: ')
+        email = validate_email()
         cfname = validate_name('Your child\'s first name: ', 'first name')
         clname = validate_name('Your child\'s last name: ', 'last name')
         dob = validate_dob()
@@ -103,6 +104,33 @@ def validate_name(message, parameter):
             print(Fore.RED + f'"{user_input}" is not a valid {parameter}. '
                   + Style.RESET_ALL + 'Names must be at least 2 characters '
                   ' in length and cannot contain any numbers.\n')
+
+
+def validate_email():
+    '''
+    Takes in a string and validates it for an email format:
+    A word made up of any alphanumeric characters, hypens,
+    underscores or full stops followed by an @ symbol followed
+    by a word made up of any alphanumeric characters, hypens,
+    or underscores followed by a full stop followed by a 2-4
+    character word made up of alphanumeric characters, hypens,
+    or underscores.
+    '''
+
+    pattern = r'^[\w\.-]+@[\w-]+\.+\w+$'
+    invalid = True
+    while invalid:
+        user_input = input('Your email address: ').strip()
+        result = re.fullmatch(pattern, user_input)
+
+        if result:
+            invalid = False
+            return user_input
+        else:
+            print(Fore.RED + f'"{user_input}" is not a valid email. '
+                  + Style.RESET_ALL + 'Emails must contain an @ and a .'
+                  ' e.g. example@email.com\n')
+    
 
 
 def validate_yes_no(message):
