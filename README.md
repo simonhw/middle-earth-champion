@@ -9,7 +9,7 @@
 - [Design](#design)
     - [Lucidchart Flowchart](#lucidchart-flowchart)
 - [Features](#features)
-- [Dependencies](#depenencies)
+- [Dependencies](#dependencies)
 - [Bugs](#bugs)
     - [Known Bugs](#known-bugs)
     - [Solved Bugs](#solved-bugs)
@@ -43,7 +43,7 @@ This application is designed to be run in a terminal environment. Its purpose is
 - return which age section the child will be joining
 - allow user to check their position using the ref number
 
-## Depenencies
+## Dependencies
 [Colorama](https://pypi.org/project/colorama/)
 
 ## Bugs
@@ -57,4 +57,3 @@ This application is designed to be run in a terminal environment. Its purpose is
 
 ## To-do List
 - Update validate_name function to allow hyphens and spaces
-- Add email validation
