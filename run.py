@@ -289,6 +289,55 @@ def generate_line(string_length):
     return hypen_string
 
 
+def choose_section():
+    '''
+    Function to allow admin user to choose which worksheet to edit.
+    '''
+
+    while True:
+        print('Please select which section you wish to edit:')
+        print(Fore.RED + '1. Beavers' + Style.RESET_ALL)
+        print(Fore.GREEN + '2. Cubs' + Style.RESET_ALL)
+        print(Fore.BLUE + '3. Scouts' + Style.RESET_ALL)
+        print(Fore.MAGENTA + '4. Ventures' + Style.RESET_ALL)
+        choice = input('Enter a number from the options above and press '
+                       'enter:\n')
+        if choice == '1':
+            return 'Beavers'
+            break
+        elif choice == '2':
+            return 'Cubs'
+            break
+        elif choice == '3':
+            return 'Scouts'
+            break
+        elif choice == '4':
+            return 'Ventures'
+            break
+        else:
+            print(Fore.RED + f'\nINVALID INPUT: "{choice}".' + Style.RESET_ALL
+                  + ' You must enter a number between 1 and 4.\n')
+    
+
+
+def verify_admin():
+    '''
+    Function to validate user input to match admin password allowing editing
+    of waiting list details.
+    '''
+
+    invalid = True
+    while invalid:
+        user_input = input('Please enter the admin password:\n')
+        if user_input != '1234':
+            print(Fore.RED + 'Invalid password! ' + Style.RESET_ALL +
+                  'Please try again.\n')
+        else:
+            is_admin = True
+            return is_admin
+        
+
+
 def main():
     '''
     Run program functions until user wants to exit.
@@ -302,9 +351,13 @@ def main():
         elif choice == '2':
             get_details()
         elif choice == '3':
-            print('Please enter admin password.')
+            is_admin = verify_admin()
+            if is_admin:
+                section = choose_section()
+                print(section)
         elif choice == '4':
-            user_continue = False       
+            print('Exiting program...')
+            break       
         else:
             print(f'Choice: {choice}')
         user_continue = validate_yes_no('Do you want to return to the main '
@@ -317,5 +370,10 @@ if __name__ == "__main__":
     title = 'Welcome to the Waiting List system for the 1st Dublin Scout Group.'
     print(Fore.BLUE + generate_line(title))
     print(title)
-    print(generate_line(title) + '\n' + Style.RESET_ALL)
+    print(generate_line(title) + Style.RESET_ALL)
+    print('Our youth sections are currently oversubscribed and all '
+          'prospective\nmembers are being placed on a waiting list. Please '
+          'select an option\nfrom the menu below to either add your child to '
+          'the waiting list or\ncheck your child\'s status if already on the '
+          'list.\n')
     main()
