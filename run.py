@@ -1,21 +1,22 @@
-#import gspread
-#from google.oauth2.service_account import Credentials
+import gspread
+from google.oauth2.service_account import Credentials
 from datetime import datetime
 import math
 import random
 import re
+from pprint import pprint
 from colorama import Fore, Style
 
-#SCOPE = [
-#    "https://www.googleapis.com/auth/spreadsheets",
-#    "https://www.googleapis.com/auth/drive.file",
-#    "https://www.googleapis.com/auth/drive"
-#    ]
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
 
-#CREDS = Credentials.from_service_account_file('creds.json')
-#SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-#GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-#SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
 
 
 def get_user_choice():
@@ -335,7 +336,17 @@ def verify_admin():
         else:
             is_admin = True
             return is_admin
-        
+
+
+def get_worksheet(worksheet):
+    '''
+    Function to get the contents of a given worksheet in a list of lists
+    and present the content to the admin user.
+    '''
+
+    list_of_rows = SHEET.worksheet(worksheet).get_all_values()
+    for row in list_of_rows:
+        print(row)
 
 
 def main():
@@ -354,7 +365,7 @@ def main():
             is_admin = verify_admin()
             if is_admin:
                 section = choose_section()
-                print(section)
+                get_worksheet(section)
         elif choice == '4':
             print('Exiting program...')
             break       
