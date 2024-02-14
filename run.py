@@ -30,13 +30,14 @@ def get_user_choice():
         print('1. Add my child to the waiting list.')
         print('2. Check my child\'s position on the waiting list.')
         print('3. ADMIN ONLY - Edit waiting list.')
+        print('4. Exit Program.')
         choice = input('Enter a number from the options above and press '
                        'enter:\n')
-        if choice == '1' or choice == '2' or choice == '3':
+        if choice == '1' or choice == '2' or choice == '3' or choice == '4':
             break
         else:
             print(Fore.RED + f'\nINVALID INPUT: "{choice}".' + Style.RESET_ALL
-                  + ' You must enter a number between 1 and 3.\n')
+                  + ' You must enter a number between 1 and 4.\n')
     return choice
 
 
@@ -300,26 +301,16 @@ def main():
             push_details(data_entered)
         elif choice == '2':
             get_details()
+        elif choice == '3':
+            print('Please enter admin password.')
+        elif choice == '4':
+            user_continue = False       
         else:
             print(f'Choice: {choice}')
         user_continue = validate_yes_no('Do you want to return to the main '
                                         'menu? (y/n)\n')
         if not user_continue:
             print('Exiting program...')
-
-
-def exit_or_input(message):
-    '''
-    Function that checks for a user entry of the string 'exit'
-    to returns them to the main menu, otherwise returns the string
-    entered by the user for further use.
-    '''
-
-    user_input = input(message)
-    if user_input.lower() == 'exit':
-        return break
-    else:
-        return user_input
 
 
 if __name__ == "__main__":
