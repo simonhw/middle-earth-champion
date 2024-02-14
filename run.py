@@ -308,6 +308,20 @@ def main():
             print('Exiting program...')
 
 
+def exit_or_input(message):
+    '''
+    Function that checks for a user entry of the string 'exit'
+    to returns them to the main menu, otherwise returns the string
+    entered by the user for further use.
+    '''
+
+    user_input = input(message)
+    if user_input.lower() == 'exit':
+        return break
+    else:
+        return user_input
+
+
 if __name__ == "__main__":
     title = 'Welcome to the Waiting List system for the 1st Dublin Scout Group.'
     print(Fore.BLUE + generate_line(title))
