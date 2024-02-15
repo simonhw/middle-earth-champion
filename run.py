@@ -351,12 +351,24 @@ def get_worksheet(worksheet):
     list is empty and break out of the function.
     '''
 
+    if worksheet == 'Beavers':
+        section_colour = Fore.RED
+    elif worksheet == 'Cubs':
+        section_colour = Fore.GREEN
+    elif worksheet == 'Scouts':
+        section_colour = Fore.BLUE
+    elif worksheet == 'Ventures':
+        section_colour = Fore.MAGENTA
+    else:
+        section_colour = Fore.WHITE
+    
     list_of_rows = SHEET.worksheet(worksheet).get_all_values()
+
     if len(list_of_rows) == 1:
         print(f'The {worksheet} waiting list is empty!\n')
     else:
         title = f'{worksheet} Waiting List'
-        print(Fore.BLUE + generate_line(title))
+        print(section_colour + generate_line(title))
         print(title)
         print(generate_line(title) + Style.RESET_ALL)
         i = 1
