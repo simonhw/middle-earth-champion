@@ -55,6 +55,9 @@ This application is designed to be run in a terminal environment. Its purpose is
 | --- | --- | --- | --- |
 | 1 | Validating user choice crashed the code passing a letter into int(). | | Set choice check to '1' '2' '3' to avoid this. |
 | 2 | dob had time at the end in 0s. || Adding .date() to the end removed them. |
+| 3 | When refactoring `get_details()` the error message printed once for each spreadsheet searched instead of just printing once and requesting new user input. | ![Get details error messages](assets/images/readme/bugs/bug-ref-loops.png) | The else was changed to an if statement and indented back to the level of the while loop. |
 
 ## To-do List
 - Update validate_name function to only allow one space and/or one hypen between letters
+- add try except to all instances of accessing google sheet.
+- hash the admin password
