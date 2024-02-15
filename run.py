@@ -98,11 +98,17 @@ def validate_name(message, parameter):
 
     invalid = True
     while invalid:
-        user_input = input(message).strip()
-        if (user_input.isalpha() and len(user_input) > 1):
-            invalid = False
-            return user_input.title()
-        else:
+        try:
+            user_input = input(message).strip()
+            for c in user_input:
+                if c.isdigit():
+                    raise ValueError
+            if (len(user_input) > 1):
+                invalid = False
+                return user_input.title()
+            else:
+                raise ValueError
+        except ValueError:
             print(Fore.RED + f'"{user_input}" is not a valid {parameter}. '
                   + Style.RESET_ALL + 'Names must be at least 2 characters '
                   ' in length and cannot contain any numbers.\n')
@@ -318,7 +324,6 @@ def choose_section():
         else:
             print(Fore.RED + f'\nINVALID INPUT: "{choice}".' + Style.RESET_ALL
                   + ' You must enter a number between 1 and 4.\n')
-    
 
 
 def verify_admin():
@@ -376,10 +381,11 @@ def delete_row(worksheet, list_of_rows):
         if delete:
             row_number = 0
             while True:
-                row_number = int(input('Enter the number of the entry to be deleted '
-                                   'and press enter:\n'))
+                row_number = int(input('Enter the number of the entry to be '
+                                       'deleted and press enter:\n'))
                 if row_number < len(list_of_rows) and row_number != 0:
-                    print(f'You selected row_number {row_number}:\n{list_of_rows[row_number]}')
+                    print(f'You selected row_number {row_number}:\n'
+                           '{list_of_rows[row_number]}')
                     print('Deleting entry...')
                     try:
                         SHEET.worksheet(worksheet).delete_rows(row_number + 1)
@@ -391,7 +397,8 @@ def delete_row(worksheet, list_of_rows):
                     break
                 else:
                     print(Fore.RED + 'Invalid choice! ' + Style.RESET_ALL +
-                  f'You must select a row between 1 and {len(list_of_rows) - 1}.\n')
+                          'You must select a row between 1 and '
+                          f'{len(list_of_rows) - 1}.\n')
         else:
             break
 
@@ -427,7 +434,8 @@ def main():
 
 
 if __name__ == "__main__":
-    title = 'Welcome to the Waiting List system for the 1st Dublin Scout Group.'
+    title = ('Welcome to the Waiting List system for the 1st Dublin Scout '
+            'Group.')
     print(Fore.BLUE + generate_line(title))
     print(title)
     print(generate_line(title) + Style.RESET_ALL)
