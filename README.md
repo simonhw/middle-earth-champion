@@ -60,3 +60,4 @@ This application is designed to be run in a terminal environment. Its purpose is
 ## To-do List
 - Update validate_name function to only allow one space and/or one hypen between letters
 - hash the admin password
+- allow user to return to main menu from any input line
