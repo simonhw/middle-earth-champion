@@ -4,7 +4,6 @@ from datetime import datetime
 import math
 import random
 import re
-from pprint import pprint
 from colorama import Fore, Back, Style
 
 SCOPE = [
@@ -445,7 +444,7 @@ def main():
 
 
 if __name__ == "__main__":
-    title = ('Welcome to the Waiting List system for the 1st Dublin Scout '
+    title = ('Welcome to the Waiting List system for the 101st Dublin Scout '
             'Group.')
     print(Fore.BLUE + generate_line(title))
     print(title)
