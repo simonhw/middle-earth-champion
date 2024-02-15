@@ -59,5 +59,4 @@ This application is designed to be run in a terminal environment. Its purpose is
 
 ## To-do List
 - Update validate_name function to only allow one space and/or one hypen between letters
-- add try except to all instances of accessing google sheet.
 - hash the admin password
