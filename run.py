@@ -342,15 +342,51 @@ def get_worksheet(worksheet):
     '''
     Function to get the contents of a given worksheet in a list of lists
     and present the content to the admin user.
+    If the list only contains the headings, tell the user that the waiting
+    list is empty and break out of the function.
     '''
 
     list_of_rows = SHEET.worksheet(worksheet).get_all_values()
-    i = 1
-    for row in list_of_rows:
-        if row == list_of_rows[0]:
-            continue
-        print(f'{i}: {row}')
-        i += 1
+    if len(list_of_rows) == 1:
+        print(f'The {worksheet} waiting list is empty!\n')
+    else:
+        title = f'{worksheet} Waiting List'
+        print(Fore.BLUE + generate_line(title))
+        print(title)
+        print(generate_line(title) + Style.RESET_ALL)
+        i = 1
+        for row in list_of_rows:
+            if row == list_of_rows[0]:
+                continue
+            print(f'{i}: {row}')
+            i += 1
+    
+        delete_row(list_of_rows)
+
+
+def delete_row(list_of_rows):
+    '''
+    Function to take in an index of a list of row and use gspread
+    to delete that row in the google sheet spreadsheet.
+    '''
+
+    while True:
+        delete = validate_yes_no('Do you want to remove a child from the '
+                                 'waiting list? (y/n)\n')
+        if delete:
+            row_number = 0
+            while True:
+                row_number = int(input('Enter the number of the entry to be deleted '
+                                   'and press enter:\n'))
+                if row_number < len(list_of_rows) and row_number != 0:
+                    print(f'You selected row_number {row_number}:\n{list_of_rows[row_number]}')
+                    #SHEET.worksheet(worksheet).delete_rows(row_number)
+                    break
+                else:
+                    print(Fore.RED + 'Invalid choice! ' + Style.RESET_ALL +
+                  f'You must select a row between 1 and {len(list_of_rows) - 1}.\n')
+        else:
+            break
 
 
 def main():
