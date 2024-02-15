@@ -249,35 +249,17 @@ def get_details():
     while invalid:
         user_ref = input('Please enter your reference code: \n')
         print('Checking reference...')
-        beaver_refs = SHEET.worksheet('Beavers').col_values(7)
-        cub_refs = SHEET.worksheet('Cubs').col_values(7)
-        scout_refs = SHEET.worksheet('Scouts').col_values(7)
-        venture_refs = SHEET.worksheet('Ventures').col_values(7)
-        if user_ref in beaver_refs:
-            index_of_details = beaver_refs.index(user_ref)
-            print(f'Your child is number {index_of_details} on the Beaver'
-                  ' waiting list')
-            invalid = False
-            break
-        elif user_ref in cub_refs:
-            index_of_details = cub_refs.index(user_ref)
-            print(f'Your child is number {index_of_details} on the Cub'
-                  ' waiting list')
-            invalid = False
-            break
-        elif user_ref in scout_refs:
-            index_of_details = scout_refs.index(user_ref)
-            print(f'Your child is number {index_of_details} on the Scout'
-                  ' waiting list')
-            invalid = False
-            break
-        elif user_ref in venture_refs:
-            index_of_details = venture_refs.index(user_ref)
-            print(f'Your child is number {index_of_details} on the Venture'
-                  ' waiting list')
-            invalid = False
-            break
-        else:
+
+        worksheets = ['Beavers', 'Cubs', 'Scouts', 'Ventures']
+        for worksheet in worksheets:
+            refs = SHEET.worksheet(worksheet).col_values(7)
+            if user_ref in refs:
+                index_of_details = refs.index(user_ref)
+                print(f'Your child is number {index_of_details} on the '
+                      f'{worksheet[:-1]} waiting list')
+                invalid = False
+                break
+        if invalid == True:
             print(Fore.RED + 'That reference does not exist. '
                   'Please try again.\n' + Style.RESET_ALL)
 
