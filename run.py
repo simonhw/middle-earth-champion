@@ -345,8 +345,12 @@ def get_worksheet(worksheet):
     '''
 
     list_of_rows = SHEET.worksheet(worksheet).get_all_values()
+    i = 1
     for row in list_of_rows:
-        print(row)
+        if row == list_of_rows[0]:
+            continue
+        print(f'{i}: {row}')
+        i += 1
 
 
 def main():
