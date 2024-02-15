@@ -57,11 +57,11 @@ def register_details():
 
     correct = False
     while not correct:
-        fname = validate_name('Your first name: ', 'first name')
-        lname = validate_name('Your last name: ', 'last name')
+        fname = validate_name('Your first name:\n', 'first name')
+        lname = validate_name('Your last name:\n', 'last name')
         email = validate_email()
-        cfname = validate_name('Your child\'s first name: ', 'first name')
-        clname = validate_name('Your child\'s last name: ', 'last name')
+        cfname = validate_name('Your child\'s first name:\n', 'first name')
+        clname = validate_name('Your child\'s last name:\n', 'last name')
         dob = validate_dob()
         str_dob = dob.strftime("%d/%m/%Y")
         section = age_section(str_dob)
@@ -127,7 +127,7 @@ def validate_email():
     pattern = r'^[\w\.-]+@[\w-]+\.+\w+$'
     invalid = True
     while invalid:
-        user_input = input('Your email address: ').strip()
+        user_input = input('Your email address:\n').strip()
         result = re.fullmatch(pattern, user_input)
 
         if result:
@@ -250,7 +250,7 @@ def get_details():
 
     invalid = True
     while invalid:
-        user_ref = input('Please enter your reference code: \n')
+        user_ref = input('Please enter your reference code:\n')
         print('Checking reference...')
         try:
             worksheets = ['Beavers', 'Cubs', 'Scouts', 'Ventures']
