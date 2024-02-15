@@ -227,7 +227,7 @@ def push_details(list):
 
     worksheet = list[-1]
     try:
-        SHEET.worksheet(worksheets).append_row(list)
+        SHEET.worksheet(worksheet).append_row(list)
         print(f'Thank you, {list[3]} has been added to the {worksheet} '
                'waiting list!')
         print('Your reference is: ' + list[-2])
