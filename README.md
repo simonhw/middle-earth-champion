@@ -1,5 +1,7 @@
 # Scout Group Waiting List
 
+Deployed program on Heroku: [Scout Group Waiting List]()
+
 ![GitHub last commit](https://img.shields.io/github/last-commit/simonhw/waiting-list)
 
 ## Contents
@@ -8,6 +10,7 @@
     - [User Stories](#user-stories)
 - [Design](#design)
     - [Lucidchart Flowchart](#lucidchart-flowchart)
+    - [Colours](#colours)
 - [Features](#features)
 - [Dependencies](#dependencies)
 - [Bugs](#bugs)
@@ -26,15 +29,26 @@ This application is designed to be run in a terminal environment. Its purpose is
 
 #### Returning Visitor Goals
 - To edit incorrect data in their entry
-- To check their data and position in list
+- To check their position in the waiting list
 
 #### Frequent Visitor Goals
-- To edit and amend entries on the list
+- To view and delete entries on the list
 
 ## Design
 ### Lucidchart Flowchart
+An inital concept was devloped in a flowchart to give a good sense of the flow of the program and how the user would interact with inputs.
 
 ![Lucidchart flowchart version 1](assets/images/readme/flowchart_v1.png)
+
+### Colours
+The Colorama module was utilised to introduce some colour to the program. Headings were given a blue foreground colour reflective of the Scout uniform in Ireland. Error warning messages were given a red colour to bring attention to the user that something has gone wrong. 
+
+In admin mode, each age section has an associated foreground colour related to the section badge: red for Beavers, green for Cubs, orange for Scouts, and magenta for Ventures, being the closest colour to purple. The colours are used for the headings when each waiting list is displayed for the admin user.
+
+![Beaver section badge](assets/images/readme/beaver-badge.png)
+![Cub section badge](assets/images/readme/cub-badge.png)
+![Scout section badge](assets/images/readme/scout-badge.png)
+![Venture section badge](assets/images/readme/venture-badge.png)
 
 ## Features
 - Take in user details: name, phone number, child's name, date of birth
@@ -45,7 +59,13 @@ This application is designed to be run in a terminal environment. Its purpose is
 - allow admin to view waiting list and delete rows
 
 ## Dependencies
-[Colorama](https://pypi.org/project/colorama/)
+- [Colorama](https://pypi.org/project/colorama/)
+- [Gspread]()
+- [Google Auth]()
+- [Datetime]()
+- [Math]()
+- [Random]()
+- [Re]()
 
 ## Bugs
 ### Known Bugs
