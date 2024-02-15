@@ -344,23 +344,27 @@ def get_worksheet(worksheet):
     else:
         section_colour = Fore.WHITE
     
-    list_of_rows = SHEET.worksheet(worksheet).get_all_values()
-
-    if len(list_of_rows) == 1:
-        print(f'The {worksheet} waiting list is empty!\n')
-    else:
-        title = f'{worksheet} Waiting List'
-        print(section_colour + generate_line(title))
-        print(title)
-        print(generate_line(title) + Style.RESET_ALL)
-        i = 1
-        for row in list_of_rows:
-            if row == list_of_rows[0]:
-                continue
-            print(f'{i}: {row}')
-            i += 1
+    try:
+        list_of_rows = SHEET.worksheet(worksheets).get_all_values()
+      
+        if len(list_of_rows) == 1:
+            print(f'The {worksheet} waiting list is empty!\n')
+        else:
+            title = f'{worksheet} Waiting List'
+            print(section_colour + generate_line(title))
+            print(title)
+            print(generate_line(title) + Style.RESET_ALL)
+            i = 1
+            for row in list_of_rows:
+                if row == list_of_rows[0]:
+                    continue
+                print(f'{i}: {row}')
+                i += 1
     
-        delete_row(worksheet, list_of_rows)
+            delete_row(worksheet, list_of_rows)
+    except:
+        print('We\'re sorry, there was a problem accessing the database. '
+              'Please try again later.')
 
 
 def delete_row(worksheet, list_of_rows):
@@ -385,7 +389,7 @@ def delete_row(worksheet, list_of_rows):
                         SHEET.worksheet(worksheet).delete_rows(row_number + 1)
                         print('Entry successfully deleted.')
                     except:
-                        print('There was a problem accessing the database. '
+                        print('We\'re sorry, there was a problem accessing the database. '
                               'Please try again later.')
 
                     break
