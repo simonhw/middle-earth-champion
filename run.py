@@ -49,7 +49,7 @@ def register_details():
     '''
 
     title = 'You chose: Add my child to the waiting list.'
-    print(Fore.BLUE + generate_line(title))
+    print(Fore.BLUE + Style.BRIGHT + generate_line(title))
     print(title)
     print(generate_line(title) + '\n' + Style.RESET_ALL)
 
@@ -244,7 +244,7 @@ def get_details():
     '''
 
     title = 'You chose: Check my child\'s position on the waiting list.'
-    print(Fore.BLUE + generate_line(title))
+    print(Fore.BLUE + Style.BRIGHT + generate_line(title))
     print(title)
     print(generate_line(title) + '\n' + Style.RESET_ALL)
 
@@ -446,7 +446,7 @@ def main():
 if __name__ == "__main__":
     title = ('Welcome to the Waiting List system for the 101st Dublin Scout '
             'Group.')
-    print(Fore.BLUE + generate_line(title))
+    print(Fore.BLUE + Style.BRIGHT + generate_line(title))
     print(title)
     print(generate_line(title) + Style.RESET_ALL)
     print('Our youth sections are currently oversubscribed and all '
