@@ -1,6 +1,6 @@
 # Scout Group Waiting List
 
-Deployed program on Heroku: [Scout Group Waiting List]()
+Deployed program on Heroku: [Scout Group Waiting List](https://scouts-waiting-list-7d813d9f1b2e.herokuapp.com/)
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/simonhw/waiting-list)
 
@@ -61,7 +61,32 @@ This program is written completely in Python. The inital scope of the project wa
 
 All of these goals were achieved in this version of the program.
 
-The user is greeted on running the program by a descriptive header.
+The user is greeted on running the program by a descriptive header welcoming them to the waiting list of the 101st Dublin Scout Group. This is a fictional group (currently not on the list of active scout groups).
+
+![Welcome menu](assets/images/readme/welcome-menu.png)
+
+Clear instructions are given to the user explaining what to do next to use the program. Only four inputs are accepted: The numbers 1, 2, 3, or 4.
+
+### Option 1
+If the user enters '1', feedback is given via a descriptive heading to confirm that the program is ready to add their child to the waiting list.
+
+![Option 1 heading](assets/images/readme/option-1-name.png)
+
+The user is then prompted to enter their first name, last name, contact email, child's first name, child's last name, and child's date of birth. The details are printed to the terminal and the user is asked to confirm them. If they enter 'n', the previous prompts repeat.
+
+![Entering details](assets/images/readme/enter-details.png)
+![Confirming details](assets/images/readme/confirm-details.png)
+
+If the user enters 'y', the data is sent to the Google Sheets spreadsheet and and confirmation message is shown if successful. This message confirms which age section the child will join and the reference number that the user needs to use to check their position in the list.
+
+![Details successfully pushed](assets/images/readme/details-pushed.png)
+
+The user is given the option to return to the main menu by inputting 'y' or exiting the program with 'n'.
+
+### Option 2
+If the user selects option 2, another descriptive heading is shown.
+
+![Option 2](assets/images/readme/option-2.png)
 
 ## Dependencies
 - [Colorama](https://pypi.org/project/colorama/)
