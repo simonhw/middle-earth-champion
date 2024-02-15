@@ -42,6 +42,7 @@ This application is designed to be run in a terminal environment. Its purpose is
 - return waitiing list reference number
 - return which age section the child will be joining
 - allow user to check their position using the ref number
+- allow admin to view waiting list and delete rows
 
 ## Dependencies
 [Colorama](https://pypi.org/project/colorama/)
@@ -56,4 +57,4 @@ This application is designed to be run in a terminal environment. Its purpose is
 | 2 | dob had time at the end in 0s. || Adding .date() to the end removed them. |
 
 ## To-do List
-- Update validate_name function to allow hyphens and spaces
+- Update validate_name function to only allow one space and/or one hypen between letters
