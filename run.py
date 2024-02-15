@@ -361,10 +361,10 @@ def get_worksheet(worksheet):
             print(f'{i}: {row}')
             i += 1
     
-        delete_row(list_of_rows)
+        delete_row(worksheet, list_of_rows)
 
 
-def delete_row(list_of_rows):
+def delete_row(worksheet, list_of_rows):
     '''
     Function to take in an index of a list of row and use gspread
     to delete that row in the google sheet spreadsheet.
@@ -380,7 +380,14 @@ def delete_row(list_of_rows):
                                    'and press enter:\n'))
                 if row_number < len(list_of_rows) and row_number != 0:
                     print(f'You selected row_number {row_number}:\n{list_of_rows[row_number]}')
-                    #SHEET.worksheet(worksheet).delete_rows(row_number)
+                    print('Deleting entry...')
+                    try:
+                        SHEET.worksheet(worksheet).delete_rows(row_number + 1)
+                        print('Entry successfully deleted.')
+                    except:
+                        print('There was a problem accessing the database. '
+                              'Please try again later.')
+
                     break
                 else:
                     print(Fore.RED + 'Invalid choice! ' + Style.RESET_ALL +
@@ -403,9 +410,11 @@ def main():
             get_details()
         elif choice == '3':
             is_admin = verify_admin()
-            if is_admin:
+            while is_admin:
                 section = choose_section()
                 get_worksheet(section)
+                is_admin = validate_yes_no('Do you want to edit another '
+                                           'section? (y/n)\n')
         elif choice == '4':
             print('Exiting program...')
             break       
