@@ -5,7 +5,7 @@ import math
 import random
 import re
 from pprint import pprint
-from colorama import Fore, Style
+from colorama import Fore, Back, Style
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -31,7 +31,7 @@ def get_user_choice():
         print('1. Add my child to the waiting list.')
         print('2. Check my child\'s position on the waiting list.')
         print('3. ADMIN ONLY - Edit waiting list.')
-        print('4. Exit Program.')
+        print('4. Exit Program.\n')
         choice = input('Enter a number from the options above and press '
                        'enter:\n')
         if choice == '1' or choice == '2' or choice == '3' or choice == '4':
@@ -290,6 +290,11 @@ def choose_section():
     '''
     Function to allow admin user to choose which worksheet to edit.
     '''
+
+    title = 'Admin Access Granted: Edit Waiting List'
+    print(Fore.RED + generate_line(title))
+    print(title)
+    print(generate_line(title) + Style.RESET_ALL)
 
     while True:
         print('Please select which section you wish to edit:')
