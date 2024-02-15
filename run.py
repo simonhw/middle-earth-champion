@@ -227,11 +227,15 @@ def push_details(list):
     '''
 
     worksheet = list[-1]
-    SHEET.worksheet(worksheet).append_row(list)
-    print(f'Thank you, {list[3]} has been added to the {worksheet} '
-          'waiting list!')
-    print('Your reference is: ' + list[-2])
-    print(f'We will be in touch when we have capacity for {list[3]} to join.')
+    try:
+        SHEET.worksheet(worksheets).append_row(list)
+        print(f'Thank you, {list[3]} has been added to the {worksheet} '
+               'waiting list!')
+        print('Your reference is: ' + list[-2])
+        print(f'We will be in touch when we have capacity for {list[3]} to join.\n')
+    except:
+        print('We\'re sorry, there was a problem accessing the database. '
+              'Please try again later.')
 
 
 def get_details():
