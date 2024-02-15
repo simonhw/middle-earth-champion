@@ -249,19 +249,23 @@ def get_details():
     while invalid:
         user_ref = input('Please enter your reference code: \n')
         print('Checking reference...')
-
-        worksheets = ['Beavers', 'Cubs', 'Scouts', 'Ventures']
-        for worksheet in worksheets:
-            refs = SHEET.worksheet(worksheet).col_values(7)
-            if user_ref in refs:
-                index_of_details = refs.index(user_ref)
-                print(f'Your child is number {index_of_details} on the '
-                      f'{worksheet[:-1]} waiting list')
-                invalid = False
-                break
-        if invalid == True:
-            print(Fore.RED + 'That reference does not exist. '
-                  'Please try again.\n' + Style.RESET_ALL)
+        try:
+            worksheets = ['Beavers', 'Cubs', 'Scouts', 'Ventures']
+            for worksheet in worksheets:
+                refs = SHEET.worksheet(worksheet).col_values(7)
+                if user_ref in refs:
+                    index_of_details = refs.index(user_ref)
+                    print(f'Your child is number {index_of_details} on the '
+                          f'{worksheet[:-1]} waiting list')
+                    invalid = False
+                    break
+            if invalid == True:
+                print(Fore.RED + 'That reference does not exist. '
+                      'Please try again.\n' + Style.RESET_ALL)
+        except:
+            print('We\'re sorry, there was a problem accessing the database. '
+                  'Please try again later.')
+            break
 
 
 def generate_line(string_length):
@@ -345,7 +349,7 @@ def get_worksheet(worksheet):
         section_colour = Fore.WHITE
     
     try:
-        list_of_rows = SHEET.worksheet(worksheets).get_all_values()
+        list_of_rows = SHEET.worksheet(worksheet).get_all_values()
       
         if len(list_of_rows) == 1:
             print(f'The {worksheet} waiting list is empty!\n')
