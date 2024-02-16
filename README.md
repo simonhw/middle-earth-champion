@@ -136,7 +136,7 @@ In the main menu, the user is asked to choose from four options by entering `1`,
 ### Validating Names
 The user inputs for the parent's first name, parent's last name, child's first name, and child's last name are subjected to a name validation check.
 
-The `validate_name()` function takes in two strings as parameters: the message to be printed, and a description of the name being validated. The function asks for input and removes any leading and trailing whitespaces with `.strip()`. The string is then searched for any numbers and a ValueError is raised if they are found.
+The `validate_name()` function takes in two strings as parameters: the message to be printed, and a description of the name being validated. The function asks for input and removes any leading and trailing whitespaces with `.strip()`. The string is then searched for any numbers and a ValueError is raised if they are found. 
 
 ![Validate name number error gif]()
 
@@ -165,7 +165,7 @@ If the user enters an invalid input, the below error is shown which reminds the 
 Valid inputs are returned by the funtion.
 
 ### Validating Dates of Birth
-The `validate_dob()` fuction asks the user to input their child's date of birth in the format `DD/MM/YYYY`. If an invalid format is entered the user is prompted again to enter the date in the specified format. 
+The `validate_dob()` fuction asks the user to input their child's date of birth in the format `DD/MM/YYYY`. If an invalid format is entered the user is prompted again to enter the date in the specified format. (See [Try Except Clauses](#try-except-clauses))
 
 ![DOB invalid format gif]()
 
@@ -181,6 +181,21 @@ If a date of birth is entered for an adult, the user is informed that only child
 The `validate_yes_no()` function returns `True` or `False` based on the user's input of `y` or `n` respectively. The user input is made lowercase using `lower()` and checked for an exact match to either `y` or `n`. If the input is invalid, an error message is printed reminding the user that they must only enter `y` or `n` and the prompt is repeated.
 
 ![Yes No input error]()
+
+### Try Except Clauses
+A number of function use try and except clauses to catch any unintended errors and inform the user that something has gone wrong.
+
+The first instance of these are found in the `validate_name()` function where strings are checked for invalid characters and if any are found, or the pass conditions are not met, a ValueError is raised. The clauses are used here due to the large number of possible characters that could be used in names from around the world, something that would be laborious and excessive to code out explicitly in if-else statements.
+
+![Validate name testing gif]()
+
+In the `validate_dob()` function, the date string provided by the user is converted to a date using `strptime()` and the format `"%d/%m/%Y"`. If there is an error converting the string, a ValueError is raised by the except clause. Again, any possible number of inputs could be entered by the user here, so a try-except clause works well.
+
+![Validate dob testing gif]()
+
+In the `push_details()`, `get_details()`, `get_worksheet()` and `delete_row()` functions, the Google Sheets spreadsheet is either called or manipulated somehow. In order to avoid the program crashing in case there is some unforseen issue accessing the spreadsheet, all the relevant methods are placed inside a try clause in these functions and the except clause prints a message telling the user that there has been an unexpected issue accessing the waiting list and to please try again later.
+
+![API error gif]()
 
 ## Dependencies
 - [Colorama](https://pypi.org/project/colorama/)
