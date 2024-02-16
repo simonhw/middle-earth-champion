@@ -216,7 +216,7 @@ In the `push_details()`, `get_details()`, `get_worksheet()` and `delete_row()` f
 | 2 | dob had time at the end in 0s. || Adding .date() to the end removed them. |
 | 3 | When refactoring `get_details()` the error message printed once for each spreadsheet searched instead of just printing once and requesting new user input. | ![Get details error messages](assets/images/readme/bugs/bug-ref-loops.png) | The else was changed to an if statement and indented back to the level of the while loop. |
 | 4 | When entering an email with more than one `.` in the domain name, the input was rejected. | ![Email domain error](assets/images/readme/bugs/email-bug.png) | |
-| 5 | After deleting a row from the waiting list, the code as it was did not update the numbers associated with the remaining entries and the user could delete the wrong entry or keep deleting the last entry which would be a blank row. | | |
+| 5 | After deleting a row from the waiting list, the code as it was did not update the numbers associated with the remaining entries and the user could delete the wrong entry or try to keep deleting the last entry which would be a blank row. | | The functions associated with this task were reordered and improved. New while loops now manage the printing of the updated waiting lists before the user is asked if they want to delete another entry.|
 
 ## Credits
 The images of the badges in this README were taken from the Scout Shop [website](https://thescoutshop.ie/collections/badges).
