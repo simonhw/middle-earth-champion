@@ -109,9 +109,35 @@ The chosen waiting lists is printed under a descriptive heading.
 
 At this point the admin user is given the option to delete someone from the waiting list for any reason e.g. the child has been enrolled or changed their mind about joining.
 
-Entering `y` will present a new input asking the user to select a number from the list corresponding to the data row they wish to delete.
+Entering `y` will present a new input asking the user to select a number from the list corresponding to the data row they wish to delete. When a number is chosen, the input choice is shown on screen as well as details of the data row being deleted. 
+Messages then print to say an attempt is being made to delete the row and if the row was successfully deleted.
 
-The input is shown on screen as well as the data row being deleted. Messages then print to say an attemmpt is being made to delete the row and if the row was successfully deleted.
+![Data deleted successfully screen]()
+
+An option to delete another entry is presented to the user. If `y` is entered, the updated waiting list in printed to the terminal again and the same steps above are follows. If `n` is entered, the user is asked if they want to view the waiting lists again and the same processes follow as above.
+
+![Edit another section screen]()
+
+Finally, the user is given the option to return to the main menu by inputting `y` or exit the program with `n`.
+
+### Option 4
+To exit the program, the user can `4`. Before full shutdown, a message prints to let them know the program is closing.
+
+![Exit program screen]()
+
+## Validation
+All user inputs and gspread processes are validated by the program. Each validation check is explained in detail below.
+
+### Validating Names
+The user inputs for the parent's first name, parent's last name, child's first name, and child's last name are subjected to a name validation check.
+
+The `validate_name()` function takes in two strings as parameters: the message to be printed, and a description of the name being validated. The function asks for input and removes any leading and trailing whitespaces with `.strip()`. The string is then searched for any numbers and a ValueError is raised if they are found.
+
+![Validate name number error gif]()
+
+If the string contains at least two characters, the input is returned with the first letter capitalised using `.title()`, otherwise a Value Error is raised.
+
+![Validate name 1 character error gif]()
 
 ## Dependencies
 - [Colorama](https://pypi.org/project/colorama/)
@@ -132,6 +158,7 @@ The input is shown on screen as well as the data row being deleted. Messages the
 | 2 | dob had time at the end in 0s. || Adding .date() to the end removed them. |
 | 3 | When refactoring `get_details()` the error message printed once for each spreadsheet searched instead of just printing once and requesting new user input. | ![Get details error messages](assets/images/readme/bugs/bug-ref-loops.png) | The else was changed to an if statement and indented back to the level of the while loop. |
 | 4 | When entering an email with more than one `.` in the domain name, the input was rejected. | ![Email domain error](assets/images/readme/bugs/email-bug.png) | |
+| 5 | After deleting a row from the waiting list, the code as it was did not update the numbers associated with the remaining entries and the user could delete the wrong entry or keep deleting the last entry which would be a blank row. | | |
 
 ## Credits
 The images of the badges in this README were taken from the Scout Shop [website](https://thescoutshop.ie/collections/badges).
@@ -141,3 +168,4 @@ The images of the badges in this README were taken from the Scout Shop [website]
 - hash the admin password
 - allow user to return to main menu from any input line
 - add code to show a maximum number of rows at a time if the waiting list is very long?
+- fix waiting list delete loop 
