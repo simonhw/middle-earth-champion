@@ -397,7 +397,7 @@ def delete_row(worksheet, list_of_rows):
                                        'deleted and press enter:\n'))
                 if row_number < len(list_of_rows) and row_number != 0:
                     print(f'You selected row_number {row_number}:\n'
-                           '{list_of_rows[row_number]}')
+                          f'{list_of_rows[row_number]}')
                     print('Deleting entry...')
                     try:
                         SHEET.worksheet(worksheet).delete_rows(row_number + 1)
