@@ -88,6 +88,31 @@ If the user selects option `2`, another descriptive heading is shown.
 
 ![Option 2](assets/images/readme/option-2.png)
 
+When the user enters a reference code, a message is printed to inform them that it is being verified. If valid, their child's position in the waiting list is printed to the terminal along with the name of the age section.
+
+![Successful reference code check screen]()
+
+The user is again given the option to return to the main menu by inputting `y` or exit the program with `n`.
+
+### Option 3
+If an admin user wants to view and edit the waiting list, they can enter `3`. A password request is presented to prevent unauthorized access to the data.
+
+![Admin log in screen]()
+
+Upon successful login, the admin user is presented with a list of the waiting lists to choose from. Entering a number from `1` to `4` prints the respective waiting list to the terminal in the form of lists of the data entries.
+
+![Section choice screen]()
+
+The chosen waiting lists is printed under a descriptive heading.
+
+![Beaver waiting list screen]()
+
+At this point the admin user is given the option to delete someone from the waiting list for any reason e.g. the child has been enrolled or changed their mind about joining.
+
+Entering `y` will present a new input asking the user to select a number from the list corresponding to the data row they wish to delete.
+
+The input is shown on screen as well as the data row being deleted. Messages then print to say an attemmpt is being made to delete the row and if the row was successfully deleted.
+
 ## Dependencies
 - [Colorama](https://pypi.org/project/colorama/)
 - [Gspread]()
