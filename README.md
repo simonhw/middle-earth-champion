@@ -128,6 +128,11 @@ To exit the program, the user can `4`. Before full shutdown, a message prints to
 ## Validation
 All user inputs and gspread processes are validated by the program. Each validation check is explained below and fully comprehensive testing of the validation is detailed in the [Manual Testing section](#manual-testing).
 
+### Validating the Main Menu
+In the main menu, the user is asked to choose from four options by entering `1`, `2`, `3`, or `4`. The `get_user_choice()` function checks if the user inputs exactly match either of these four numbers as a string; if not, it prints an error message and remind the users they must choose only one of the four numbers specified.
+
+![Main menu invalid choice]()
+
 ### Validating Names
 The user inputs for the parent's first name, parent's last name, child's first name, and child's last name are subjected to a name validation check.
 
@@ -160,7 +165,22 @@ If the user enters an invalid input, the below error is shown which reminds the 
 Valid inputs are returned by the funtion.
 
 ### Validating Dates of Birth
-The `validate_dob()` fuction asks the user to input their child's date of birth in the format `DD/MM/YYYY`. 
+The `validate_dob()` fuction asks the user to input their child's date of birth in the format `DD/MM/YYYY`. If an invalid format is entered the user is prompted again to enter the date in the specified format. 
+
+![DOB invalid format gif]()
+
+If a future date is entered, the user is warned that dates of birth must be in the past.
+
+![DOB future date gif]()
+
+If a date of birth is entered for an adult, the user is informed that only children younger than 18 can be added to the waiting list.
+
+![DOB adult error gif]()
+
+### Validating Yes/No Inputs
+The `validate_yes_no()` function returns `True` or `False` based on the user's input of `y` or `n` respectively. The user input is made lowercase using `lower()` and checked for an exact match to either `y` or `n`. If the input is invalid, an error message is printed reminding the user that they must only enter `y` or `n` and the prompt is repeated.
+
+![Yes No input error]()
 
 ## Dependencies
 - [Colorama](https://pypi.org/project/colorama/)
