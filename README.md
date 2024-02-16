@@ -126,7 +126,7 @@ To exit the program, the user can `4`. Before full shutdown, a message prints to
 ![Exit program screen]()
 
 ## Validation
-All user inputs and gspread processes are validated by the program. Each validation check is explained in detail below.
+All user inputs and gspread processes are validated by the program. Each validation check is explained below and fully comprehensive testing of the validation is detailed in the [Manual Testing section](#manual-testing).
 
 ### Validating Names
 The user inputs for the parent's first name, parent's last name, child's first name, and child's last name are subjected to a name validation check.
@@ -138,6 +138,29 @@ The `validate_name()` function takes in two strings as parameters: the message t
 If the string contains at least two characters, the input is returned with the first letter capitalised using `.title()`, otherwise a Value Error is raised.
 
 ![Validate name 1 character error gif]()
+
+### Validating Emails
+The `validate_email()` function uses RegEx to check if the user input matches the specified email format:
+
+- Name made up of any word or hypen or full stop: `[\w\.-]` e.g. `john.smith`
+- The `@` symbol
+- A domain name made up of any word including hyphens: `[\w-]` e.g. `foresty-group`
+- A full stop `.`
+- The rest of the domain made up of any words and full stops: `[\w\.]` e.g. `.co.uk`
+
+Put together, the RegEx pattern for this is 
+`^[\w\.-]+@[\w-]+\.+[\w\.]+$`
+
+![Email pattern test on RegEx](assets/images/readme/email-test.png)
+
+If the user enters an invalid input, the below error is shown which reminds the user of the correct email format required.
+
+![Invalid email error message]()
+
+Valid inputs are returned by the funtion.
+
+### Validating Dates of Birth
+The `validate_dob()` fuction asks the user to input their child's date of birth in the format `DD/MM/YYYY`. 
 
 ## Dependencies
 - [Colorama](https://pypi.org/project/colorama/)
