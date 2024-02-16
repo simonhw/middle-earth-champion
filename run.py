@@ -175,6 +175,10 @@ def validate_dob():
             if date_diff(user_input) < 0:
                 print(Fore.RED + 'Invalid date: ' + Style.RESET_ALL +
                       'Date of birth must be in the past.')
+            elif date_diff(user_input) >= 18 * 365.25:
+                print(Fore.RED + 'Invalid age: ' + Style.RESET_ALL +
+                      'Only children under the age of 18 may be added to the '
+                      'waiting list.\n')
             else:
                 return datetime.strptime(user_input, "%d/%m/%Y").date()
                 invalid = False
