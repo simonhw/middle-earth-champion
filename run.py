@@ -367,6 +367,7 @@ def get_worksheet(worksheet):
       
         if len(list_of_rows) == 1:
             print(f'The {worksheet} waiting list is empty!\n')
+            return False
         else:
             title = f'{worksheet} Waiting List'
             print(section_colour + generate_line(title))
@@ -379,7 +380,7 @@ def get_worksheet(worksheet):
                 print(f'{i}: {row}')
                 i += 1
     
-            delete_row(worksheet, list_of_rows)
+            return list_of_rows
     except:
         print('We\'re sorry, there was a problem accessing the database. '
               'Please try again later.')
@@ -391,32 +392,29 @@ def delete_row(worksheet, list_of_rows):
     to delete that row in the google sheet spreadsheet.
     '''
 
+    row_number = 0
     while True:
-        delete = validate_yes_no('Do you want to remove a child from the '
-                                 'waiting list? (y/n)\n')
-        if delete:
-            row_number = 0
-            while True:
-                row_number = int(input('Enter the number of the entry to be '
-                                       'deleted and press enter:\n'))
-                if row_number < len(list_of_rows) and row_number != 0:
-                    print(f'You selected row_number {row_number}:\n'
-                          f'{list_of_rows[row_number]}')
-                    print('Deleting entry...')
-                    try:
-                        SHEET.worksheet(worksheet).delete_rows(row_number + 1)
-                        print('Entry successfully deleted.')
-                    except:
-                        print('We\'re sorry, there was a problem accessing the database. '
-                              'Please try again later.')
+        row_number = int(input('Enter the number of the entry to be '
+                               'deleted and press enter:\n'))
+        if row_number < len(list_of_rows) and row_number != 0:
+            print(f'You selected row_number {row_number}:\n'
+                  f'{list_of_rows[row_number]}')
+            print('Deleting entry...')
+            try:
+                SHEET.worksheet(worksheet).delete_rows(row_number + 1)
+                print('Entry successfully deleted.')
+                delete = validate_yes_no('Do you want to remove another child from the '
+                         f'{worksheet} waiting list? (y/n)\n')
+                return delete
+            except:
+                print('We\'re sorry, there was a problem accessing the '
+                      'database. Please try again later.')
 
-                    break
-                else:
-                    print(Fore.RED + 'Invalid choice! ' + Style.RESET_ALL +
-                          'You must select a row between 1 and '
-                          f'{len(list_of_rows) - 1}.\n')
-        else:
             break
+        else:
+            print(Fore.RED + 'Invalid choice! ' + Style.RESET_ALL +
+                  'You must select a row between 1 and '
+                  f'{len(list_of_rows) - 1}.\n')
 
 
 def main():
@@ -435,7 +433,16 @@ def main():
             is_admin = verify_admin()
             while is_admin:
                 section = choose_section()
-                get_worksheet(section)
+                delete = True
+                while delete:
+                    list_of_rows = get_worksheet(section)
+                    if not list_of_rows:
+                        break
+                    if validate_yes_no('Do you want to remove a child from the '
+                                       f'{section} waiting list? (y/n)\n'):
+                        delete = delete_row(section, list_of_rows)
+                    else:
+                        delete = False
                 is_admin = validate_yes_no('Do you want to edit another '
                                            'section? (y/n)\n')
         elif choice == '4':
