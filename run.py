@@ -124,7 +124,7 @@ def validate_email():
     or underscores.
     '''
 
-    pattern = r'^[\w\.-]+@[\w-]+\.+\w+$'
+    pattern = r'^[\w\.-]+@[\w-]+\.+[\w\.]+$'
     invalid = True
     while invalid:
         user_input = input('Your email address:\n').strip()
