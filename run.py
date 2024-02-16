@@ -231,6 +231,8 @@ def push_details(list):
         print(f'Thank you, {list[3]} has been added to the {worksheet} '
                'waiting list!')
         print('Your reference is: ' + list[-2])
+        print('Please save this reference as you will need it to check your '
+              'child\'s waiting list position.')
         print(f'We will be in touch when we have capacity for {list[3]} to join.\n')
     except:
         print('We\'re sorry, there was a problem accessing the database. '
