@@ -198,7 +198,7 @@ def validate_dob():
                 invalid = False
         except ValueError:
             print(Fore.RED + 'Invalid format: ' + Style.RESET_ALL +
-                  'Date of birth format must be DD/MM/YYYY.')
+                  'Date of birth format must be DD/MM/YYYY.\n')
 
 
 def generate_reference_no(lname):
