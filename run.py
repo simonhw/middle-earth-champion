@@ -112,7 +112,7 @@ def validate_name(message, parameter):
                      + Style.RESET_ALL)
             prompt = ('Names must be at least 2 characters in length and '
                       'cannot contain any numbers.\n')
-            if len(error) > 49:
+            if len(error) > 79:
                 print(Fore.RED + f'That is not a valid {parameter}'
                       + Style.RESET_ALL)
             else:
@@ -141,9 +141,16 @@ def validate_email():
             invalid = False
             return user_input
         else:
-            print(Fore.RED + f'"{user_input}" is not a valid email. '
-                  + Style.RESET_ALL + 'Emails must contain an @ and a .'
-                  ' e.g. example@email.com\n')
+            error = (Fore.RED + f'"{user_input}" is not a valid email.'
+                     + Style.RESET_ALL)
+            prompt = ('Emails must contain an @ and a . '
+                      ' e.g. example@email.com\n')
+            if len(error) > 79:
+                print(Fore.RED + f'That is not a valid email.'
+                      + Style.RESET_ALL)
+            else:
+                print(error)
+            print(prompt)
 
 
 def validate_yes_no(message):
