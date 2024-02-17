@@ -257,12 +257,17 @@ To deploy this program locally on your own device, please follow the steps below
 | To enter data without error or confusion. | Inputs are presented to the user one at a time with simple descriptions. Invalid data is rejected with an error message explanation given to the user. The user is reminded of the correct input format for each input. | [1. Data Input Lines](assets/images/readme/enter-details.png) [2. Invalid Inputs and Error Messages](assets/images/readme/validate-name-testing.gif) |
 | To ensure data is correct before submission. | The user is presented with their input data for final confirmation and given the option to restart the process in case they have made a mistake. | [Gif of Input Data Confirmation and Re-entry](assets/images/readme/data-entry-confirmation.gif) |
 | Returning Visitor Goals | | |
-| To check their child's position in the waiting list. | The user can navigate from the main menu to this part of the program. Providing the reference code generated when they initially registered their details will return their child's position on that particular waiting list. | [Successfully Checking Refernce Code](assets/images/readme/check-ref-code.png) |
+| To check their child's position in the waiting list. | The user can navigate from the main menu to this part of the program. Providing the reference code generated when they initially registered their details will return their child's position on that particular waiting list. | [Successfully Checking Reference Code](assets/images/readme/check-ref-code.png) |
 | Frequent Visitor Goals | |
 | To view and delete entries on the list. | Admin users can securely access this part of the program with a password. Each waiting list can be viewed and entries can be deleted by entering the corresponding number on screen next to a given entry. | [1. Admin Welcome Screen](assets/images/readme/section-choice-screen.png) ![2. Admin View of Lists]() ![3. Admin Deletion of Entry]() |
 
+### Full Testing
+
 ## Bugs
 ### Known Bugs
+| # | Bug | Image | Plan to Solve |
+| --- | --- | --- | --- |
+| 1 | When running the program on my local Visual Studio Code, it took a number of minutes for the first lines of code to print after which the program performed as expected. This issue could not be replicated when deployed on Heroku or on browser VS Code using Gitpod. When the lines of code related to gspread and google auth were commented out, the program ran immediately. | [VS Code Delay on Desktop](assets/images/readme/bugs/vscode-delay.gif) | The cause of this issue is uncertain and could be due to my internet connection or some other setting in VS Code. Given that using Gitpod allowed me to avoid this bug completelely without changing any other aspects of the code, it was not deemed a priority to solve this bug before the submission of this assignment in the interest of best use of time. |
 
 ### Solved Bugs
 | # | Bug | Image | Solution |
@@ -277,6 +282,9 @@ To deploy this program locally on your own device, please follow the steps below
 
 ## Credits
 The images of the badges in this README were taken from the Scout Shop [website](https://thescoutshop.ie/collections/badges).
+
+## Acknowledgements
+Thanks to the Code Institude tutors for suggesting Gitpod as a way to get around Bug #1 while coding this program.
 
 ## To-do List
 - Update validate_name function to only allow one space and/or one hypen between letters
