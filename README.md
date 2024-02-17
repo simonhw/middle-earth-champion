@@ -251,6 +251,15 @@ To deploy this program locally on your own device, please follow the steps below
 ## Testing
 ### Manual Testing
 | User Stories | Achieved by: | Supporting Images |
+| --- | --- | --- | 
+| First-time Visitor Goals | | |
+| To understand the purpose of the program. | The welcome message explains the purpose of the program and how to use it. | [Welcome Screen](assets/images/readme/welcome-menu.png) |
+| To enter data without error or confusion. | Inputs are presented to the user one at a time with simple descriptions. Invalid data is rejected with an error message explanation given to the user. The user is reminded of the correct input format for each input. | [1. Data Input Lines](assets/images/readme/enter-details.png) [2. Invalid Inputs and Error Messages](assets/images/readme/validate-name-testing.gif) |
+| To ensure data is correct before submission. | The user is presented with their input data for final confirmation and given the option to restart the process in case they have made a mistake. | [Gif of Input Data Confirmation and Re-entry](assets/images/readme/data-entry-confirmation.gif) |
+| Returning Visitor Goals | | |
+| To check their child's position in the waiting list. | The user can navigate from the main menu to this part of the program. Providing the reference code generated when they initially registered their details will return their child's position on that particular waiting list. | [Successfully Checking Refernce Code](assets/images/readme/check-ref-code.png) |
+| Frequent Visitor Goals | |
+| To view and delete entries on the list. | Admin users can securely access this part of the program with a password. Each waiting list can be viewed and entries can be deleted by entering the corresponding number on screen next to a given entry. | [1. Admin Welcome Screen](assets/images/readme/section-choice-screen.png) ![2. Admin View of Lists]() ![3. Admin Deletion of Entry]() |
 
 ## Bugs
 ### Known Bugs
