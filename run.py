@@ -64,7 +64,7 @@ def register_details():
         dob = validate_dob()
         str_dob = dob.strftime("%d/%m/%Y")
         section = age_section(str_dob)
-        print(f'Your details are as follows:\n'
+        print(f'\nYour details are as follows:\n'
               f'Full Name: {fname} {lname}\n'
               f'Contact email: {email}\n'
               f'Child\'s Full Name: {cfname} {clname}\n'
