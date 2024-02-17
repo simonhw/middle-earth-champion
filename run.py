@@ -32,7 +32,7 @@ def get_user_choice():
         print('3. ADMIN ONLY - Edit waiting list.')
         print('4. Exit Program.\n')
         choice = input('Enter a number from the options above and press '
-                       'enter:\n')
+                       'enter:\n').strip()
         if choice == '1' or choice == '2' or choice == '3' or choice == '4':
             break
         else:
@@ -102,15 +102,22 @@ def validate_name(message, parameter):
             for c in user_input:
                 if c.isdigit():
                     raise ValueError
-            if (len(user_input) > 1):
+            if (len(user_input) > 1 and len(user_input) < 49):
                 invalid = False
                 return user_input.title()
             else:
                 raise ValueError
         except ValueError:
-            print(Fore.RED + f'"{user_input}" is not a valid {parameter}. '
-                  + Style.RESET_ALL + 'Names must be at least 2 characters '
-                  ' in length and cannot contain any numbers.\n')
+            error = (Fore.RED + f'"{user_input}" is not a valid {parameter}.'
+                     + Style.RESET_ALL)
+            prompt = ('Names must be at least 2 characters in length and '
+                      'cannot contain any numbers.\n')
+            if len(error) > 49:
+                print(Fore.RED + f'That is not a valid {parameter}'
+                      + Style.RESET_ALL)
+            else:
+                print(error)
+            print(prompt)
 
 
 def validate_email():
