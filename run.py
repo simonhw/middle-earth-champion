@@ -168,8 +168,15 @@ def validate_yes_no(message):
             invalid = False
             return True if user_input == 'y' else False
         else:
-            print(Fore.RED + f'"{user_input}" is not a valid choice. '
-                  + Style.RESET_ALL + 'Only "y" or "n" are accepted.\n')
+            error = (Fore.RED + f'"{user_input}" is not a valid choice.'
+                     + Style.RESET_ALL)
+            prompt = ('Only "y" or "n" are accepted.\n')
+            if len(error) > 79:
+                print(Fore.RED + f'That is not a valid choice.'
+                      + Style.RESET_ALL)
+            else:
+                print(error)
+            print(prompt)
             invalid = True
 
 
@@ -279,7 +286,7 @@ def get_details():
                 if user_ref in refs:
                     index_of_details = refs.index(user_ref)
                     print(f'Your child is number {index_of_details} on the '
-                          f'{worksheet[:-1]} waiting list')
+                          f'{worksheet[:-1]} waiting list.\n')
                     invalid = False
                     break
             if invalid == True:
