@@ -294,7 +294,7 @@ def get_details():
                       'Please try again.\n' + Style.RESET_ALL)
         except:
             print('We\'re sorry, there was a problem accessing the database. '
-                  'Please try again later.')
+                  'Please try again later.\n')
             break
 
 
@@ -404,7 +404,7 @@ def get_worksheet(worksheet):
             return list_of_rows
     except:
         print('We\'re sorry, there was a problem accessing the database. '
-              'Please try again later.')
+              'Please try again later.\n')
 
 
 def delete_row(worksheet, list_of_rows):
@@ -429,7 +429,7 @@ def delete_row(worksheet, list_of_rows):
                 return delete
             except:
                 print('We\'re sorry, there was a problem accessing the '
-                      'database. Please try again later.')
+                      'database. Please try again later.\n')
 
             break
         else:

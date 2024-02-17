@@ -160,42 +160,40 @@ Put together, the RegEx pattern for this is
 
 If the user enters an invalid input, the below error is shown which reminds the user of the correct email format required.
 
-![Invalid email error message]()
+![Invalid email error message](assets/images/readme/validate-email.gif)
 
 Valid inputs are returned by the funtion.
 
 ### Validating Dates of Birth
 The `validate_dob()` fuction asks the user to input their child's date of birth in the format `DD/MM/YYYY`. If an invalid format is entered the user is prompted again to enter the date in the specified format. (See [Try Except Clauses](#try-except-clauses))
 
-![DOB invalid format gif]()
+![DOB invalid format gif](assets/images/readme/validate-dob-invalid.gif)
 
 If a future date is entered, the user is warned that dates of birth must be in the past.
 
-![DOB future date gif]()
+![DOB future date gif](assets/images/readme/validate-dob-future.gif)
 
 If a date of birth is entered for an adult, the user is informed that only children younger than 18 can be added to the waiting list.
 
-![DOB adult error gif]()
+![DOB adult error gif](assets/images/readme/validate-dob-adult.gif)
 
 ### Validating Yes/No Inputs
 The `validate_yes_no()` function returns `True` or `False` based on the user's input of `y` or `n` respectively. The user input is made lowercase using `lower()` and checked for an exact match to either `y` or `n`. If the input is invalid, an error message is printed reminding the user that they must only enter `y` or `n` and the prompt is repeated.
 
-![Yes No input error]()
+![Yes No input error](assets/images/readme/validate-yes-no.gif)
 
 ### Try Except Clauses
 A number of function use try and except clauses to catch any unintended errors and inform the user that something has gone wrong.
 
 The first instance of these are found in the `validate_name()` function where strings are checked for invalid characters and if any are found, or the pass conditions are not met, a ValueError is raised. The clauses are used here due to the large number of possible characters that could be used in names from around the world, something that would be laborious and excessive to code out explicitly in if-else statements.
 
-![Validate name testing gif]()
+![Validate name testing gif](assets/images/readme/validate-name-testing.gif)
 
 In the `validate_dob()` function, the date string provided by the user is converted to a date using `strptime()` and the format `"%d/%m/%Y"`. If there is an error converting the string, a ValueError is raised by the except clause. Again, any possible number of inputs could be entered by the user here, so a try-except clause works well.
 
-![Validate dob testing gif]()
-
 In the `push_details()`, `get_details()`, `get_worksheet()` and `delete_row()` functions, the Google Sheets spreadsheet is either called or manipulated somehow. In order to avoid the program crashing in case there is some unforseen issue accessing the spreadsheet, all the relevant methods are placed inside a try clause in these functions and the except clause prints a message telling the user that there has been an unexpected issue accessing the waiting list and to please try again later.
 
-![API error gif]()
+![API error gif](assets/images/readme/validate-api-error.gif)
 
 ## Dependencies
 - [Colorama](https://pypi.org/project/colorama/)
@@ -228,5 +226,3 @@ The images of the badges in this README were taken from the Scout Shop [website]
 - hash the admin password
 - allow user to return to main menu from any input line
 - add code to show a maximum number of rows at a time if the waiting list is very long?
-- fix waiting list delete loop 
-- invalid input that makes string too long, hide the input?
