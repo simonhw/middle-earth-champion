@@ -195,14 +195,42 @@ In the `push_details()`, `get_details()`, `get_worksheet()` and `delete_row()` f
 
 ![API error gif](assets/images/readme/validate-api-error.gif)
 
-## Dependencies
-- [Colorama](https://pypi.org/project/colorama/)
-- [Gspread]()
-- [Google Auth]()
-- [Datetime]()
-- [Math]()
-- [Random]()
-- [Re]()
+## Technologies Used
+### Languages
+Python
+
+### Frameworks, Libaries, and Programs
+[Lucidchart](https://lucid.app/) - To create flowcharts.
+
+Visual Studio Code - An IDE used to write my code.
+
+[Gitpod](https://www.gitpod.io/) - A cloud IDE also used to write my code.
+
+[Git](https://git-scm.com/) - For version control.
+
+[GitHub](https://github.com/) - To save and store files online.
+
+[W3Schools.com](https://www.w3schools.com/) and [The Python Library](https://docs.python.org/3/library/) - For researching and learning about Python methods and syntax.
+
+[ScreenToGif](https://www.screentogif.com/) - To create gif files for this README.
+
+Adobe Photoshop 2020 - To pixellate and crop some README images.
+
+[Heroku](https://www.heroku.com/) - To host the deployed version of the program.
+
+[Sheilds.io](https://shields.io/) - To add badges to this README.
+
+[CI Python Linter](https://pep8ci.herokuapp.com/#) - To ensure code meets minimum PEP8 standards.
+
+### Dependencies
+- [Colorama](https://pypi.org/project/colorama/) - To apply some colour to text in the program.
+- [Gspread](https://docs.gspread.org/) - API allowing manipulation of data with a Google Sheet spreadhsheet.
+- [Google Auth](https://google-auth.readthedocs.io/) - API to control access to the spreadsheet.
+- [Datetime](https://github.com/python/cpython/tree/3.12/Lib/datetime.py) - To work with strings and integers as dates in the code.
+- [Random](https://github.com/python/cpython/tree/3.12/Lib/random.py) - To generate random numbers.
+- [Re](https://github.com/python/cpython/tree/3.12/Lib/re/) - To work with regular expression operations.
+
+
 
 ## Bugs
 ### Known Bugs
