@@ -230,7 +230,27 @@ Adobe Photoshop 2020 - To pixellate and crop some README images.
 - [Random](https://github.com/python/cpython/tree/3.12/Lib/random.py) - To generate random numbers.
 - [Re](https://github.com/python/cpython/tree/3.12/Lib/re/) - To work with regular expression operations.
 
+## Deployment
+The program was deployed on Heroku to allow the CI assessor and other interested parties to view and interact with the program.
 
+### Local Deployment
+To deploy this program locally on your own device, please follow the steps below:
+
+#### Forking
+1. Log in or sign up to GitHub.
+2. Navigate to the repository for [Scout Waiting List](https://github.com/simonhw/waiting-list).
+3. Click the Fork button located in the top right part of the webpage.
+
+#### Cloning
+1. Log in or sign up to GitHub.
+2. Navigate to the repository for [Scout Waiting List](https://github.com/simonhw/waiting-list).
+3. Click on the green Code button and select your preferred option of HTTPS, SSH, or GitHub CLI and copy the relevant link.
+4. Open the terminal in your IDE and navigate to your directory of choice for this new clone.
+5. Type `git clone` into the terminal and paste in your copied link. Press enter.
+
+## Testing
+### Manual Testing
+| User Stories | Achieved by: | Supporting Images |
 
 ## Bugs
 ### Known Bugs
