@@ -138,11 +138,11 @@ The user inputs for the parent's first name, parent's last name, child's first n
 
 The `validate_name()` function takes in two strings as parameters: the message to be printed, and a description of the name being validated. The function asks for input and removes any leading and trailing whitespaces with `.strip()`. The string is then searched for any numbers and a ValueError is raised if they are found. 
 
-![Validate name number error gif]()
+![Validate name number error gif](assets/images/readme/validate-name-number.gif)
 
-If the string contains at least two characters, the input is returned with the first letter capitalised using `.title()`, otherwise a Value Error is raised.
+If the string contains at least two characters, the input is saved with the first letter capitalised using `.title()`, otherwise a Value Error is raised.
 
-![Validate name 1 character error gif]()
+![Validate name 1 character error gif](assets/images/readme/validate-name-character.gif)
 
 ### Validating Emails
 The `validate_email()` function uses RegEx to check if the user input matches the specified email format:
@@ -218,7 +218,7 @@ In the `push_details()`, `get_details()`, `get_worksheet()` and `delete_row()` f
 | 4 | When entering an email with more than one `.` in the domain name, the input was rejected. | ![Email domain error](assets/images/readme/bugs/email-bug.png) | |
 | 5 | After deleting a row from the waiting list, the code as it was did not update the numbers associated with the remaining entries and the user could delete the wrong entry or try to keep deleting the last entry which would be a blank row. | | The functions associated with this task were reordered and improved. New while loops now manage the printing of the updated waiting lists before the user is asked if they want to delete another entry.|
 | 6 | A correct number input by the user was marked as invalid if a whitespace was accidentally included after the number. | ![Main menu whitespace bug](assets/images/readme/bugs/menu-whitespace-bug.gif) | The `.strip()` method was applied to the user input to remove leading and trailing whitespaces. |
-| 7 | It was possible to enter a very long invalid input which resulted in the lines in the error messages string being longer than 80 characters and this sometimes caused words to be split over two lines as the terminal wrapped to a new line. | ![Long input error string](assets/images/readme/bugs/long-input-message.png) | The error message was separated into two strings and when the user input was detected as containing more than 49 characters, intead of being printed to the terminal, the string `That is not a valid ...` was inserted with the appropriate parameter name at the end of the string. This prevented any error messages being longer than 80 characters per line. | 
+| 7 | With the `validate_name()` function it was possible to enter a very long invalid input which resulted in the lines in the error message string being longer than 80 characters and this sometimes caused words to be split over two lines as the terminal wrapped to a new line. | ![Long input error string](assets/images/readme/bugs/long-input-message.png) | The error message was separated into two strings and when the user input was detected as containing more than 49 characters, intead of being printed to the terminal, the string `That is not a valid {parameter}.` was inserted with the appropriate parameter name at the end of the string. This prevented any error messages being longer than 80 characters per line. Similar code was added to the `validate_email()` function to achieve the same result.| 
 
 ## Credits
 The images of the badges in this README were taken from the Scout Shop [website](https://thescoutshop.ie/collections/badges).
