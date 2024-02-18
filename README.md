@@ -183,9 +183,9 @@ The `validate_yes_no()` function returns `True` or `False` based on the user's i
 ![Yes No input error](assets/images/readme/validate-yes-no.gif)
 
 ### Validating Admin Status
-The `verify_admin()` function compares user input against a hashed password stored securely in the Google Sheet. The user input is encoding into bytes and checked against the hash using bcrpyt's `.checkpw()` method. If the input does not match, the user is informed and prompted to try again. A successful match brings the user to the Edit Waiting List Menu. As the hash is stored on the Google Sheet, the code is wrapped in a try clause in case there is some unforseen problem with the API call.
+The `verify_admin()` function compares user input against a hashed password stored securely in the Google Sheet. The user input is encoded into bytes and checked against the hash using bcrpyt's `.checkpw()` method. If the input does not match, the user is informed and prompted to try again. A successful match brings the user to the Edit Waiting List Menu. As the hash is stored on the Google Sheet, the code is wrapped in a try clause in case there is some unforseen problem with the API call.
 
-![Validate password testing gif]()
+![Validate password testing gif](assets/images/readme/validate-admin.gif)
 
 ### Try Except Clauses
 A number of function use try and except clauses to catch any unintended errors and inform the user that something has gone wrong.
