@@ -425,9 +425,20 @@ def get_worksheet(worksheet):
                 string = (f'{i}: {row[3]} {row[4]} '
                           f'- DOB: {row[5]} '
                           f'- Parent Contact: {row[0]} {row[1]} {row[2]}')
-                print(string)
+                if len(string) > 78:
+                    medium_string = (f'{i}: {row[3]} {row[4]} '
+                              f'- Parent Contact: {row[0]} {row[1]} {row[2]}')
+                    if len(medium_string) > 78:
+                        short_string = (f'{i}: {row[3]} {row[4]} '
+                                        f'- Parent Contact: {row[2]}')
+                        print(short_string)
+                    else:
+                        print(medium_string)
+                else:
+                    print(string)
+                
                 i += 1
-    
+
             return list_of_rows
     except:
         print('We\'re sorry, there was a problem accessing the database. '
