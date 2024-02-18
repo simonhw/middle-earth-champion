@@ -35,8 +35,15 @@ def get_user_choice():
         if choice == '1' or choice == '2' or choice == '3' or choice == '4':
             break
         else:
-            print(Fore.RED + f'\nINVALID INPUT: "{choice}".' + Style.RESET_ALL
-                  + ' You must enter a number between 1 and 4.\n')
+            error = (Fore.RED + f'\nINVALID INPUT: "{choice}".'
+                     + Style.RESET_ALL)
+            prompt = ('You must enter a number between 1 and 4.\n')
+            if len(error) > 79:
+                print(Fore.RED + f'That is not a valid input.'
+                      + Style.RESET_ALL)
+            else:
+                print(error)
+            print(prompt)
     return choice
 
 
@@ -169,7 +176,7 @@ def validate_yes_no(message):
         else:
             error = (Fore.RED + f'"{user_input}" is not a valid choice.'
                      + Style.RESET_ALL)
-            prompt = ('Only "y" or "n" are accepted.\n')
+            prompt = ('Only "y" or "n" are accepted.')
             if len(error) > 79:
                 print(Fore.RED + f'That is not a valid choice.'
                       + Style.RESET_ALL)
@@ -414,7 +421,7 @@ def delete_row(worksheet, list_of_rows):
 
     row_number = 0
     while True:
-        row_number = int(input('Enter the number of the entry to be '
+        row_number = int(input('\nEnter the number of the entry to be '
                                'deleted and press enter:\n'))
         if row_number < len(list_of_rows) and row_number != 0:
             print(f'You selected row_number {row_number}:\n'
@@ -423,7 +430,7 @@ def delete_row(worksheet, list_of_rows):
             try:
                 SHEET.worksheet(worksheet).delete_rows(row_number + 1)
                 print('Entry successfully deleted.')
-                delete = validate_yes_no('Do you want to remove another child from the '
+                delete = validate_yes_no('\nDo you want to view the updated '
                          f'{worksheet} waiting list? (y/n)\n')
                 return delete
             except:
@@ -458,19 +465,19 @@ def main():
                     list_of_rows = get_worksheet(section)
                     if not list_of_rows:
                         break
-                    if validate_yes_no('Do you want to remove a child from the '
+                    if validate_yes_no('\nDo you want to remove a child from the '
                                        f'{section} waiting list? (y/n)\n'):
                         delete = delete_row(section, list_of_rows)
                     else:
                         delete = False
-                is_admin = validate_yes_no('Do you want to edit another '
+                is_admin = validate_yes_no('\nDo you want to edit another '
                                            'section? (y/n)\n')
         elif choice == '4':
             print('Exiting program...')
             break       
         else:
             print(f'Choice: {choice}')
-        user_continue = validate_yes_no('Do you want to return to the main '
+        user_continue = validate_yes_no('\nDo you want to return to the main '
                                         'menu? (y/n)\n')
         if not user_continue:
             print('Exiting program...')
