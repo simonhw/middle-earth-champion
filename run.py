@@ -421,24 +421,30 @@ def delete_row(worksheet, list_of_rows):
 
     row_number = 0
     while True:
-        row_number = int(input('\nEnter the number of the entry to be '
-                               'deleted and press enter:\n'))
-        if row_number < len(list_of_rows) and row_number != 0:
-            print(f'You selected row_number {row_number}:\n'
-                  f'{list_of_rows[row_number]}')
-            print('Deleting entry...')
-            try:
-                SHEET.worksheet(worksheet).delete_rows(row_number + 1)
-                print('Entry successfully deleted.')
-                delete = validate_yes_no('\nDo you want to view the updated '
-                         f'{worksheet} waiting list? (y/n)\n')
-                return delete
-            except:
-                print('We\'re sorry, there was a problem accessing the '
-                      'database. Please try again later.\n')
+        row_number = input('\nEnter the number of the entry to be '
+                               'deleted and press enter:\n')
+        try:
+            row_number = int(row_number)
+            if row_number < len(list_of_rows) and row_number != 0:
+                print(f'You selected row_number {row_number}:\n'
+                    f'{list_of_rows[row_number]}')
+                print('Deleting entry...')
+                try:
+                    SHEET.worksheet(worksheet).delete_rows(row_number + 1)
+                    print('Entry successfully deleted.')
+                    delete = validate_yes_no('\nDo you want to view the updated '
+                            f'{worksheet} waiting list? (y/n)\n')
+                    return delete
+                except:
+                    print('We\'re sorry, there was a problem accessing the '
+                        'database. Please try again later.\n')
 
-            break
-        else:
+                break
+            else:
+                print(Fore.RED + 'Invalid choice! ' + Style.RESET_ALL +
+                      'You must select a row between 1 and '
+                      f'{len(list_of_rows) - 1}.\n')
+        except:
             print(Fore.RED + 'Invalid choice! ' + Style.RESET_ALL +
                   'You must select a row between 1 and '
                   f'{len(list_of_rows) - 1}.\n')
