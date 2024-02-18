@@ -368,8 +368,8 @@ def verify_admin():
     of waiting list details.
     '''
 
-    invalid = True
-    while invalid:
+    invalid = False
+    while not invalid:
         password = input('Please enter the admin password:\n')
         pwdbytes = password.encode('utf-8')
         try:
@@ -384,7 +384,8 @@ def verify_admin():
                 return is_admin
         except:
             print('We\'re sorry, there was a problem accessing the database. '
-                  'Please try again later.\n')
+                  'Please try again later.')
+            break
 
 
 def get_worksheet(worksheet):
@@ -421,7 +422,10 @@ def get_worksheet(worksheet):
             for row in list_of_rows:
                 if row == list_of_rows[0]:
                     continue
-                print(f'{i}: {row}')
+                string = (f'{i}: {row[3]} {row[4]} '
+                          f'- DOB: {row[5]} '
+                          f'- Parent Contact: {row[0]} {row[1]} {row[2]}')
+                print(string)
                 i += 1
     
             return list_of_rows
