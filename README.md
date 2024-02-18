@@ -332,6 +332,13 @@ The site was tested on Google Chrome on desktop, and DuckDuckGo on mobile.
 | Edit Another Section Question | When the user enters `y` or `Y`, the program returns the user to the Edit Waiting List Menu. | The letters `y` and `Y` were entered in separate instances. | The program returns the user to the Edit Waiting List Menu. | PASS |
 | Edit Another Section Question | The user is posed the Return to Main Menu Question after entering `n` or `N`. | The letters `n` and `N` were entered in separate instances. | The program poses the Return to Main Menu Question. | PASS |
 
+### Automated Testing
+The Code Intitute Python Linter was used to check the code for any violations of PEP8 standards.
+
+The code passed with no errors.
+
+![CI Linter screenshot]()
+
 ## Bugs
 ### Known Bugs
 | # | Bug | Image | Plan to Solve |
@@ -351,10 +358,25 @@ The site was tested on Google Chrome on desktop, and DuckDuckGo on mobile.
 | 8 | Entering nothing, letters, or symbols in the Delete Data Row input crashes the program. | ![delete_row() bug that crashed the program](assets/images/readme/bugs/delete-row-crash-bug.gif) | The function was amended to include a try-except clause and the user input was only converted to an integer inside the clause to avoid the program crashing. |
 
 ## Credits
+### Media
 The images of the badges in this README were taken from the Scout Shop [website](https://thescoutshop.ie/collections/badges).
 
+### Code Used
+**All code in this project was written entirely by Simon Henleywillis unless otherwise specified below.**
+
+
+The idea to use Gspread and Google Auth was inspired by the Love Sandwiches walkthrough project. Lines 8 to 17 of `run.py` were taken from there as the Google Sheets setup was the same for this project.
+
+Line 144 uses the method `re.fullmatch`. This was discovered on a Stack Overflow post:
+- [Differences between re.match, re.search, re.fullmatch [duplicate]](https://stackoverflow.com/questions/58774029/differences-between-re-match-re-search-re-fullmatch)
+
+Line 210 which converts the user input string date to a true date format was taken from a comment on a Stack Overflow post:
+- [Stack Overflow - How do I check date of birth format is correct](https://stackoverflow.com/questions/44716920/how-do-i-check-date-of-birth-format-is-correct)
+
 ## Acknowledgements
-Thanks to the Code Institude tutors for suggesting Gitpod as a way to get around Bug #1 while coding this program.
+- Thanks to the Code Institude tutors for suggesting Gitpod as a way to get around Known Bug #1 while coding this program.
+- Thanks to my CI Mentor [Graeme Taylor](https://github.com/G-Taylor) for his great support and encouragement and especially for showing me that I could use RegEx to validate the email input.
+- [Creating Your First README - Kera Cudmore](https://github.com/kera-cudmore/readme-examples)
 
 ## To-do List
 - Update validate_name function to only allow one space and/or one hypen between letters
