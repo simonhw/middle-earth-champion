@@ -418,7 +418,7 @@ def get_worksheet(worksheet):
             print(section_colour + generate_line(title))
             print(title)
             print(generate_line(title) + Style.RESET_ALL)
-            ####
+
             if len(list_of_rows) > 16:
                 first_15_rows = list_of_rows[:16]
                 print_rows(1, first_15_rows)
@@ -427,33 +427,11 @@ def get_worksheet(worksheet):
                 remaining_rows = list_of_rows[15:]
                 view_all = validate_yes_no('\nDo you want to view the '
                                            f'remaining entries ({remaining})?'
-                                           '(y/n)\n')
+                                           ' (y/n)\n')
                 if view_all:
                     print_rows(16, remaining_rows)
             else:
                 print_rows(list_of_rows)
-            ####
-            '''
-            for row in list_of_rows:
-                if row == list_of_rows[0]:
-                    continue
-                string = (f'{i}: {row[3]} {row[4]} '
-                          f'- DOB: {row[5]} '
-                          f'- Parent Contact: {row[0]} {row[1]} {row[2]}')
-                if len(string) > 78:
-                    medium_string = (f'{i}: {row[3]} {row[4]} '
-                              f'- Parent Contact: {row[0]} {row[1]} {row[2]}')
-                    if len(medium_string) > 78:
-                        short_string = (f'{i}: {row[3]} {row[4]} '
-                                        f'- Parent Contact: {row[2]}')
-                        print(short_string)
-                    else:
-                        print(medium_string)
-                else:
-                    print(string)
-                
-                i += 1
-            '''
 
             return list_of_rows
     except:
