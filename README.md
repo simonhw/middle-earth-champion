@@ -105,12 +105,11 @@ Upon successful login, the admin user is presented with a list of the waiting li
 
 The chosen waiting list is printed under a descriptive heading.
 
-![Beaver waiting list screen]()
+![Beaver waiting list screen](assets/images/readme/beavers-waiting-list.png)
 
 At this point the admin user is given the option to delete someone from the waiting list for any reason e.g. the child has been enrolled or changed their mind about joining.
 
-Entering `y` will present a new input asking the user to select a number from the list corresponding to the data row they wish to delete. When a number is chosen, the input choice is shown on screen as well as details of the data row being deleted. 
-Messages then print to say an attempt is being made to delete the row and if the row was successfully deleted.
+Entering `y` will present a new input asking the user to select a number from the list corresponding to the data row they wish to delete. When a number is chosen, the corresponding name of the child to be removed from the waiting list is shown. The user is asked to confirm the action of deletion. Entering `n` will ask the user if they want to edit another section. Entering `y` causes a message to print saying an attempt is being made to delete the row and then another if the row was successfully deleted or is something went wrong.
 
 ![Data deleted successfully screen]()
 
@@ -318,6 +317,9 @@ The site was tested on Google Chrome on desktop, and DuckDuckGo on mobile.
 | CHECK POSITION ON WAITING LIST | | | | |
 | Check Waiting List Position | The user cannot access any data without entering a valid reference code. | Empty strings and invalid reference codes were entered. | The program checks the invalid input and returns an error message to say it does not exist. The user is prompted to try again. | PASS |
 | Check Waiting List Position | The user can access the position of their child on the waiting list when entering a valid reference code. | A valid reference code was entered. | The program checks the input and returns a message stating the child's position on the waiting list. The user is given a return to main menu option. | PASS |
+| Forgot Reference Code Question | The user can only proceed by entering `y`, `n`, `Y`, or `N`. | Entry of numbers, other letters, symbols, whitespaces, tab, and nothing was attempted. | The program rejects the inputs and reminds the user to only enter `y` or `n`. The user is prompted to try again. | PASS |
+| Forgot Reference Code Question | On entering `n` or `N` the user is returned to the Check Waiting List Position part of the loop. | The letters `n` and `N` were entered in separate instances. | The user is returned to the Check Waiting List Position part of the loop. | PASS |
+| Forgot Reference Code Question | The user is returned to the main menu after entering `y` or `Y`. | The letters `y` and `Y` were entered in separate instances. | The program returns the user to the main menu. | PASS |
 | ADMIN ACCESS TO WAITING LIST | | | | |
 | Edit Waiting List | The user cannot proceed without entering the admin password. | Inputs other than the admin password were entered. | The program rejects the input and explains why. The user is prompted to try again. | PASS |
 | Edit Waiting List | The user proceeds to the edit waiting list menu after entering the admin password. | The correct admin password was entered. | The program proceeds to the edit waiting list menu | PASS |
@@ -393,4 +395,3 @@ The use of bcrypt to hash the admin password was suggested by my CI mentor. This
 - allow user to return to main menu from any input line
 - add code to show a maximum number of rows at a time if the waiting list is very long?
 - crop waiting list data to be maximum 80 characters.
-- allow return to main menu from reference code loop
