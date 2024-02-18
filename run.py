@@ -292,7 +292,7 @@ def get_details():
                 if user_ref in refs:
                     index_of_details = refs.index(user_ref)
                     print(f'Your child is number {index_of_details} on the '
-                          f'{worksheet[:-1]} waiting list.\n')
+                          f'{worksheet[:-1]} waiting list.')
                     invalid = False
                     break
             if invalid == True:
@@ -393,7 +393,7 @@ def get_worksheet(worksheet):
         list_of_rows = SHEET.worksheet(worksheet).get_all_values()
       
         if len(list_of_rows) == 1:
-            print(f'The {worksheet} waiting list is empty!\n')
+            print(f'The {worksheet} waiting list is empty!')
             return False
         else:
             title = f'{worksheet} Waiting List'
