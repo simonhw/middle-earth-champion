@@ -119,6 +119,15 @@ An option to delete another entry is presented to the user. If `y` is entered, t
 
 Finally, the user is given the option to return to the main menu by inputting `y` or exit the program with `n`.
 
+#### Large Waiting Lists
+A later addition to this program tackled the idea of printed a long waiting list to the terminal. I decided to initally limit the display of large lists to the first 15 data entries only, as this looked neat in the confines of the 24 row high Heroku terminal. The user can choose to then print the rest of the rows if they wish. In each instance they are then given the option to select a row to delete.
+
+<details><summary>Gif of a large waiting list being viewed</summary>
+
+![Large Waiting List](assets/images/readme/long-waiting-list.gif)
+
+</details>
+
 ### Option 4
 To exit the program, the user can `4`. Before full shutdown, a message prints to let them know the program is closing.
 
@@ -267,7 +276,7 @@ To deploy this program locally on your own device, please follow the steps below
 | Returning Visitor Goals | | |
 | To check their child's position in the waiting list. | The user can navigate from the main menu to this part of the program. Providing the reference code generated when they initially registered their details will return their child's position on that particular waiting list. | [Successfully Checking Reference Code](assets/images/readme/check-ref-code.png) |
 | Frequent Visitor Goals | |
-| To view and delete entries on the list. | Admin users can securely access this part of the program with a password. Each waiting list can be viewed and entries can be deleted by entering the corresponding number on screen next to a given entry. | [1. Admin Welcome Screen](assets/images/readme/section-choice-screen.png) ![2. Admin View of Lists]() ![3. Admin Deletion of Entry]() |
+| To view and delete entries on the list. | Admin users can securely access this part of the program with a password. Each waiting list can be viewed and entries can be deleted by entering the corresponding number on screen next to a given entry. | [1. Admin Welcome Screen](assets/images/readme/section-choice-screen.png) [2. Admin View of Lists](assets/images/readme/beavers-waiting-list.png) [3. Admin Deletion of Entry](assets/images/readme/successful-delete.png) |
 
 ### Full Testing
 The program was deployed on Heroku and tested there on a Windows 10 desktop with a 26" monitor and on a One Plus 9 Pro mobile phone.
@@ -328,6 +337,9 @@ The site was tested on Google Chrome on desktop, and DuckDuckGo on mobile.
 | Edit Waiting List Menu | The program prints the Cub waiting list to the terminal when the user enters 2. |  Entry of the number 2 attempted. | The program prints the Cub waiting list to the terminal and poses the Delete Entry Question. | PASS |
 | Edit Waiting List Menu | The program prints the Scout waiting list to the terminal when the user enters 3. |  Entry of the number 3 attempted. | The program prints the Scout waiting list to the terminal and poses the Delete Entry Question. | PASS |
 | Edit Waiting List Menu | The program prints the Venture waiting list to the terminal when the user enters 4. |  Entry of the number 4 attempted. | The program prints the Venture waiting list to the terminal and poses the Delete Entry Question. | PASS |
+| View Remaining Entries Question | The user can only proceed by entering `y`, `n`, `Y`, or `N`. | Entry of numbers, other letters, symbols, whitespaces, tab, and nothing was attempted. | The program rejects the inputs and reminds the user to only enter `y` or `n`. The user is prompted to try again. | PASS |
+| View Remaining Entries Question | The user proceeds to the Delete Entry Question after entering `n` or `N`. | The letters `n` and `N` were entered in separate instances. | The program poses the Delete Entry Question. | PASS |
+| View Remaining Entries Question | After entering `y` or `Y`, the program prints the remaining rows from the list before then posing the Delete Entry Question. | The letters `y` and `Y` were entered in separate instances. | The program prints the remaining rows from the list before then posing the Delete Entry Question. | PASS |
 | Delete Entry Question | The user can only proceed by entering `y`, `n`, `Y`, or `N`. | Entry of numbers, other letters, symbols, whitespaces, tab, and nothing was attempted. | The program rejects the inputs and reminds the user to only enter `y` or `n`. The user is prompted to try again. | PASS |
 | Delete Entry Question | The user is posed the Edit Another Section Question after entering `n` or `N`. | The letters `n` and `N` were entered in separate instances. | The program poses the Edit Another Section Question. | PASS |
 | Delete Entry Question | The program asks the user to specify the data row to be deleted when the user enters `y` or `Y`. | The letters `y` and `Y` were entered in separate instances. | The program asks the user to enter the number corresponding to the data row they wish to delete. | PASS |
@@ -367,6 +379,7 @@ The code passed with no errors.
 | 6 | A correct number input by the user was marked as invalid if a whitespace was accidentally included after the number. | ![Main menu whitespace bug](assets/images/readme/bugs/menu-whitespace-bug.gif) | The `.strip()` method was applied to the user input to remove leading and trailing whitespaces. |
 | 7 | With the `validate_name()` function it was possible to enter a very long invalid input which resulted in the lines in the error message string being longer than 80 characters and this sometimes caused words to be split over two lines as the terminal wrapped to a new line. | ![Long input error string](assets/images/readme/bugs/long-input-message.png) | The error message was separated into two strings and when the user input was detected as containing more than 49 characters, intead of being printed to the terminal, the string `That is not a valid {parameter}.` was inserted with the appropriate parameter name at the end of the string. This prevented any error messages being longer than 80 characters per line. Similar code was added to the other functions that take in user inputs where the specfic input format is not managed directly by code e.g. as it is in `validate_dob()`.| 
 | 8 | Entering nothing, letters, or symbols in the Delete Data Row input crashes the program. | ![delete_row() bug that crashed the program](assets/images/readme/bugs/delete-row-crash-bug.gif) | The function was amended to include a try-except clause and the user input was only converted to an integer inside the clause to avoid the program crashing. |
+| 9 | When printing the remaining rows from a large waiting list, the first row in that list i.e. the 16th entry was not printed to the terminal. | | The cause of this was the `continue` that ignores the first entry in the list which in the first instance are the column headers. To avoid this issues, the 15th row was included in the new list so that the `continue` would skip an already printed row. |
 
 ## Credits
 ### Media
@@ -397,4 +410,3 @@ The use of bcrypt to hash the admin password was suggested by my CI mentor. This
 - Update validate_name function to only allow one space and/or one hypen between letters
 - allow user to return to main menu from any input line
 - add code to show a maximum number of rows at a time if the waiting list is very long?
-- crop waiting list data to be maximum 80 characters.
