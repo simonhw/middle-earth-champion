@@ -265,7 +265,7 @@ def push_details(list):
         print('Your reference is: ' + list[-2])
         print('Please save this reference as you will need it to check your '
               'child\'s waiting\nlist position.')
-        print(f'We will be in touch when we have capacity for {list[3]} to join.\n')
+        print(f'We will be in touch when we have capacity for {list[3]} to join.')
     except:
         print('We\'re sorry, there was a problem accessing the database. '
               'Please try again later.\n')
@@ -458,8 +458,13 @@ def delete_row(worksheet, list_of_rows):
         try:
             row_number = int(row_number)
             if row_number < len(list_of_rows) and row_number != 0:
-                print(f'You selected row_number {row_number}:\n'
-                    f'{list_of_rows[row_number]}')
+                print(f'You selected: '
+                      f'{list_of_rows[row_number][3]} '
+                      f'{list_of_rows[row_number][4]}')
+                confirm = validate_yes_no('Are you sure you want to delete '
+                                          'this entry? (y/n)\n')
+                if not confirm:
+                    break
                 print('Deleting entry...')
                 try:
                     SHEET.worksheet(worksheet).delete_rows(row_number + 1)
@@ -473,11 +478,11 @@ def delete_row(worksheet, list_of_rows):
 
                 break
             else:
-                print(Fore.RED + 'Invalid choice! ' + Style.RESET_ALL +
+                print(Fore.RED + 'elseInvalid choice! ' + Style.RESET_ALL +
                       'You must select a row between 1 and '
                       f'{len(list_of_rows) - 1}.\n')
         except:
-            print(Fore.RED + 'Invalid choice! ' + Style.RESET_ALL +
+            print(Fore.RED + 'exceptInvalid choice! ' + Style.RESET_ALL +
                   'You must select a row between 1 and '
                   f'{len(list_of_rows) - 1}.\n')
 
