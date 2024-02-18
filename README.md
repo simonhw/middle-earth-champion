@@ -324,32 +324,31 @@ The site was tested on Google Chrome on desktop, and DuckDuckGo on mobile.
 | Delete Entry Question | The user is posed the Edit Another Section Question after entering `n` or `N`. | The letters `n` and `N` were entered in separate instances. | The program poses the Edit Another Section Question. | PASS |
 | Delete Entry Question | The program asks the user to specify the data row to be deleted when the user enters `y` or `Y`. | The letters `y` and `Y` were entered in separate instances. | The program asks the user to enter the number corresponding to the data row they wish to delete. | PASS |
 | Data Deletion Input | The program rejects the input if anything other than a number from the list of entries displayed in the terminal is entered. | Letters, symbols, whitespaces, and nothing where entered. | The program crashes. | FAIL |
-| Date Deletion Input | When a valid number is entered, the entry is successfully deleted. | A valid number corresponding to a data row was entered. | The program attempts to delete the data row from the Google Sheet and if successful, prints a success message to the terminal. The user is prompted to indicated if they wish to view the updated waiting list. | PASS |
+| Data Deletion Input | When a valid number is entered, the entry is successfully deleted. | A valid number corresponding to a data row was entered. | The program attempts to delete the data row from the Google Sheet and if successful, prints a success message to the terminal. The user is prompted to indicated if they wish to view the updated waiting list. | PASS |
 | View Updated Waiting List Question | The user can only proceed by entering `y`, `n`, `Y`, or `N`. | Entry of numbers, other letters, symbols, whitespaces, tab, and nothing was attempted. | The program rejects the inputs and reminds the user to only enter `y` or `n`. The user is prompted to try again. | PASS |
 | View Updated Waiting List Question | The user is posed the Edit Another Section Question after entering `n` or `N`. | The letters `n` and `N` were entered in separate instances. | The program poses the Edit Another Section Question. | PASS |
 | View Updated Waiting List Question | When the user enters `y` or `Y`, the program prints the updated waiting list and asks the user if they wish to delete a data entry. | The letters `y` and `Y` were entered in separate instances. | The program prints the updated waiting list and poses the Delete Entry Question. | PASS |
 | Edit Another Section Question | The user can only proceed by entering `y`, `n`, `Y`, or `N`. | Entry of numbers, other letters, symbols, whitespaces, tab, and nothing was attempted. | The program rejects the inputs and reminds the user to only enter `y` or `n`. The user is prompted to try again. | PASS |
-| Edit Another Section Question | The user is posed the Return to Main Menu Question after entering `n` or `N`. | The letters `n` and `N` were entered in separate instances. | The program poses the Return to Main Menu Question. | PASS |
 | Edit Another Section Question | When the user enters `y` or `Y`, the program returns the user to the Edit Waiting List Menu. | The letters `y` and `Y` were entered in separate instances. | The program returns the user to the Edit Waiting List Menu. | PASS |
-
+| Edit Another Section Question | The user is posed the Return to Main Menu Question after entering `n` or `N`. | The letters `n` and `N` were entered in separate instances. | The program poses the Return to Main Menu Question. | PASS |
 
 ## Bugs
 ### Known Bugs
 | # | Bug | Image | Plan to Solve |
 | --- | --- | --- | --- |
 | 1 | When running the program on my local Visual Studio Code, it took a number of minutes for the first lines of code to print after which the program performed as expected. This issue could not be replicated when deployed on Heroku or on browser VS Code using Gitpod. When the lines of code related to gspread and google auth were commented out, the program ran immediately. | [VS Code Delay on Desktop](assets/images/readme/bugs/vscode-delay.gif) | The cause of this issue is uncertain and could be due to my internet connection or some other setting in VS Code. Given that using Gitpod allowed me to avoid this bug completelely without changing any other aspects of the code, it was not deemed a priority to solve this bug before the submission of this assignment in the interest of best use of time. |
-| 2 | Entering nothing, letters, or symbols in the Delete Data Row input crashes the program. | | |
 
 ### Solved Bugs
 | # | Bug | Image | Solution |
 | --- | --- | --- | --- |
-| 1 | Validating user choice crashed the code passing a letter into int(). | | Set choice check to '1' '2' '3' to avoid this. |
-| 2 | dob had time at the end in 0s. || Adding .date() to the end removed them. |
+| 1 | Validating the user input in `get_user_choice()` crashed the code passing a string into `int()`. | | The function was amended to check for the strings `'1'`, `'2'`, `'3'`, or `'4'` to avoid this. |
+| 2 | The Date of Birth input saved to the Google Sheet spreadsheet had time displayed after the date 0s. || Adding `.date()` to the end of the variable removed these 0s from the result. |
 | 3 | When refactoring `get_details()` the error message printed once for each spreadsheet searched instead of just printing once and requesting new user input. | ![Get details error messages](assets/images/readme/bugs/bug-ref-loops.png) | The else was changed to an if statement and indented back to the level of the while loop. |
 | 4 | When entering an email with more than one `.` in the domain name, the input was rejected. | ![Email domain error](assets/images/readme/bugs/email-bug.png) | The RegEx pattern for the domain was changed from `[\w]` to `[\w\.]` to allow more than the minimum single full stop. |
 | 5 | After deleting a row from the waiting list, the code as it was did not update the numbers associated with the remaining entries and the user could delete the wrong entry or try to keep deleting the last entry which would be a blank row. | | The functions associated with this task were reordered and improved. New while loops now manage the printing of the updated waiting lists before the user is asked if they want to delete another entry.|
 | 6 | A correct number input by the user was marked as invalid if a whitespace was accidentally included after the number. | ![Main menu whitespace bug](assets/images/readme/bugs/menu-whitespace-bug.gif) | The `.strip()` method was applied to the user input to remove leading and trailing whitespaces. |
 | 7 | With the `validate_name()` function it was possible to enter a very long invalid input which resulted in the lines in the error message string being longer than 80 characters and this sometimes caused words to be split over two lines as the terminal wrapped to a new line. | ![Long input error string](assets/images/readme/bugs/long-input-message.png) | The error message was separated into two strings and when the user input was detected as containing more than 49 characters, intead of being printed to the terminal, the string `That is not a valid {parameter}.` was inserted with the appropriate parameter name at the end of the string. This prevented any error messages being longer than 80 characters per line. Similar code was added to the other functions that take in user inputs where the specfic input format is not managed directly by code e.g. as it is in `validate_dob()`.| 
+| 8 | Entering nothing, letters, or symbols in the Delete Data Row input crashes the program. | ![delete_row() bug that crashed the program](assets/images/readme/bugs/delete-row-crash-bug.gif) | The function was amended to include a try-except clause and the user input was only converted to an integer inside the clause to avoid the program crashing. |
 
 ## Credits
 The images of the badges in this README were taken from the Scout Shop [website](https://thescoutshop.ie/collections/badges).
@@ -362,4 +361,5 @@ Thanks to the Code Institude tutors for suggesting Gitpod as a way to get around
 - hash the admin password
 - allow user to return to main menu from any input line
 - add code to show a maximum number of rows at a time if the waiting list is very long?
+- crop waiting list data to be maximum 80 characters.
 - allow return to main menu from reference code loop
