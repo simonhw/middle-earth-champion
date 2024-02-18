@@ -12,10 +12,36 @@ Deployed program on Heroku: [Scout Group Waiting List](https://scouts-waiting-li
     - [Lucidchart Flowchart](#lucidchart-flowchart)
     - [Colours](#colours)
 - [Features](#features)
-- [Dependencies](#dependencies)
+    - [Menu Option 1](#menu-option-1)
+    - [Menu Option 2](#menu-option-2)
+    - [Menu Option 3](#menu-option-3)
+    - [Menu Option 4](#menu-option-4)
+    - [Features to be Implemented](#features-to-be-implemented)
+- [Validation](#validation)
+    - [Validating the Main Menu](#validating-the-main-menu)
+    - [Validating Names](#validating-names)
+    - [Validating Emails](#validating-emails)
+    - [Validating Dates of Birth](#validating-dates-of-birth)
+    - [Validating Yes/No Inputs](#validating-yesno-inputs)
+    - [Validating Admin Status](#validating-admin-status)
+    - [Try-Except Clauses](#try-except-clauses)
+- [Technologies Used](#technologies-used)
+    - [Languages](#languages)
+    - [Frameworks, Libaries, and Programs](#frameworks-libaries-and-programs)
+    - [Dependencies](#dependencies)
+- [Deployment](#deployment)
+    - [Local Deployment](#local-deployment)
+- [Testing](#testing)
+    - [Manual Testing](#manual-testing)
+    - [Full Testing](#full-testing)
+    - [Automated Testing](#automated-testing)
 - [Bugs](#bugs)
     - [Known Bugs](#known-bugs)
     - [Solved Bugs](#solved-bugs)
+- [Credits](#credits)
+    - [Media](#media)
+    - [Code Used](#code-used)
+- [Acknowledgements](#acknowledgements)
 
 
 ## User Experience
@@ -67,7 +93,7 @@ Clear instructions are given to the user explaining what to do next to use the p
 
 ![Welcome menu](assets/images/readme/welcome-menu.png)
 
-### Option 1
+### Menu Option 1
 If the user enters `1`, feedback is given via a descriptive heading to confirm that the program is ready to add their child to the waiting list.
 
 ![Option 1 heading](assets/images/readme/option-1-name.png)
@@ -83,7 +109,7 @@ If the user enters `y`, the data is sent to the Google Sheets spreadsheet and a 
 
 The user is given the option to return to the main menu by inputting `y` or exit the program with `n`.
 
-### Option 2
+### Menu Option 2
 If the user selects option `2`, another descriptive heading is shown.
 
 ![Option 2](assets/images/readme/option-2.png)
@@ -94,7 +120,7 @@ When the user enters a reference code, a message is printed to inform them that 
 
 The user is again given the option to return to the main menu by inputting `y` or exit the program with `n`.
 
-### Option 3
+### Menu Option 3
 If an admin user wants to view and edit the waiting list, they can enter `3`. A password request is presented to prevent unauthorized access to the data.
 
 ![Admin log in screen](assets/images/readme/admin-screen.png)
@@ -128,10 +154,13 @@ A later addition to this program tackled the idea of printed a long waiting list
 
 </details>
 
-### Option 4
+### Menu Option 4
 To exit the program, the user can `4`. Before full shutdown, a message prints to let them know the program is closing.
 
 ![Exit program screen](assets/images/readme/exit-program-screen.png)
+
+### Features to be Implemented
+- Restrict the input of `validate_name()` futher to disallow symbols that are not generally used in names anywhere in the world e.g, `?` and `&`.
 
 ## Validation
 All user inputs and gspread processes are validated by the program. Each validation check is explained below and fully comprehensive testing of the validation is detailed in the [Manual Testing section](#manual-testing).
@@ -195,7 +224,7 @@ The `verify_admin()` function compares user input against a hashed password stor
 
 ![Validate password testing gif](assets/images/readme/validate-admin.gif)
 
-### Try Except Clauses
+### Try-Except Clauses
 A number of function use try and except clauses to catch any unintended errors and inform the user that something has gone wrong.
 
 The first instance of these are found in the `validate_name()` function where strings are checked for invalid characters and if any are found, or the pass conditions are not met, a ValueError is raised. The clauses are used here due to the large number of possible characters that could be used in names from around the world, something that would be laborious and excessive to code out explicitly in if-else statements.
@@ -207,9 +236,6 @@ In the `validate_dob()` function, the date string provided by the user is conver
 In the `push_details()`, `get_details()`, `get_worksheet()` and `delete_row()` functions, the Google Sheets spreadsheet is either called or manipulated somehow. In order to avoid the program crashing in case there is some unforseen issue accessing the spreadsheet, all the relevant methods are placed inside a try clause in these functions and the except clause prints a message telling the user that there has been an unexpected issue accessing the waiting list and to please try again later.
 
 ![API error gif](assets/images/readme/validate-api-error.gif)
-
-### Features to be Implemented
-- Restrict the input of `validate_name()` futher to disallow symbols that are not generally used in names anywhere in the world e.g, `?` and `&`.
 
 ## Technologies Used
 ### Languages
@@ -409,4 +435,6 @@ The use of bcrypt to hash the admin password was suggested by my CI mentor. This
 ## To-do List
 - Update validate_name function to only allow one space and/or one hypen between letters
 - allow user to return to main menu from any input line
-- add code to show a maximum number of rows at a time if the waiting list is very long?
+- spell check readme
+- spell check code
+- CI linter the code
