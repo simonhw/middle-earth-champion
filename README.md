@@ -182,6 +182,11 @@ The `validate_yes_no()` function returns `True` or `False` based on the user's i
 
 ![Yes No input error](assets/images/readme/validate-yes-no.gif)
 
+### Validating Admin Status
+The `verify_admin()` function compares user input against a hashed password stored securely in the Google Sheet. The user input is encoding into bytes and checked against the hash using bcrpyt's `.checkpw()` method. If the input does not match, the user is informed and prompted to try again. A successful match brings the user to the Edit Waiting List Menu. As the hash is stored on the Google Sheet, the code is wrapped in a try clause in case there is some unforseen problem with the API call.
+
+![Validate password testing gif]()
+
 ### Try Except Clauses
 A number of function use try and except clauses to catch any unintended errors and inform the user that something has gone wrong.
 
@@ -230,6 +235,7 @@ Adobe Photoshop 2020 - To pixellate and crop some README images.
 - [Gspread](https://docs.gspread.org/) - API allowing manipulation of data with a Google Sheet spreadhsheet.
 - [Google Auth](https://google-auth.readthedocs.io/) - API to control access to the spreadsheet.
 - [Datetime](https://github.com/python/cpython/tree/3.12/Lib/datetime.py) - To work with strings and integers as dates in the code.
+- [BCrypt](https://pypi.org/project/bcrypt/) - To hash passwords.
 - [Random](https://github.com/python/cpython/tree/3.12/Lib/random.py) - To generate random numbers.
 - [Re](https://github.com/python/cpython/tree/3.12/Lib/re/) - To work with regular expression operations.
 
@@ -364,7 +370,6 @@ The images of the badges in this README were taken from the Scout Shop [website]
 ### Code Used
 **All code in this project was written entirely by Simon Henleywillis unless otherwise specified below.**
 
-
 The idea to use Gspread and Google Auth was inspired by the Love Sandwiches walkthrough project. Lines 8 to 17 of `run.py` were taken from there as the Google Sheets setup was the same for this project.
 
 Line 144 uses the method `re.fullmatch`. This was discovered on a Stack Overflow post:
@@ -373,6 +378,11 @@ Line 144 uses the method `re.fullmatch`. This was discovered on a Stack Overflow
 Line 210 which converts the user input string date to a true date format was taken from a comment on a Stack Overflow post:
 - [Stack Overflow - How do I check date of birth format is correct](https://stackoverflow.com/questions/44716920/how-do-i-check-date-of-birth-format-is-correct)
 
+Including `if __name__ == "__main__":` to call my main code functions was included after discussions with my CI mentor.
+
+The use of bcrypt to hash the admin password was suggested by my CI mentor. This tutorial on [TutorialsPoint.com](https://www.tutorialspoint.com/hashing-passwords-in-python-with-bcrypt) was followed to genrate a hashed password. In the process of understanding how to use it effectively, I came across the below post on Stack Overflow that solved issues I had with decoding and encoding the plaintext user input.
+- [Stack Overflow - storing and retrieving hashed password in postgres](https://stackoverflow.com/questions/77897298/storing-and-retrieving-hashed-password-in-postgres)
+
 ## Acknowledgements
 - Thanks to the Code Institude tutors for suggesting Gitpod as a way to get around Known Bug #1 while coding this program.
 - Thanks to my CI Mentor [Graeme Taylor](https://github.com/G-Taylor) for his great support and encouragement and especially for showing me that I could use RegEx to validate the email input.
@@ -380,7 +390,6 @@ Line 210 which converts the user input string date to a true date format was tak
 
 ## To-do List
 - Update validate_name function to only allow one space and/or one hypen between letters
-- hash the admin password
 - allow user to return to main menu from any input line
 - add code to show a maximum number of rows at a time if the waiting list is very long?
 - crop waiting list data to be maximum 80 characters.
