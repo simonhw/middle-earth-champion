@@ -365,6 +365,7 @@ def verify_admin():
         password = input('Please enter the admin password:\n')
         pwdbytes = password.encode('utf-8')
         try:
+            print('Checking password...')
             stored_hash = SHEET.worksheet('hash').cell(1, 1).value
             stored_hash = stored_hash.encode('utf-8')
             if not bcrypt.checkpw(pwdbytes, stored_hash) :
