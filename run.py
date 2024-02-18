@@ -282,6 +282,7 @@ def get_details():
     print(title)
     print(generate_line(title) + '\n' + Style.RESET_ALL)
 
+    count = 0
     invalid = True
     while invalid:
         user_ref = input('Please enter your reference code:\n')
@@ -299,6 +300,13 @@ def get_details():
             if invalid == True:
                 print(Fore.RED + 'That reference does not exist. '
                       'Please try again.\n' + Style.RESET_ALL)
+                count += 1
+            if count == 3:
+                forgot = validate_yes_no('Have you forgotten your reference code? (y/n)\n')
+                if forgot:
+                    break
+                else:
+                    count = 0
         except:
             print('We\'re sorry, there was a problem accessing the database. '
                   'Please try again later.\n')
