@@ -4,6 +4,7 @@ from datetime import datetime
 import random
 import re
 from colorama import Fore, Back, Style
+import bcrypt
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -361,13 +362,20 @@ def verify_admin():
 
     invalid = True
     while invalid:
-        user_input = input('Please enter the admin password:\n')
-        if user_input != '1234':
-            print(Fore.RED + 'Invalid password! ' + Style.RESET_ALL +
-                  'Please try again.\n')
-        else:
-            is_admin = True
-            return is_admin
+        password = input('Please enter the admin password:\n')
+        pwdbytes = password.encode('utf-8')
+        try:
+            stored_hash = SHEET.worksheet('hash').cell(1, 1).value
+            stored_hash = stored_hash.encode('utf-8')
+            if not bcrypt.checkpw(pwdbytes, stored_hash) :
+                print(Fore.RED + 'Invalid password! ' + Style.RESET_ALL +
+                    'Please try again.\n')
+            else:
+                is_admin = True
+                return is_admin
+        except:
+            print('We\'re sorry, there was a problem accessing the database. '
+                  'Please try again later.\n')
 
 
 def get_worksheet(worksheet):
