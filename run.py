@@ -418,7 +418,22 @@ def get_worksheet(worksheet):
             print(section_colour + generate_line(title))
             print(title)
             print(generate_line(title) + Style.RESET_ALL)
-            i = 1
+            ####
+            if len(list_of_rows) > 16:
+                first_15_rows = list_of_rows[:16]
+                print_rows(1, first_15_rows)
+                print(f'\nNOTE: 15/{len(list_of_rows) - 1} entries shown.')
+                remaining = len(list_of_rows) - len(first_15_rows)
+                remaining_rows = list_of_rows[15:]
+                view_all = validate_yes_no('\nDo you want to view the '
+                                           f'remaining entries ({remaining})?'
+                                           '(y/n)\n')
+                if view_all:
+                    print_rows(16, remaining_rows)
+            else:
+                print_rows(list_of_rows)
+            ####
+            '''
             for row in list_of_rows:
                 if row == list_of_rows[0]:
                     continue
@@ -438,11 +453,40 @@ def get_worksheet(worksheet):
                     print(string)
                 
                 i += 1
+            '''
 
             return list_of_rows
     except:
         print('We\'re sorry, there was a problem accessing the database. '
               'Please try again later.\n')
+
+
+def print_rows(index, list):
+    '''
+    Function to print data from a supplied list.
+    '''
+
+    i = index
+    for row in list:
+            if row == list[0]:
+                continue
+            string = (f'{i}: {row[3]} {row[4]} '
+                      f'- DOB: {row[5]} '
+                      f'- Parent Contact: {row[0]} {row[1]} {row[2]}')
+            if len(string) > 78:
+                medium_string = (f'{i}: {row[3]} {row[4]} '
+                                 f'- Parent Contact: {row[0]} {row[1]} '
+                                 f'{row[2]}')
+                if len(medium_string) > 78:
+                    short_string = (f'{i}: {row[3]} {row[4]} '
+                                    f'- Parent Contact: {row[2]}')
+                    print(short_string)
+                else:
+                    print(medium_string)
+            else:
+                print(string)
+
+            i += 1
 
 
 def delete_row(worksheet, list_of_rows):
