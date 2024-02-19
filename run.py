@@ -58,7 +58,7 @@ def register_details():
     title = 'You chose: Add my child to the waiting list.'
     print(Fore.BLUE + Style.BRIGHT + generate_line(title))
     print(title)
-    print(generate_line(title) + '\n' + Style.RESET_ALL)
+    print(generate_line(title) + Style.RESET_ALL)
     print('Please enter your details below when prompted.')
     print('To return to the main menu at any time, type "menu" and hit '
           'enter.\n')
@@ -470,12 +470,13 @@ def get_worksheet(worksheet):
                 if view_all:
                     print_rows(16, remaining_rows)
             else:
-                print_rows(list_of_rows)
+                print_rows(1, list_of_rows)
 
             return list_of_rows
-    except:
+    except Exception as e:
         print('We\'re sorry, there was a problem accessing the database. '
               'Please try again later.\n')
+        print(e.args)
 
 
 def print_rows(index, list):
