@@ -470,3 +470,10 @@ The use of bcrypt to hash the admin password was suggested by my CI mentor. This
 ## To-do List
 - read through the readme
 - CI linter the code after any new changes
+- abstract out isadmin 
+- call main to go back to menu
+- EXPLAIN call main inside validate_name
+- review docstrings
+- explain the heroku deployment more
+- move testing to its own file
+- register details class 
