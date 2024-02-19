@@ -134,9 +134,11 @@ If the user enters an invalid code three times, they are given the option to exi
 ![Forgot reference code check]()
 
 ### Menu Option 3
-If an admin user wants to view and edit the waiting list, they can enter `3`. A password request is presented to prevent unauthorized access to the data.
+If an admin user wants to view and edit the waiting list, they can enter `3`. A password request is presented to prevent unauthorized access to the data. If the user enters an invalid password three times, they are given the option to exit the process or continue attempting to enter a password. This check repeats for every three invalid attempts.
 
 ![Admin log in screen](assets/images/readme/admin-screen.png)
+
+![Forgot password code check]()
 
 Upon successful login, the admin user is presented with a list of the waiting lists to choose from. Entering a number from `1` to `4` prints the respective waiting list to the terminal in the form of lists of the data entries.
 
@@ -375,8 +377,11 @@ The site was tested on Google Chrome on desktop, and DuckDuckGo on mobile.
 | Forgot Reference Code Question | On entering `n` or `N` the user is returned to the Check Waiting List Position part of the loop. | The letters `n` and `N` were entered in separate instances. | The user is returned to the Check Waiting List Position part of the loop. | PASS |
 | Forgot Reference Code Question | The user is returned to the main menu after entering `y` or `Y`. | The letters `y` and `Y` were entered in separate instances. | The program returns the user to the main menu. | PASS |
 | ADMIN ACCESS TO WAITING LIST | | | | |
-| Edit Waiting List | The user cannot proceed without entering the admin password. | Inputs other than the admin password were entered. | The program rejects the input and explains why. The user is prompted to try again. | PASS |
-| Edit Waiting List | The user proceeds to the edit waiting list menu after entering the admin password. | The correct admin password was entered. | The program proceeds to the edit waiting list menu | PASS |
+| Password Request | The user cannot proceed without entering the admin password. | Inputs other than the admin password were entered. | The program rejects the input and explains why. The user is prompted to try again. | PASS |
+| Forgot Password Question | The user can only proceed by entering `y`, `n`, `Y`, or `N`. | Entry of numbers, other letters, symbols, whitespaces, tab, and nothing was attempted. | The program rejects the inputs and reminds the user to only enter `y` or `n`. The user is prompted to try again. | PASS |
+| Forgot Password Question | On entering `y` or `Y` the user is posed the Return to Main Menu Question | The letters `y` and `Y` were entered in separate instances. | The user is posed the Return to Main Menu Question. | PASS |
+| Forgot Password Question | The user can continue attempting to enter a password after entering `n` or `N`. | The letters `n` and `N` were entered in separate instances. | The program repeats the admin password request. | PASS |
+| Password Request | The user proceeds to the Edit Waiting List Menu after entering the admin password. | The correct admin password was entered. | The program proceeds to the Edit Waiting List Menu | PASS |
 | Edit Waiting List Menu | The user can only proceed entering the numbers 1, 2, 3, or 4. | Entry of the numbers 5 and greater, 0, -1 and less were attempted. Entry of whitespaces, tabs, and nothing attempted. Entry of letters and symbols attempted. | The program rejects the input and explains what went wrong. User can only proceed when entering the numbers 1, 2, 3, or 4. | PASS |
 | Edit Waiting List Menu | The program prints the Beaver waiting list to the terminal when the user enters 1. |  Entry of the number 1 attempted. | The program prints the Beavers waiting list to the terminal and poses the Delete Entry Question. | PASS |
 | Edit Waiting List Menu | The program prints the Cub waiting list to the terminal when the user enters 2. |  Entry of the number 2 attempted. | The program prints the Cub waiting list to the terminal and poses the Delete Entry Question. | PASS |
