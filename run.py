@@ -123,6 +123,8 @@ def validate_name(message, parameter):
     Returns the string with the first letter capitalised.
     '''
 
+    DISALLOWED_SYMBOLS = set('\\`¬¦!"£$%^&*()_+={}[]:;@~#|<>,.?/')
+
     invalid = True
     while invalid:
         try:
@@ -133,6 +135,10 @@ def validate_name(message, parameter):
             for c in user_input:
                 if c.isdigit():
                     raise ValueError
+            name_set = set(user_input)
+            symbols = DISALLOWED_SYMBOLS.intersection(name_set)
+            if symbols:
+                raise ValueError
             if (len(user_input) > 1 and len(user_input) < 49):
                 invalid = False
                 return user_input.title()
@@ -141,8 +147,11 @@ def validate_name(message, parameter):
         except ValueError:
             error = (Fore.RED + f'"{user_input}" is not a valid {parameter}.'
                      + Style.RESET_ALL)
+            symbols_list = '\\`¬¦!"£$%^&*()_+={}[]:;@~#|<>,.?/'
             prompt = ('Names must be at least 2 characters in length and '
-                      'cannot contain any numbers.\n')
+                      'cannot contain any numbers\nor any of the following '
+                      f'symbols: {symbols_list}\n')
+
             if len(error) > 79:
                 print(Fore.RED + f'That is not a valid {parameter}'
                       + Style.RESET_ALL)
@@ -450,7 +459,8 @@ def get_worksheet(worksheet):
         list_of_rows = SHEET.worksheet(worksheet).get_all_values()
       
         if len(list_of_rows) == 1:
-            print(f'The {worksheet} waiting list is empty!')
+            print(section_colour + f'The {worksheet} waiting list is empty!'
+                  + Style.RESET_ALL)
             return False
         else:
             title = f'{worksheet} Waiting List'
