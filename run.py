@@ -398,6 +398,7 @@ def verify_admin():
     of waiting list details.
     '''
 
+    count = 0
     invalid = False
     while not invalid:
         password = input('Please enter the admin password:\n')
@@ -409,6 +410,14 @@ def verify_admin():
             if not bcrypt.checkpw(pwdbytes, stored_hash) :
                 print(Fore.RED + 'Invalid password! ' + Style.RESET_ALL +
                     'Please try again.\n')
+                count += 1
+                if count == 3:
+                    forgot = validate_yes_no('Have you forgotten your '
+                                             'password? (y/n)\n')
+                    if forgot:
+                        break
+                    else:
+                        count = 0
             else:
                 is_admin = True
                 return is_admin
