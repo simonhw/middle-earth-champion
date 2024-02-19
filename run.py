@@ -59,17 +59,38 @@ def register_details():
     print(Fore.BLUE + Style.BRIGHT + generate_line(title))
     print(title)
     print(generate_line(title) + '\n' + Style.RESET_ALL)
+    print('Please enter your details below when prompted.')
+    print('To return to the main menu at any time, type "menu" and hit '
+          'enter.\n')
 
     details = []
 
     correct = False
     while not correct:
         fname = validate_name('Your first name:\n', 'first name')
+        if fname == 'menu':
+            return 'menu'
+            break
         lname = validate_name('Your last name:\n', 'last name')
+        if lname == 'menu':
+            return 'menu'
+            break
         email = validate_email()
+        if email == 'menu':
+            return 'menu'
+            break
         cfname = validate_name('Your child\'s first name:\n', 'first name')
+        if cfname == 'menu':
+            return 'menu'
+            break
         clname = validate_name('Your child\'s last name:\n', 'last name')
+        if clname == 'menu':
+            return 'menu'
+            break
         dob = validate_dob()
+        if dob == 'menu':
+            return 'menu'
+            break
         str_dob = dob.strftime("%d/%m/%Y")
         section = age_section(str_dob)
         print(f'\nYour details are as follows:\n'
@@ -106,6 +127,9 @@ def validate_name(message, parameter):
     while invalid:
         try:
             user_input = input(message).strip()
+            if user_input.strip().lower() == 'menu':
+                return 'menu'
+                break
             for c in user_input:
                 if c.isdigit():
                     raise ValueError
@@ -142,6 +166,9 @@ def validate_email():
     invalid = True
     while invalid:
         user_input = input('Your email address:\n').strip()
+        if user_input.strip().lower() == 'menu':
+            return 'menu'
+            break
         result = re.fullmatch(pattern, user_input)
 
         if result:
@@ -199,6 +226,9 @@ def validate_dob():
     while invalid:
         user_input = input('Please enter your child\'s date of birth '
                            'in the format DD/MM/YYYY:\n')
+        if user_input.strip().lower() == 'menu':
+            return 'menu'
+            break
         try:
             if date_diff(user_input) < 0:
                 print(Fore.RED + 'Invalid date: ' + Style.RESET_ALL +
@@ -518,7 +548,10 @@ def main():
         choice = get_user_choice()
         if choice == '1':
             data_entered = register_details()
-            push_details(data_entered)
+            if data_entered == 'menu':
+                pass
+            else:
+                push_details(data_entered)
         elif choice == '2':
             get_details()
         elif choice == '3':
