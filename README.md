@@ -417,7 +417,7 @@ The Code Institute Python Linter was used to check the code for any violations o
 
 The code passed with no errors.
 
-![CI Linter screenshot]()
+![CI Linter screenshot](assets/images/readme/ci-linter-sshot.png)
 
 ## Bugs
 ### Known Bugs
@@ -468,6 +468,5 @@ The use of bcrypt to hash the admin password was suggested by my CI mentor. This
 - [Creating Your First README - Kera Cudmore](https://github.com/kera-cudmore/readme-examples)
 
 ## To-do List
-- spell check readme
-- spell check code
-- CI linter the code
+- read through the readme
+- CI linter the code after any new changes
