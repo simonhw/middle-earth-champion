@@ -298,7 +298,7 @@ def push_details(list):
 
     worksheet = list[-1]
     try:
-        SHEET.worksheet(worksheet).append_row(list)
+        SHEET.worksheet(worksheets).append_row(list)
         print(f'Thank you, {list[3]} has been added to the {worksheet} '
               'waiting list!')
         print('Your reference is: ' + list[-2])
@@ -306,9 +306,9 @@ def push_details(list):
               'child\'s waiting\nlist position.')
         print(f'We will be in touch when we have capacity for {list[3]} to '
               'join.')
-    except:
-        print('We\'re sorry, there was a problem accessing the database. '
-              'Please try again later.\n')
+    except Exception:
+        print('We\'re sorry, there was a problem accessing the database.'
+              ' Please try again later.')
 
 
 def get_details():
@@ -348,7 +348,7 @@ def get_details():
                     break
                 else:
                     count = 0
-        except:
+        except Exception:
             print('We\'re sorry, there was a problem accessing the database. '
                   'Please try again later.\n')
             break
@@ -432,7 +432,7 @@ def verify_admin():
             else:
                 is_admin = True
                 return is_admin
-        except:
+        except Exception:
             print('We\'re sorry, there was a problem accessing the database. '
                   'Please try again later.')
             break
@@ -546,7 +546,7 @@ def delete_row(worksheet, list_of_rows):
                                              f'updated {worksheet} waiting '
                                              'list? (y/n)\n')
                     return delete
-                except:
+                except Exception:
                     print('We\'re sorry, there was a problem accessing the '
                           'database. Please try again later.\n')
 
@@ -555,7 +555,7 @@ def delete_row(worksheet, list_of_rows):
                 print(Fore.RED + 'elseInvalid choice! ' + Style.RESET_ALL +
                       'You must select a row between 1 and '
                       f'{len(list_of_rows) - 1}.\n')
-        except:
+        except Exception:
             print(Fore.RED + 'exceptInvalid choice! ' + Style.RESET_ALL +
                   'You must select a row between 1 and '
                   f'{len(list_of_rows) - 1}.\n')
