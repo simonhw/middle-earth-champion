@@ -430,6 +430,7 @@ The code passed with no errors.
 | 7 | With the `validate_name()` function it was possible to enter a very long invalid input which resulted in the lines in the error message string being longer than 80 characters and this sometimes caused words to be split over two lines as the terminal wrapped to a new line. | ![Long input error string](assets/images/readme/bugs/long-input-message.png) | The error message was separated into two strings and when the user input was detected as containing more than 49 characters, intead of being printed to the terminal, the string `That is not a valid {parameter}.` was inserted with the appropriate parameter name at the end of the string. This prevented any error messages being longer than 80 characters per line. Similar code was added to the other functions that take in user inputs where the specfic input format is not managed directly by code e.g. as it is in `validate_dob()`.| 
 | 8 | Entering nothing, letters, or symbols in the Delete Data Row input crashes the program. | ![delete_row() bug that crashed the program](assets/images/readme/bugs/delete-row-crash-bug.gif) | The function was amended to include a try-except clause and the user input was only converted to an integer inside the clause to avoid the program crashing. |
 | 9 | When printing the remaining rows from a large waiting list, the first row in that list i.e. the 16th entry was not printed to the terminal. | | The cause of this was the `continue` that ignores the first entry in the list which in the first instance are the column headers. To avoid this issues, the 15th row was included in the new list so that the `continue` would skip an already printed row. |
+| 10 | After amending the `get_worksheet()` function to initially print a maximum of 15 entries to the terminal only, attempts to access two other worksheet resulted in in the try clause failing. | ![get_worksheet() bug after adding 15 row limit part 1](assets/images/readme/bugs/sheet-access-bug-15rows-1.png) ![get_worksheet() bug after adding 15 row limit part 2](assets/images/readme/bugs/sheet-access-bug-15rows-2.png) | The cause of this bug was investigated by printing the Exception arguments to the terminal. It was found that the `print_rows()` function was missing a parameter for the starting index. The parameter was included and the issue resolved.
 
 ## Credits
 ### Media
@@ -458,7 +459,6 @@ The use of bcrypt to hash the admin password was suggested by my CI mentor. This
 
 ## To-do List
 - Update validate_name function to only allow one space and/or one hypen between letters
-- allow user to return to main menu from any input line
 - spell check readme
 - spell check code
 - CI linter the code
