@@ -192,6 +192,11 @@ The `validate_name()` function takes in two strings as parameters: the message t
 
 ![Validate name number error gif](assets/images/readme/validate-name-number.gif)
 
+If the string contains any of the symbols below, a ValueError is raised:
+- `¬¦!"£$%^&*()_+={}[]:;@~#<>,.?\/` `
+
+![Validate name symbols error gif]()
+
 If the string contains at least two characters, the input is saved with the first letter capitalised using `.title()`, otherwise a Value Error is raised.
 
 ![Validate name 1 character error gif](assets/images/readme/validate-name-character.gif)
@@ -335,12 +340,14 @@ The site was tested on Google Chrome on desktop, and DuckDuckGo on mobile.
 | ADD DETAILS TO WAITING LIST | | | | |
 | Register First Name | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS |
 | Register First Name | The user cannot successfully enter a name that contains numbers. | Entry of words containing numbers and numbers on their own attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
-| Register First Name | The user cannot enter a name containing less than two characters. | Entry of a single character was attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
+| Register First Name | The user cannot enter a name containing less than two characters. | Entry of a single character was attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS |
+| Register First Name | The user cannot enter a name containing `¬¦!"£$%^&*()_+={}[]:;@~#<>,.?\/` or `. | Entry of some and all of these symbols were attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register First Name | The user cannot enter blank data or whitespaces. | Entry of nothing, tabs, and whitespaces attempted in turn. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register First Name | The user can successfully enter a name that contains letters, symbols, and whitespaces e.g. `Anne-Marie` or `Siobhán`. | Entry of words containing symbols and accented letters attempted. | The program accepts the input and proceeds to the next input request. | PASS | 
 | Register Last Name | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS |
 | Register Last Name | The user cannot successfully enter a name that contains numbers. | Entry of words containing numbers and numbers on their own attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
-| Register Last Name | The user cannot enter a name containing less than two characters. | Entry of a single character was attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
+| Register Last Name | The user cannot enter a name containing less than two characters. | Entry of a single character was attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS |
+| Register Last Name | The user cannot enter a name containing `¬¦!"£$%^&*()_+={}[]:;@~#<>,.?\/` or `. | Entry of some and all of these symbols were attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS |  
 | Register Last Name | The user cannot enter blank data or whitespaces. | Entry of nothing, tabs, and whitespaces attempted in turn. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Last Name | The user can successfully enter a name that contains letters, symbols, and whitespaces e.g. `O'Brien-Smith` or `Knüttel`. | Entry of words containing symbols and accented letters attempted. | The program accepts the input and proceeds to the next input request. | PASS | 
 | Register Email | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS |
@@ -351,11 +358,13 @@ The site was tested on Google Chrome on desktop, and DuckDuckGo on mobile.
 | Register Child's First Name | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS |
 | Register Child's First Name | The user cannot successfully enter a name that contains numbers. | Entry of words containing numbers and numbers on their own attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's First Name | The user cannot enter a name containing less than two characters. | Entry of a single character was attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
+| Register Child's First Name | The user cannot enter a name containing `¬¦!"£$%^&*()_+={}[]:;@~#<>,.?\/` or `. | Entry of some and all of these symbols were attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's First Name | The user cannot enter blank data or whitespaces. | Entry of nothing, tabs, and whitespaces attempted in turn. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's First Name | The user can successfully enter a name that contains letters, symbols, and whitespaces e.g. `John-Paul` or `José`. | Entry of words containing symbols and accented letters attempted. | The program accepts the input and proceeds to the next input request. | PASS |
 | Register Child's Last Name | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS | 
 | Register Child's Last Name | The user cannot successfully enter a name that contains numbers. | Entry of words containing numbers and numbers on their own attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's Last Name | The user cannot enter a name containing less than two characters. | Entry of a single character was attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
+| Register Child's Last Name | The user cannot enter a name containing `¬¦!"£$%^&*()_+={}[]:;@~#<>,.?\/` or `. | Entry of some and all of these symbols were attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's Last Name | The user cannot enter blank data or whitespaces. | Entry of nothing, tabs, and whitespaces attempted in turn. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's Last Name | The user can successfully enter a name that contains letters, symbols, and whitespaces e.g. `Costa Silva` or `Núñez`. | Entry of words containing symbols and accented letters attempted. | The program accepts the input and proceeds to the next input request. | PASS | 
 | Register Child's Date of Birth | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS |
@@ -441,6 +450,9 @@ The images of the badges in this README were taken from the Scout Shop [website]
 
 The idea to use Gspread and Google Auth was inspired by the Love Sandwiches walkthrough project. Lines 8 to 17 of `run.py` were taken from there as the Google Sheets setup was the same for this project.
 
+Code used to exclude certain symbols from accepted in `validate_name()` was taken from a comment on a Stack Overflow post:
+- [Stack Overflow - Validating existence of symbols in input](https://stackoverflow.com/questions/64236875/validating-existence-of-symbols-in-input)
+
 Line 144 uses the method `re.fullmatch`. This was discovered on a Stack Overflow post:
 - [Differences between re.match, re.search, re.fullmatch [duplicate]](https://stackoverflow.com/questions/58774029/differences-between-re-match-re-search-re-fullmatch)
 
@@ -458,7 +470,6 @@ The use of bcrypt to hash the admin password was suggested by my CI mentor. This
 - [Creating Your First README - Kera Cudmore](https://github.com/kera-cudmore/readme-examples)
 
 ## To-do List
-- Update validate_name function to only allow one space and/or one hypen between letters
 - spell check readme
 - spell check code
 - CI linter the code
