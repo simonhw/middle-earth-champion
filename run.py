@@ -52,7 +52,7 @@ def register_details():
     '''
     Gather personal details from user.
     User details and child details will be recorded in a new row
-    in the spreadsheet and given an unique reference number.
+    in the spreadsheet and given a unique reference number.
     '''
 
     title = 'You chose: Add my child to the waiting list.'
@@ -163,11 +163,11 @@ def validate_name(message, parameter):
 def validate_email():
     '''
     Takes in a string and validates it for an email format:
-    A word made up of any alphanumeric characters, hypens,
+    A word made up of any alphanumeric characters, hyphens,
     underscores or full stops followed by an @ symbol followed
-    by a word made up of any alphanumeric characters, hypens,
+    by a word made up of any alphanumeric characters, hyphens,
     or underscores followed by a full stop followed by a 2-4
-    character word made up of alphanumeric characters, hypens,
+    character word made up of alphanumeric characters, hyphens,
     or underscores.
     '''
 
@@ -198,7 +198,7 @@ def validate_email():
 
 def validate_yes_no(message):
     '''
-    Takes in a custom message and return a True or False for the
+    Takes in a custom message and returns a True or False for the
     user's response to a Yes/No question.
     Validates the user's response to only be the letter y or the
     letter n.
@@ -225,7 +225,7 @@ def validate_yes_no(message):
 
 def validate_dob():
     '''
-    Takes in user input and check if it is a valid date of birth
+    Takes in user input and checks if it is a valid date of birth
     in the specified format of DD/MM/YYYY.
     Checks if the date of birth reflects an age of less than 18
     years.
@@ -300,11 +300,12 @@ def push_details(list):
     try:
         SHEET.worksheet(worksheet).append_row(list)
         print(f'Thank you, {list[3]} has been added to the {worksheet} '
-               'waiting list!')
+              'waiting list!')
         print('Your reference is: ' + list[-2])
         print('Please save this reference as you will need it to check your '
               'child\'s waiting\nlist position.')
-        print(f'We will be in touch when we have capacity for {list[3]} to join.')
+        print(f'We will be in touch when we have capacity for {list[3]} to '
+              'join.')
     except:
         print('We\'re sorry, there was a problem accessing the database. '
               'Please try again later.\n')
@@ -312,7 +313,7 @@ def push_details(list):
 
 def get_details():
     '''
-    Take user input ref number and check if it exists in the worksheet.
+    Take in user input and check it against reference codes in the worksheet.
     If it does return the associated waiting list position.
     '''
 
@@ -336,12 +337,13 @@ def get_details():
                           f'{worksheet[:-1]} waiting list.')
                     invalid = False
                     break
-            if invalid == True:
+            if invalid is True:
                 print(Fore.RED + 'That reference does not exist. '
                       'Please try again.\n' + Style.RESET_ALL)
                 count += 1
             if count == 3:
-                forgot = validate_yes_no('Have you forgotten your reference code? (y/n)\n')
+                forgot = validate_yes_no('Have you forgotten your reference '
+                                         'code? (y/n)\n')
                 if forgot:
                     break
                 else:
@@ -354,8 +356,8 @@ def get_details():
 
 def generate_line(string_length):
     '''
-    Generates a line of hypens as long as the string to be wrapped up
-    to a maximum length of 80 characters.
+    Generates a line of hyphens as long as the string parameter provided up
+    to a maximum length of 79 characters.
     '''
 
     hypen_string = ''
@@ -416,9 +418,9 @@ def verify_admin():
             print('Checking password...')
             stored_hash = SHEET.worksheet('hash').cell(1, 1).value
             stored_hash = stored_hash.encode('utf-8')
-            if not bcrypt.checkpw(pwdbytes, stored_hash) :
+            if not bcrypt.checkpw(pwdbytes, stored_hash):
                 print(Fore.RED + 'Invalid password! ' + Style.RESET_ALL +
-                    'Please try again.\n')
+                      'Please try again.\n')
                 count += 1
                 if count == 3:
                     forgot = validate_yes_no('Have you forgotten your '
@@ -441,7 +443,7 @@ def get_worksheet(worksheet):
     Function to get the contents of a given worksheet in a list of lists
     and present the content to the admin user.
     If the list only contains the headings, tell the user that the waiting
-    list is empty and break out of the function.
+    list is empty and breaks out of the function.
     '''
 
     if worksheet == 'Beavers':
@@ -454,10 +456,10 @@ def get_worksheet(worksheet):
         section_colour = Fore.MAGENTA
     else:
         section_colour = Fore.WHITE
-    
+
     try:
         list_of_rows = SHEET.worksheet(worksheet).get_all_values()
-      
+
         if len(list_of_rows) == 1:
             print(section_colour + f'The {worksheet} waiting list is empty!'
                   + Style.RESET_ALL)
@@ -496,37 +498,36 @@ def print_rows(index, list):
 
     i = index
     for row in list:
-            if row == list[0]:
-                continue
-            string = (f'{i}: {row[3]} {row[4]} '
-                      f'- DOB: {row[5]} '
-                      f'- Parent Contact: {row[0]} {row[1]} {row[2]}')
-            if len(string) > 78:
-                medium_string = (f'{i}: {row[3]} {row[4]} '
-                                 f'- Parent Contact: {row[0]} {row[1]} '
-                                 f'{row[2]}')
-                if len(medium_string) > 78:
-                    short_string = (f'{i}: {row[3]} {row[4]} '
-                                    f'- Parent Contact: {row[2]}')
-                    print(short_string)
-                else:
-                    print(medium_string)
+        if row == list[0]:
+            continue
+        string = (f'{i}: {row[3]} {row[4]} '
+                  f'- DOB: {row[5]} '
+                  f'- Parent Contact: {row[0]} {row[1]} {row[2]}')
+        if len(string) > 78:
+            medium_string = (f'{i}: {row[3]} {row[4]} '
+                             f'- Parent Contact: {row[0]} {row[1]} {row[2]}')
+            if len(medium_string) > 78:
+                short_string = (f'{i}: {row[3]} {row[4]} '
+                                f'- Parent Contact: {row[2]}')
+                print(short_string)
             else:
-                print(string)
+                print(medium_string)
+        else:
+            print(string)
 
-            i += 1
+        i += 1
 
 
 def delete_row(worksheet, list_of_rows):
     '''
-    Function to take in an index of a list of row and use gspread
-    to delete that row in the google sheet spreadsheet.
+    Function to take in user unput of an index of a list of rows
+    and use gspread to delete that row in the google sheet spreadsheet.
     '''
 
     row_number = 0
     while True:
         row_number = input('\nEnter the number of the entry to be '
-                               'deleted and press enter:\n')
+                           'deleted and press enter:\n')
         try:
             row_number = int(row_number)
             if row_number < len(list_of_rows) and row_number != 0:
@@ -541,12 +542,13 @@ def delete_row(worksheet, list_of_rows):
                 try:
                     SHEET.worksheet(worksheet).delete_rows(row_number + 1)
                     print('Entry successfully deleted.')
-                    delete = validate_yes_no('\nDo you want to view the updated '
-                            f'{worksheet} waiting list? (y/n)\n')
+                    delete = validate_yes_no('\nDo you want to view the '
+                                             f'updated {worksheet} waiting '
+                                             'list? (y/n)\n')
                     return delete
                 except:
                     print('We\'re sorry, there was a problem accessing the '
-                        'database. Please try again later.\n')
+                          'database. Please try again later.\n')
 
                 break
             else:
@@ -583,8 +585,9 @@ def main():
                     list_of_rows = get_worksheet(section)
                     if not list_of_rows:
                         break
-                    if validate_yes_no('\nDo you want to remove a child from the '
-                                       f'{section} waiting list? (y/n)\n'):
+                    if validate_yes_no('\nDo you want to remove a child from '
+                                       f' the {section} waiting list? '
+                                       '(y/n)\n'):
                         delete = delete_row(section, list_of_rows)
                     else:
                         delete = False
@@ -592,7 +595,7 @@ def main():
                                            'section? (y/n)\n')
         elif choice == '4':
             print('Exiting program...')
-            break       
+            break
         else:
             print(f'Choice: {choice}')
         user_continue = validate_yes_no('\nDo you want to return to the main '
@@ -603,7 +606,7 @@ def main():
 
 if __name__ == "__main__":
     title = ('Welcome to the Waiting List system for the 101st Dublin Scout '
-            'Group.')
+             'Group.')
     print(Fore.BLUE + Style.BRIGHT + generate_line(title))
     print(title)
     print(generate_line(title) + Style.RESET_ALL)
