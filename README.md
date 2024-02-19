@@ -109,6 +109,15 @@ If the user enters `y`, the data is sent to the Google Sheets spreadsheet and a 
 
 The user is given the option to return to the main menu by inputting `y` or exit the program with `n`.
 
+#### Cancel Registration of Details
+Should the user which to abort the process of entering details or they get stuck in a loop entering invalid inputs over and over, they may type `menu` into the terminal and the `register_details()` function will end. In this case, the `push_details()` will not be called and the user will be given the option to return to the main menu by inputting `y` or exit the program with `n`.
+
+<summary><details>Gif of user exiting the details registration process early</details>
+
+![Exiting details process early gif]()
+
+</summary>
+
 ### Menu Option 2
 If the user selects option `2`, another descriptive heading is shown.
 
@@ -119,6 +128,10 @@ When the user enters a reference code, a message is printed to inform them that 
 ![Successful reference code check screen](assets/images/readme/check-ref-code.png)
 
 The user is again given the option to return to the main menu by inputting `y` or exit the program with `n`.
+
+If the user enters an invalid code three times, they are given the option to exit the process or continue attempting to enter a code. This check repeats for every three invalid attempts.
+
+![Forgot reference code check]()
 
 ### Menu Option 3
 If an admin user wants to view and edit the waiting list, they can enter `3`. A password request is presented to prevent unauthorized access to the data.
@@ -318,26 +331,32 @@ The site was tested on Google Chrome on desktop, and DuckDuckGo on mobile.
 | Main Menu | The user proceeds to the admin login feature when entering 3. |  Entry of the number 3 attempted. | The program proceeds to the admin login feature of the program. | PASS |
 | Main Menu | The user exits the program when entering 4. |  Entry of the number 4 attempted. | The program terminates. | PASS |
 | ADD DETAILS TO WAITING LIST | | | | |
+| Register First Name | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS |
 | Register First Name | The user cannot successfully enter a name that contains numbers. | Entry of words containing numbers and numbers on their own attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register First Name | The user cannot enter a name containing less than two characters. | Entry of a single character was attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register First Name | The user cannot enter blank data or whitespaces. | Entry of nothing, tabs, and whitespaces attempted in turn. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register First Name | The user can successfully enter a name that contains letters, symbols, and whitespaces e.g. `Anne-Marie` or `Siobhán`. | Entry of words containing symbols and accented letters attempted. | The program accepts the input and proceeds to the next input request. | PASS | 
+| Register Last Name | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS |
 | Register Last Name | The user cannot successfully enter a name that contains numbers. | Entry of words containing numbers and numbers on their own attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Last Name | The user cannot enter a name containing less than two characters. | Entry of a single character was attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Last Name | The user cannot enter blank data or whitespaces. | Entry of nothing, tabs, and whitespaces attempted in turn. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Last Name | The user can successfully enter a name that contains letters, symbols, and whitespaces e.g. `O'Brien-Smith` or `Knüttel`. | Entry of words containing symbols and accented letters attempted. | The program accepts the input and proceeds to the next input request. | PASS | 
+| Register Email | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS |
 | Register Email | The user cannot enter letters, numbers, or symbols on their own. (except when a `.` follows a `@`) | Entry of letters, numbers, and symbols attempted. | The program rejects the input and reminds the user of the correct email format. The user is prompted to try again. | PASS |
 | Register Email | The user cannot enter letters, numbers, or symbols that include a `@` when it is not followed by a `.` | Entry of letters, numbers, and symbols including a `@` but not followed by a `.` attempted. | The program rejects the input and reminds the user of the correct email format. The user is prompted to try again. | PASS |
 | Register Email | The user cannot enter letters, numbers, or symbols that include a `.` when it is not preceded by a `@` | Entry of letters, numbers, and symbols including a `.` but not preceded by a `@` attempted. | The program rejects the input and reminds the user of the correct email format. The user is prompted to try again. | PASS |
 | Register Email | The user can successfully enter letters, numbers, or symbols where a `@` is followed by at least one `.` | Entry of letters, numbers, and symbols where a `@` is followed by a `.` attempted. | The program accepts the input and proceeds to the next input request. | PASS |
+| Register Child's First Name | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS |
 | Register Child's First Name | The user cannot successfully enter a name that contains numbers. | Entry of words containing numbers and numbers on their own attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's First Name | The user cannot enter a name containing less than two characters. | Entry of a single character was attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's First Name | The user cannot enter blank data or whitespaces. | Entry of nothing, tabs, and whitespaces attempted in turn. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
-| Register Child's First Name | The user can successfully enter a name that contains letters, symbols, and whitespaces e.g. `John-Paul` or `José`. | Entry of words containing symbols and accented letters attempted. | The program accepts the input and proceeds to the next input request. | PASS | 
+| Register Child's First Name | The user can successfully enter a name that contains letters, symbols, and whitespaces e.g. `John-Paul` or `José`. | Entry of words containing symbols and accented letters attempted. | The program accepts the input and proceeds to the next input request. | PASS |
+| Register Child's Last Name | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS | 
 | Register Child's Last Name | The user cannot successfully enter a name that contains numbers. | Entry of words containing numbers and numbers on their own attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's Last Name | The user cannot enter a name containing less than two characters. | Entry of a single character was attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's Last Name | The user cannot enter blank data or whitespaces. | Entry of nothing, tabs, and whitespaces attempted in turn. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's Last Name | The user can successfully enter a name that contains letters, symbols, and whitespaces e.g. `Costa Silva` or `Núñez`. | Entry of words containing symbols and accented letters attempted. | The program accepts the input and proceeds to the next input request. | PASS | 
+| Register Child's Date of Birth | If the user enters the word "menu" in upper or lowercase letters, they are posed the Return to Main Menu Question. | Entries of `menu`, `MENU`, and combinations such as `mEnU` were attempted. | The process aborted and the user was posed the Return to Main Menu Question. | PASS |
 | Register Child's Date of Birth | The user cannot enter a combination of numbers, letters, and symbols. | Entry of a combination of numbers, letters, and symbols attempted e.g. `23??45>twenty` or `21/February/2014` | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's Date of Birth | The user cannot enter numbers and symbols in a format other than `DD/MM/YYY`. | Entry of numbers and symbols not matching the specified format was attempted e.g. `21-05-2015` or `21.03.2016`. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
 | Register Child's Date of Birth | The user cannot enter a date that has not occured. | Entry of a future date in the correct format was attempted. | The program rejects the input and explains why. The user is prompted to try again. | PASS | 
@@ -348,7 +367,7 @@ The site was tested on Google Chrome on desktop, and DuckDuckGo on mobile.
 | Confirm Details Question | The program successfully saved the registered details when the user enters `y` or `Y`. | The letters `y` and `Y` were entered in separate instances. | The program attempts to send the data to the Google Sheet and if successfull, prints a success message for the user. | PASS |
 | Return to Main Menu Question | The user can only proceed by entering `y`, `n`, `Y`, or `N`. | Entry of numbers, other letters, symbols, whitespaces, tab, and nothing was attempted. | The program rejects the inputs and reminds the user to only enter `y` or `n`. The user is prompted to try again. | PASS |
 | Return to Main Menu Question | The user exits the program after entering `n` or `N`. | The letters `n` and `N` were entered in separate instances. | The program terminates with the exit message. | PASS |
-| Return to Main Menu  Question | The user is returned to the main menu after entering `y` or `Y`. | The letters `y` and `Y` were entered in separate instances. | The program returns the user to the main menu. | PASS |
+| Return to Main Menu Question | The user is returned to the main menu after entering `y` or `Y`. | The letters `y` and `Y` were entered in separate instances. | The program returns the user to the main menu. | PASS |
 | CHECK POSITION ON WAITING LIST | | | | |
 | Check Waiting List Position | The user cannot access any data without entering a valid reference code. | Empty strings and invalid reference codes were entered. | The program checks the invalid input and returns an error message to say it does not exist. The user is prompted to try again. | PASS |
 | Check Waiting List Position | The user can access the position of their child on the waiting list when entering a valid reference code. | A valid reference code was entered. | The program checks the input and returns a message stating the child's position on the waiting list. The user is given a return to main menu option. | PASS |
