@@ -5,6 +5,7 @@ import random
 import re
 from colorama import Fore, Back, Style
 import bcrypt
+import sys
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -68,29 +69,11 @@ def register_details():
     correct = False
     while not correct:
         fname = validate_name('Your first name:\n', 'first name')
-        if fname == 'menu':
-            return 'menu'
-            break
         lname = validate_name('Your last name:\n', 'last name')
-        if lname == 'menu':
-            return 'menu'
-            break
         email = validate_email()
-        if email == 'menu':
-            return 'menu'
-            break
         cfname = validate_name('Your child\'s first name:\n', 'first name')
-        if cfname == 'menu':
-            return 'menu'
-            break
         clname = validate_name('Your child\'s last name:\n', 'last name')
-        if clname == 'menu':
-            return 'menu'
-            break
         dob = validate_dob()
-        if dob == 'menu':
-            return 'menu'
-            break
         str_dob = dob.strftime("%d/%m/%Y")
         section = age_section(str_dob)
         print(f'\nYour details are as follows:\n'
@@ -130,8 +113,7 @@ def validate_name(message, parameter):
         try:
             user_input = input(message).strip()
             if user_input.strip().lower() == 'menu':
-                return 'menu'
-                break
+                main()
             for c in user_input:
                 if c.isdigit():
                     raise ValueError
@@ -176,8 +158,7 @@ def validate_email():
     while invalid:
         user_input = input('Your email address:\n').strip()
         if user_input.strip().lower() == 'menu':
-            return 'menu'
-            break
+            main()
         result = re.fullmatch(pattern, user_input)
 
         if result:
@@ -236,8 +217,7 @@ def validate_dob():
         user_input = input('Please enter your child\'s date of birth '
                            'in the format DD/MM/YYYY:\n')
         if user_input.strip().lower() == 'menu':
-            return 'menu'
-            break
+            main()
         try:
             if date_diff(user_input) < 0:
                 print(Fore.RED + 'Invalid date: ' + Style.RESET_ALL +
@@ -298,7 +278,7 @@ def push_details(list):
 
     worksheet = list[-1]
     try:
-        SHEET.worksheet(worksheets).append_row(list)
+        SHEET.worksheet(worksheet).append_row(list)
         print(f'Thank you, {list[3]} has been added to the {worksheet} '
               'waiting list!')
         print('Your reference is: ' + list[-2])
@@ -570,10 +550,7 @@ def main():
         choice = get_user_choice()
         if choice == '1':
             data_entered = register_details()
-            if data_entered == 'menu':
-                pass
-            else:
-                push_details(data_entered)
+            push_details(data_entered)
         elif choice == '2':
             get_details()
         elif choice == '3':
@@ -595,13 +572,14 @@ def main():
                                            'section? (y/n)\n')
         elif choice == '4':
             print('Exiting program...')
-            break
+            sys.exit()
         else:
             print(f'Choice: {choice}')
         user_continue = validate_yes_no('\nDo you want to return to the main '
                                         'menu? (y/n)\n')
         if not user_continue:
             print('Exiting program...')
+            sys.exit()
 
 
 if __name__ == "__main__":
