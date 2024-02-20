@@ -24,7 +24,7 @@ Deployed program on Heroku: [Scout Group Waiting List](https://scouts-waiting-li
     - [Solved Bugs](#solved-bugs)
 
 ## Validation and Testing
-Extensive testing was carried throughout the development of this application. There are many possible invalid inputs that the user can attempt to enter and the validation checks explained below deal with these effectively.
+Extensive testing was carried out throughout the development of this application. There are many possible invalid inputs that the user could attempt to enter and the validation checks explained below deal with these effectively.
 
 ## Input Validation
 All user inputs and GSpread processes are validated by the program. Each validation check is explained below and fully comprehensive testing of the validation is detailed in the [Manual Testing section](#manual-testing).
@@ -44,18 +44,20 @@ The `validate_name()` function takes in two strings as parameters: the message t
 If the string contains any of the symbols below, a ValueError is raised:
 - `¬¦!"£$%^&*()_+={}[]:;@~#<>,.?\/` `
 
-![Validate name symbols error gif]()
+![Validate name symbols error gif](assets/images/readme/validate-name-symbols.gif)
 
-If the string contains at least two characters, the input is saved with the first letter capitalised using `.title()`, otherwise a Value Error is raised.
+If the string passes the above tests and contains at least two characters, it is saved with the first letter capitalised using `.title()`, otherwise a Value Error is raised.
 
 ![Validate name 1 character error gif](assets/images/readme/validate-name-character.gif)
 
 If at any stage the user enters `menu` into one of the input requests, the `main()` function is called and the user is returned to the main menu, skipping the rest of the code.
 
+![Exiting details process early gif](assets/images/readme/menu-exit-1.gif)
+
 ### Validating Emails
 The `validate_email()` function uses RegEx to check if the user input matches the specified email format:
 
-- Name made up of any word or hyphen or full stop: `[\w\.-]` e.g. `john.smith`
+- Name made up of any word or hyphens or full stops: `[\w\.-]` e.g. `john.smith`
 - The `@` symbol
 - A domain name made up of any word including hyphens: `[\w-]` e.g. `foresty-group`
 - A full stop `.`
@@ -95,14 +97,14 @@ The `validate_yes_no()` function returns `True` or `False` based on the user's i
 ![Yes No input error](assets/images/readme/validate-yes-no.gif)
 
 ### Validating Reference Codes
-The `get_details()` function compares the user's input to reference codes stored in a column in each of the worksheets on Google Sheets. A list is generated for each worksheet column in turn and checked against the user input inside a loop. When a match is found, the index of the reference in the list is returned to the terminal, being analagous to the position of the data entry on the waiting list. As list indexing starts at 0 and GSpread indexing starts at 1, it would appear at first that this would be incorrect; however, the first row in each worksheet column is a descriptive heading so the list index of 1 does indeed correspond to someone in postion 1 on a waiting list.
+The `get_details()` function compares the user's input to reference codes stored in a column in each of the worksheets on Google Sheets. A list is generated for each worksheet column in turn and checked against the user input inside a loop. When a match is found, the index of the reference in the list is returned to the terminal, being analogous to the position of the data entry on the waiting list. As list indexing starts at 0 and GSpread indexing starts at 1, it would appear at first that this would be incorrect; however, the first row in each worksheet column is a descriptive heading so the list index of 1 does indeed correspond to someone in position 1 on a waiting list.
 
 If no match is found, the user is informed that the code is invalid.
 
-![Invalid reference code gif]()
+![Invalid reference code gif](assets/images/readme/invalid-ref-code.gif)
 
 ### Validating Admin Status
-The bcrypt dependency was used to hash a password and compare the user's input to this hash. This level of security for the admin login was chosen because of the sensitive nature of the personal information held by this application. Hashing is a one-way process which means that it is virtually impossible to decrypt it and view the original plain text password. The python file written to generate the hash is not included in this repository for obvious reasons; however, its format was as follows:
+The bcrypt dependency was used to hash a password and compare the user's input to this hash. This level of security for the admin login was chosen because of the sensitive nature of the personal information held by this application. Hashing is a one-way process which means that it is virtually impossible to decrypt it and view the original plain text password. The Python file written to generate the hash is not included in this repository for obvious reasons; however, its format was in line with the following:
 
 ```python
 import bcrypt
@@ -128,7 +130,7 @@ The first instance of these is found in the `validate_name()` function where str
 
 In the `validate_dob()` function, the date string provided by the user is converted to a date using `strptime()` and the format `"%d/%m/%Y"`. If there is an error converting the string, a ValueError is raised by the except clause. Again, any possible number of inputs could be entered by the user here, so a try-except clause works well.
 
-In the `push_details()`, `get_details()`, `get_worksheet()` and `delete_row()` functions, the Google Sheets spreadsheet is either called or manipulated somehow. To avoid the program crashing in case there is some unforeseen issue accessing the spreadsheet, all the relevant methods are placed inside a try clause in these functions and the except clause prints a message telling the user that there has been an unexpected issue accessing the waiting list and to please try again later.
+In the `push_details()`, `get_details()`, `verify_admin()`, `get_worksheet()` and `delete_row()` functions, the Google Sheets spreadsheet is either called or manipulated somehow. To avoid the program crashing in case there is some unforeseen issue accessing the spreadsheet, all the relevant methods are placed inside a try clause in these functions and the except clause prints a message telling the user that there has been an unexpected issue accessing the waiting list and to please try again later.
 
 ![API error gif](assets/images/readme/validate-api-error.gif)
 
@@ -249,21 +251,21 @@ The code passed with no errors.
 ### Known Bugs
 | # | Bug | Image | Plan to Solve |
 | --- | --- | --- | --- |
-| 1 | When running the program on my local Visual Studio Code, it took several minutes for the first lines of code to print after which the program performed as expected. This issue could not be replicated when deployed on Heroku or on Gitpod using the browser version of VS Code. When the lines of code related to GSpread and Google Auth were commented out, the program ran immediately. | [VS Code Delay on Desktop](assets/images/readme/bugs/vscode-delay.gif) | The cause of this issue is uncertain and could be due to my internet connection or some other setting in VS Code. Given that using Gitpod allowed me to avoid this bug completely without changing any other aspects of the code, it was not deemed a priority to solve this bug before the submission of this assignment in the interest of the best use of time. |
+| 1 | When running the program on my local Visual Studio Code, it took several minutes for the first lines of code to print after which the program performed as expected. This issue could not be replicated when deployed on Heroku or on Gitpod using the browser version of VS Code. When the lines of code related to GSpread and Google Auth were commented out, the program ran immediately. | [VS Code Delay on Desktop](assets/images/readme/bugs/vscode-delay.gif) | The cause of this issue is uncertain and could be due to my home internet connection or some other setting in VS Code. Given that using Gitpod allowed me to avoid this bug completely without changing any other aspects of the code, it was not deemed a priority to solve this bug before the submission of this assignment in the interest of the best use of time. |
 
 ### Solved Bugs
 | # | Bug | Image | Solution |
 | --- | --- | --- | --- |
-| 1 | Validating the user input in `get_user_choice()` crashed the code passing a string into `int()`. | | The function was amended to check for the strings `'1'`, `'2'`, `'3'`, or `'4'` to avoid this. |
-| 2 | The Date of Birth input saved to the Google Sheets spreadsheet had time displayed after the date 0s. || Adding `.date()` to the end of the variable removed these 0s from the result. |
+| 1 | Validating the user input in `get_user_choice()` crashed the code passing a string into `int()`. | ![Int error in main menu](assets/images/readme/bugs/bug-int-str.png) | The function was amended to check for the strings `'1'`, `'2'`, `'3'`, or `'4'` to avoid this. |
+| 2 | The Date of Birth input saved to the Google Sheets spreadsheet had time displayed after the date in 0s. || Adding `.date()` to the end of the variable removed these 0s from the result. |
 | 3 | When refactoring `get_details()` the error message printed once for each spreadsheet searched instead of just printing once and requesting new user input. | ![Get details error messages](assets/images/readme/bugs/bug-ref-loops.png) | The else was changed to an if statement and indented back to the level of the while loop. |
 | 4 | When entering an email with more than one `.` in the domain name, the input was rejected. | ![Email domain error](assets/images/readme/bugs/email-bug.png) | The RegEx pattern for the domain was changed from `[\w]` to `[\w\.]` to allow more than the minimum single full stop. |
 | 5 | After deleting a row from the waiting list, the code as it was did not update the numbers associated with the remaining entries and the user could delete the wrong entry or try to keep deleting the last entry which would be a blank row. | | The functions associated with this task were reordered and improved. New while loops now manage the printing of the updated waiting lists before the user is asked if they want to delete another entry.|
-| 6 | A correct number input by the user was marked as invalid if a whitespace was accidentally included after the number. | ![Main menu whitespace bug](assets/images/readme/bugs/menu-whitespace-bug.gif) | The `.strip()` method was applied to the user input to remove leading and trailing whitespaces. |
+| 6 | A correct number input by the user was marked as invalid if whitespace was accidentally included after the number. | ![Main menu whitespace bug](assets/images/readme/bugs/menu-whitespace-bug.gif) | The `.strip()` method was applied to the user input to remove leading and trailing whitespaces. |
 | 7 | With the `validate_name()` function it was possible to enter a very long invalid input which resulted in the lines in the error message string being longer than 80 characters and this sometimes caused words to be split over two lines as the terminal wrapped to a new line. | ![Long input error string](assets/images/readme/bugs/long-input-message.png) | The error message was separated into two strings and when the user input was detected as containing more than 49 characters, instead of being printed to the terminal, the string `That is not a valid {parameter}.` was inserted with the appropriate parameter name at the end of the string. This prevented any error messages from being longer than 80 characters per line. Similar code was added to the other functions that take in user inputs where the specific input format is not managed directly by code e.g. as it is in `validate_dob()`.| 
-| 8 | Entering nothing, letters, or symbols in the Delete Data Row input crashes the program. | ![delete_row() bug that crashed the program](assets/images/readme/bugs/delete-row-crash-bug.gif) | The function was amended to include a try-except clause and the user input was only converted to an integer inside the clause to avoid the program crashing. |
-| 9 | When printing the remaining rows from a large waiting list, the first row in that list i.e. the 16th entry was not printed to the terminal. | | The cause of this was the `continue` that ignores the first entry in the list which in the first instance are the column headers. To avoid this issue, the 15th row was included in the new list so that the `continue` would skip this already printed row. |
+| 8 | Entering nothing, letters, or symbols in the Delete Data Row input crashed the program. | ![delete_row() bug that crashed the program](assets/images/readme/bugs/delete-row-crash-bug.gif) | The function was amended to include a try-except clause and the user input was only converted to an integer inside the clause to avoid the program crashing. |
+| 9 | When printing the remaining rows from a large waiting list, the first row in that list i.e. the 16th entry was not printed to the terminal. | | The cause of this was the `continue` that ignores the 0th index in the list which in the first instance are the column headers. To avoid this issue, the starting index was set to 15 in the second list so that the `continue` would skip this already printed row and proceed to print the 16th row and any others. |
 | 10 | After amending the `get_worksheet()` function to initially print a maximum of 15 entries to the terminal only, attempts to access two other worksheets resulted in the try clause failing. | ![get_worksheet() bug after adding 15-row limit part 1](assets/images/readme/bugs/sheet-access-bug-15rows-1.png) ![get_worksheet() bug after adding 15-row limit part 2](assets/images/readme/bugs/sheet-access-bug-15rows-2.png) | The cause of this bug was investigated by printing the Exception arguments to the terminal. It was found that the `print_rows()` function was missing a parameter for the starting index. The parameter was included and the issue was resolved.
-| 11 | When optimising the code to simply call `main()` to bring the user back to the main menu when they choose to do so, the code after the inserted `main()` resumed when the user tried to exit that particular `main()` call. | | The solution was to use `sys.exit()` from the sys dependency to exit the program completey at points in the code where the user indicates they want to exit fully. |
+| 11 | When optimising the code to simply call `main()` to bring the user back to the main menu when they choose to do so, the code after the inserted `main()` resumed when the user tried to exit that particular `main()` call. | | The solution was to use `sys.exit()` from the sys dependency to exit the program completely at points in the code where the user indicates they want to exit fully. |
 
 Back to [README.md](/README.md)
