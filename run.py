@@ -112,7 +112,7 @@ def validate_name(message, parameter):
     while invalid:
         try:
             user_input = input(message).strip()
-            if user_input.strip().lower() == 'menu':
+            if user_input.lower() == 'menu':
                 main()
             for c in user_input:
                 if c.isdigit():
@@ -157,7 +157,7 @@ def validate_email():
     invalid = True
     while invalid:
         user_input = input('Your email address:\n').strip()
-        if user_input.strip().lower() == 'menu':
+        if user_input.lower() == 'menu':
             main()
         result = re.fullmatch(pattern, user_input)
 
@@ -306,6 +306,8 @@ def get_details():
     invalid = True
     while invalid:
         user_ref = input('Please enter your reference code:\n')
+        if user_ref.strip().lower() == 'menu':
+            main()
         print('Checking reference...')
         try:
             worksheets = ['Beavers', 'Cubs', 'Scouts', 'Ventures']
@@ -393,6 +395,8 @@ def verify_admin():
     invalid = False
     while not invalid:
         password = input('Please enter the admin password:\n')
+        if password.strip().lower() == 'menu':
+            main()
         pwdbytes = password.encode('utf-8')
         try:
             print('Checking password...')
