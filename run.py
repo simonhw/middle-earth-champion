@@ -214,7 +214,7 @@ def validate_yes_no(message):
 
     invalid = True
     while invalid:
-        user_input = input(message).lower()
+        user_input = input(message).lower().strip()
         if user_input == 'y' or user_input == 'n':
             invalid = False
             return True if user_input == 'y' else False
@@ -402,7 +402,7 @@ def choose_section():
         print(Fore.BLUE + '3. Scouts' + Style.RESET_ALL)
         print(Fore.MAGENTA + '4. Ventures' + Style.RESET_ALL)
         choice = input('Enter a number from the options above and press '
-                       'enter:\n')
+                       'enter:\n').strip()
         if choice == '1':
             return 'Beavers'
             break
