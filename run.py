@@ -300,7 +300,10 @@ def get_details():
     title = 'You chose: Check my child\'s position on the waiting list.'
     print(Fore.BLUE + Style.BRIGHT + generate_line(title))
     print(title)
-    print(generate_line(title) + '\n' + Style.RESET_ALL)
+    print(generate_line(title) + Style.RESET_ALL)
+    print('Please enter the reference code you were given when you first '
+          'registered\nyour child.\nIf you have forgotten your code, you '
+          'can return to the main menu by typing\n"menu" and hitting enter.')
 
     count = 0
     invalid = True
@@ -342,12 +345,12 @@ def generate_line(string_length):
     to a maximum length of 79 characters.
     '''
 
-    hypen_string = ''
+    hyphen_string = ''
     i = 0
     while (i < len(string_length) and len(string_length) < 79):
-        hypen_string += '-'
+        hyphen_string += '-'
         i += 1
-    return hypen_string
+    return hyphen_string
 
 
 def choose_section():
@@ -391,6 +394,13 @@ def verify_admin():
     of waiting list details.
     '''
 
+    title = 'You chose: Edit the waiting list.'
+    print(Fore.BLUE + Style.BRIGHT + generate_line(title))
+    print(title)
+    print(generate_line(title) + Style.RESET_ALL)
+    print(Fore.RED + 'NOTE: ' + Style.RESET_ALL + 'You must be an '
+          'admin user to use this feature of the program.\n'
+          'To return to the main menu, type "menu" and hit enter.\n')
     count = 0
     invalid = False
     while not invalid:
