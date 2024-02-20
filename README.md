@@ -34,7 +34,7 @@ Deployed program on Heroku: [Scout Group Waiting List](https://scouts-waiting-li
 
 ## User Experience
 ### Initial Discussion
-This application is designed to be run in a terminal environment. Its purpose is to take in user information and add it to a database for a club membership waiting list. Users may also use the application to check their child's position on the waiting list. Admin users can view the content of the waiting list and delete entries where appropriate.
+This application is designed to be run in a terminal environment. Its purpose is to take in user information and add it to a database for a Scout group membership waiting list. Users may also use the application to check their child's position on the waiting list. Admin users can view the content of the waiting list and delete entries where appropriate.
 
 ### User Stories
 #### First-time Visitor Goals
@@ -75,7 +75,7 @@ This program is written completely in Python. The initial scope of the project w
 
 All of these goals were achieved in this version of the program.
 
-When the program launche, the user is greeted by a descriptive header welcoming them to the waiting list of the 101st Dublin Scout Group. This is a fictional group (currently not on the list of active scout groups).
+When the program launches, the user is greeted by a descriptive header welcoming them to the waiting list of the 101st Dublin Scout Group. This is a fictional group (currently not on the list of active scout groups).
 
 Clear instructions are given to the user explaining what to do next to use the program. Only four inputs are accepted: The numbers `1`, `2`, `3`, or `4`.
 
@@ -91,20 +91,20 @@ The user is then prompted to enter their first name, last name, contact email, c
 ![Entering details](assets/images/readme/enter-details.png)
 ![Confirming details](assets/images/readme/confirm-details.png)
 
-If the user enters `y`, a unique reference number is generated and two Class instances take in the user inputs and return a list of the values. This could also be achieved by simply appending the inputs to a list one by one but using the Classes makes the code look more elegant and tidy, and also provides evidence of my understanding of Python Classes. The lists are concatenated and sent to the Google Sheets spreadsheet. A confirmation message is shown if this process succeeds. This message also confirms which age section the child will join and the reference number that the user needs to use to check their position in the list.
+If the user enters `y`, a unique reference number is generated and two Class instances take in the user inputs and return a list of the values. This can also be achieved by simply appending the inputs to a list one by one but using the classes makes the code look more elegant and tidy, and also provides evidence of my understanding of Python Classes. The lists are concatenated and sent to the Google Sheets spreadsheet as one row of data. A confirmation message is shown if this process succeeds. This message also confirms which age section the child will join and provides the reference number that the user will need to input to check their position on the waiting list.
 
 ![Details successfully pushed](assets/images/readme/details-pushed.png)
 
-The user is given the option to return to the main menu by inputting `y` or exit the program with `n`.
+The user is given the option to return to the main menu by inputting `y` or to exit the program with `n`.
 
-#### Cancel Registration of Details
+#### Aborting the Registration Process
 Should the user wish to abort the process of entering details or if they get stuck in a loop entering invalid inputs over and over, they may type `menu` into the terminal and the program will return the user to the main menu.
 
-<summary><details>Gif of user exiting the details registration process early</details>
+<details><summary>Gif of user exiting the details registration process early</summary>
 
-![Exiting details process early gif]()
+![Exiting details process early gif](assets/images/readme/menu-exit-1.gif)
 
-</summary>
+</details>
 
 ### Option 2 - Checking Position on Waiting List
 If the user enters `2`, another descriptive heading is shown.
@@ -115,18 +115,24 @@ When the user enters a reference code, a message is printed to inform them that 
 
 ![Successful reference code check screen](assets/images/readme/check-ref-code.png)
 
-The user is again given the option to return to the main menu by inputting `y` or exit the program with `n`.
+The user is again given the option to return to the main menu by inputting `y` or to exit the program with `n`.
 
-If the user enters an invalid code three times, they are given the option to exit the process or continue attempting to enter a code. This check repeats for every three invalid attempts.
+If the user enters an invalid code three times, they are given the option to exit the process by answering `y` or continue attempting to enter a code by answering `n`. This check repeats for every three invalid attempts.
 
-![Forgot reference code check]()
+![Forgot reference code check](assets/images/readme/forgot-ref-code.png)
 
 ### Option 3 - Viewing and Editing the Waiting Lists
-If an admin user wants to view and edit the waiting list, they can enter `3`. A password request is presented to prevent unauthorized access to the data. If the user enters an invalid password three times, they are given the option to exit the process or continue attempting to enter a password. This check repeats for every three invalid attempts.
+If an admin user wants to view and edit the waiting list, they can enter `3`. A password request is presented to prevent unauthorised access to the data.
 
 ![Admin log in screen](assets/images/readme/admin-screen.png)
 
-![Forgot password code check]()
+If the user enters an invalid password three times, they are given the option to exit the process with `y` or continue attempting to enter a password with `n` . This check repeats for every three invalid attempts.
+
+<details><summary>Forgot Password Check</summary>
+
+![Forgot password code check](assets/images/readme/forgot-password.png)
+
+</details>
 
 Upon successful login, the admin user is presented with a list of the waiting lists to choose from. Entering a number from `1` to `4` prints the respective waiting list to the terminal in the form of lists of the data entries.
 
@@ -136,17 +142,17 @@ The chosen waiting list is printed under a descriptive heading.
 
 ![Beaver waiting list screen](assets/images/readme/beavers-waiting-list.png)
 
+Depending on the character length of the data registered, some details may not be shown in the terminal for a given entry. This is so that each row is kept at most 80 characters in length. In the screenshot above, the first entry omits the date of birth detail in order to fit the child's name, parent's name, and email on one line. At the very least, a data row will always show the child's name and the parent's email address. (See Solved Bug #7 in [TESTING.md](/TESTING.md) for more details)
+
 At this point, the admin user is given the option to delete someone from the waiting list for any reason e.g. the child has been enrolled or changed their mind about joining.
 
 Entering `y` will present a new input asking the user to select a number from the list corresponding to the data row they wish to delete. When a number is chosen, the corresponding name of the child to be removed from the waiting list is shown. The user is then asked to confirm the action of deletion. Entering `n` will cancel this process and ask the user if they want to edit another section. Entering `y` will print a message saying an attempt is being made to delete the row and then another message either stating that the row was successfully deleted or that something went wrong accessing the data.
 
 ![Data deleted successfully screen](assets/images/readme/successful-delete.png)
 
-An option to delete another entry is presented to the user. If `y` is entered, the updated waiting list is printed to the terminal again and the same steps above are followed. If `n` is entered, the user is asked if they want to view the waiting lists again and the same processes follow as above.
+An option to view the updated waiting list is presented to the user. If `y` is entered, the updated list is printed to the terminal and the same steps as above can be followed. If `n` is entered, the user is asked if they want to view the other waiting lists. Answering `y` will print the numbered lists again and ask the user to select one. Answering `n` will prompt the user to choose between returning to the main menu again or exiting the program.
 
 ![Edit another section screen](assets/images/readme/edit-another-section.png)
-
-Finally, the user is given the option to return to the main menu by inputting `y` or exit the program with `n`.
 
 #### Large Waiting Lists
 A later addition to this program tackled the idea of printing a long waiting list to the terminal. I decided to initially limit the display of large lists to the first 15 data entries only, as this looked neat in the confines of the 24-row high Heroku terminal. The user can choose to then print the rest of the rows if they wish. In each instance, they are then given the option to select a row to delete.
@@ -164,6 +170,8 @@ To exit the program, the user can enter `4`. Before full shutdown, a message pri
 
 ### Features to be Implemented
 - Allow a user to edit their existing details using their reference code.
+- Allow an admin to amend the position of a child on a waiting list.
+- Allow an admin to sort the waiting lists so that children who become older while still on the waiting list and would be due to move to an older age section are moved to that list.
 
 ## Technologies Used
 ### Languages
@@ -186,18 +194,19 @@ Adobe Photoshop 2020 - To pixellate and crop some README images.
 
 [Heroku](https://www.heroku.com/) - To host the deployed version of the program.
 
-[Sheilds.io](https://shields.io/) - To add badges to this README.
+[Shields.io](https://shields.io/) - To add badges to this README.
 
 [CI Python Linter](https://pep8ci.herokuapp.com/#) - To ensure code meets minimum PEP8 standards.
 
 ### Dependencies
 - [Colorama](https://pypi.org/project/colorama/) - To apply some colour to text in the program.
-- [Gspread](https://docs.gspread.org/) - API allowing manipulation of data with a Google Sheet spreadsheet.
-- [Google Auth](https://google-auth.readthedocs.io/) - API to control access to the spreadsheet.
+- [GSpread](https://docs.gspread.org/) - To allow manipulation of data in a Google Sheet spreadsheet.
+- [Google Auth](https://google-auth.readthedocs.io/) - To control access to the spreadsheet.
 - [Datetime](https://github.com/python/cpython/tree/3.12/Lib/datetime.py) - To work with strings and integers as dates in the code.
 - [BCrypt](https://pypi.org/project/bcrypt/) - To hash passwords.
 - [Random](https://github.com/python/cpython/tree/3.12/Lib/random.py) - To generate random numbers.
 - [Re](https://github.com/python/cpython/tree/3.12/Lib/re/) - To work with regular expression operations.
+- [Sys](https://docs.python.org/3/library/sys.html) - To make the program exit its processes.
 
 ## Deployment
 The program was deployed on Heroku to allow the CI assessor and other interested parties to view and interact with the program.
@@ -225,12 +234,12 @@ To deploy this program locally on your device, please follow the steps below:
 4. Navigate to "APIs & Services" on the left-hand side of the page.
 5. Search for the Google Drive API and click "Enable".
 6. In the API overview, click "Create Credentials".
-7. In the next page, select the following options:
+7. On the next page, select the following options:
     - "Which API are you using?": Google Drive API
     - "Where will you be calling the API from?": Web Server
     - "What data will you be accessing?": Application data
 8. Click "No" for the final question and then click "What credentials do I need?"
-9. In this next page, enter a service account name, select the Project/Editor role, and select JSON as the key type.
+9. On this next page, enter a service account name, select the Project/Editor role, and select JSON as the key type.
 10. Click continue and wait for the JSON file to download to your computer.
 11. Store this file in your local repository and rename it `creds.json`.
 12. Navigate back to "APIs & Services" and search for and enable the Google Sheets API.
@@ -238,7 +247,7 @@ To deploy this program locally on your device, please follow the steps below:
 #### Heroku
 1. Log in or sign up to Heroku.
 2. On the Heroku dashboard, click "Create New App".
-3. Enter a name and select a region then click "Create App".
+3. Enter a name, select a region, and then click "Create App".
 4. Navigate to the Setting tab and click on "Show Config Vars."
 5. Enter `CREDS` into the key field and the `creds.json` file contents into the value field.
 6. Enter `PORT` into the next key field and `8000` into the corresponding value field.
@@ -252,24 +261,24 @@ To deploy this program locally on your device, please follow the steps below:
 14. Wait for the compiler to finish and once the message "Your app was successfully deployed." is shown, click "View" to view your program!
 
 ## Testing
-All documentation on the testing of this application can be found in the [TESTING.md](/TESTING.md) files
+All documentation on the testing of this application can be found in the [TESTING.md](/TESTING.md) file.
 
 ## Credits
 ### Media
-The images of the badges in this README were taken from the Scout Shop [website](https://thescoutshop.ie/collections/badges).
+The images of the four scout badges in this README were taken from the Scout Shop [website](https://thescoutshop.ie/collections/badges).
 
 ### Code Used
 **All code in this project was written entirely by Simon Henleywillis unless otherwise specified below.**
 
-The idea to use Gspread and Google Auth was inspired by the Love Sandwiches walkthrough project. Lines 8 to 17 of `run.py` were taken from there as the Google Sheets setup was the same for this project.
+The idea to use GSpread and Google Auth was inspired by the Love Sandwiches walkthrough project. Lines 10 to 19 of `run.py` were taken from there as the Google Sheets setup was the same for this project.
 
-Code used to exclude certain symbols from accepted in `validate_name()` was taken from a comment on a Stack Overflow post:
+Code used to exclude certain symbols from being accepted in the `validate_name()` function was taken from a comment on a Stack Overflow post:
 - [Stack Overflow - Validating existence of symbols in input](https://stackoverflow.com/questions/64236875/validating-existence-of-symbols-in-input)
 
-Line 144 uses the method `re.fullmatch`. This was discovered on a Stack Overflow post:
+Line 188 uses the method `re.fullmatch`. This was discovered on a Stack Overflow post:
 - [Differences between re.match, re.search, re.fullmatch [duplicate]](https://stackoverflow.com/questions/58774029/differences-between-re-match-re-search-re-fullmatch)
 
-Line 210 which converts the user input string date to a true date format was taken from a comment on a Stack Overflow post:
+Line 259 which converts the user input string date to a true date format was taken from a comment on a Stack Overflow post:
 - [Stack Overflow - How do I check date of birth format is correct](https://stackoverflow.com/questions/44716920/how-do-i-check-date-of-birth-format-is-correct)
 
 The line `if __name__ == "__main__":` was included to call my main code functions after discussions with my CI mentor.
@@ -279,10 +288,5 @@ The use of bcrypt to hash the admin password was suggested by my CI mentor. This
 
 ## Acknowledgements
 - Thanks to the Code Institute tutors for suggesting Gitpod as a way to get around Known Bug #1 while coding this program.
-- Thanks to my CI Mentor [Graeme Taylor](https://github.com/G-Taylor) for his great support and encouragement and especially for showing me that I could use RegEx to validate the email input.
+- Thanks to my CI Mentor [Graeme Taylor](https://github.com/G-Taylor) for his great support and encouragement and especially for suggesting that I could use RegEx to validate an email address format.
 - [Creating Your First README - Kera Cudmore](https://github.com/kera-cudmore/readme-examples)
-
-## To-do List
-- add images for all bugs
-- final read through of the readme 
-- CI linter the code after any final changes
