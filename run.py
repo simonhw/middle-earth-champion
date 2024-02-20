@@ -555,6 +555,29 @@ def delete_row(worksheet, list_of_rows):
                   f'{len(list_of_rows) - 1}.\n')
 
 
+def admin_access():
+    '''
+    Function to run the neccessary proccess to verify admin status and allow
+    access to view and edit the waiting lists fully.
+    '''
+
+    is_admin = verify_admin()
+    while is_admin:
+        section = choose_section()
+        delete = True
+        while delete:
+            list_of_rows = get_worksheet(section)
+            if not list_of_rows:
+                break
+            if validate_yes_no(f'\nDo you want to remove a child from the'
+                               f' {section} waiting list? (y/n)\n'):
+                delete = delete_row(section, list_of_rows)
+            else:
+                delete = False
+        is_admin = validate_yes_no('\nDo yu want to edit another section?'
+                                   ' (y/n)\n')
+
+
 def main():
     '''
     Run program functions until user wants to exit.
@@ -568,27 +591,12 @@ def main():
         elif choice == '2':
             get_details()
         elif choice == '3':
-            is_admin = verify_admin()
-            while is_admin:
-                section = choose_section()
-                delete = True
-                while delete:
-                    list_of_rows = get_worksheet(section)
-                    if not list_of_rows:
-                        break
-                    if validate_yes_no('\nDo you want to remove a child from '
-                                       f' the {section} waiting list? '
-                                       '(y/n)\n'):
-                        delete = delete_row(section, list_of_rows)
-                    else:
-                        delete = False
-                is_admin = validate_yes_no('\nDo you want to edit another '
-                                           'section? (y/n)\n')
+            admin_access()
         elif choice == '4':
             print('Exiting program...')
             sys.exit()
         else:
-            print(f'Choice: {choice}')
+            print('Something unexpected went wrong...\n')
         user_continue = validate_yes_no('\nDo you want to return to the main '
                                         'menu? (y/n)\n')
         if not user_continue:
