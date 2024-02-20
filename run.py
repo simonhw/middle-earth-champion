@@ -18,13 +18,42 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
 
+class Parent:
+    '''
+    Creates a new instance of Parent.
+    '''
+    def __init__(self, fname, lname, email, ref):
+        #Parent's personal details
+        self.fname = fname
+        self.lname = lname
+        self.email = email
+        self.ref = ref
+    
+    def list(self):
+        return [self.fname, self.lname, self.email, self.ref]
+
+
+class Child:
+    '''
+    Creates a new instance of Child.
+    '''
+    def __init__(self, cfname, clname, dob, section):
+        #Child's personal details
+        self.cfname = cfname
+        self.clname = clname
+        self.dob = dob
+        self.section = section
+    
+    def list(self):
+        return [self.cfname, self.clname, self.dob, self.section]
+
 
 def get_user_choice():
     '''
-    Get user's chosen option.
-    Run a while loop to validate user input, must be a number from 1 to 3.
-    Loop will run continuously until the user enters valid data as
-    instructed.
+    Gets user's input for choosing a main menu option.
+    Runs a while loop to validate the input which must be a number between 1
+    and 4.
+    Loop runs continuously until the user enters valid data as instructed.
     '''
     while True:
         print('OPTIONS:')
@@ -51,9 +80,10 @@ def get_user_choice():
 
 def register_details():
     '''
-    Gather personal details from user.
-    User details and child details will be recorded in a new row
-    in the spreadsheet and given a unique reference number.
+    Gathers personal details from user and organises them using two Classes.
+    Generates unique reference number for the Class instance.
+    Class outputs are concatenated for sending to the Google Sheets
+    spreadsheet using GSpread methods.
     '''
 
     title = 'You chose: Add my child to the waiting list.'
@@ -63,8 +93,6 @@ def register_details():
     print('Please enter your details below when prompted.')
     print('To return to the main menu at any time, type "menu" and hit '
           'enter.\n')
-
-    details = []
 
     correct = False
     while not correct:
@@ -76,22 +104,19 @@ def register_details():
         dob = validate_dob()
         str_dob = dob.strftime("%d/%m/%Y")
         section = age_section(str_dob)
+
         print(f'\nYour details are as follows:\n'
               f'Full Name: {fname} {lname}\n'
               f'Contact email: {email}\n'
               f'Child\'s Full Name: {cfname} {clname}\n'
               f'Child\'s DOB: {str_dob}\n')
+
         correct = validate_yes_no('Are these details correct? (y/n)\n')
         if correct:
-            details.append(fname)
-            details.append(lname)
-            details.append(email)
-            details.append(cfname)
-            details.append(clname)
-            details.append(str_dob)
             ref = generate_reference_no(lname)
-            details.append(ref)
-            details.append(section)
+            parent = Parent(fname, lname, email, ref)
+            child = Child(cfname, clname, str_dob, section)
+            details = parent.list() + child.list()
             return details
 
 
@@ -100,6 +125,7 @@ def validate_name(message, parameter):
     Takes in a custom message and parameter description as strings.
     Checks that the user input is a string made up only of letters and
     has at least two characters.
+    Checks that the user unput does not contain any specific symbols.
     Strips any leading and trailing whitespaces.
     While loop will continue to run until a valid name is entered
     by the user.
@@ -144,13 +170,12 @@ def validate_name(message, parameter):
 
 def validate_email():
     '''
-    Takes in a string and validates it for an email format:
-    A word made up of any alphanumeric characters, hyphens,
-    underscores or full stops followed by an @ symbol followed
-    by a word made up of any alphanumeric characters, hyphens,
-    or underscores followed by a full stop followed by a 2-4
-    character word made up of alphanumeric characters, hyphens,
-    or underscores.
+    Takes in a string and validates it according to a RegEx email format:
+    A word made up of any alphanumeric characters, hyphens, underscores or
+    full stops followed by an @ symbol followed by a word made up of any
+    alphanumeric characters, hyphens, or underscores followed by a full stop
+    followed by a word made up of alphanumeric characters, underscores, or
+    full stops.
     '''
 
     pattern = r'^[\w\.-]+@[\w-]+\.+[\w\.]+$'
@@ -167,8 +192,9 @@ def validate_email():
         else:
             error = (Fore.RED + f'"{user_input}" is not a valid email.'
                      + Style.RESET_ALL)
-            prompt = ('Emails must contain an @ and a . '
-                      ' e.g. example@email.com\n')
+            prompt = ('Emails must contain an @ and a . e.g. '
+                      'example@email.com\nEmails cannot contain any symbols '
+                      'other than "@", ".", "-", or "_".\n')
             if len(error) > 79:
                 print(Fore.RED + f'That is not a valid email.'
                       + Style.RESET_ALL)
@@ -179,10 +205,10 @@ def validate_email():
 
 def validate_yes_no(message):
     '''
-    Takes in a custom message and returns a True or False for the
-    user's response to a Yes/No question.
-    Validates the user's response to only be the letter y or the
-    letter n.
+    Takes in a custom message which should ask for a response to a Yes/No
+    question. 
+    Validates the user's response to only be the letter y or the letter n and
+    returns a True or False respectively.
     '''
 
     invalid = True
@@ -210,6 +236,8 @@ def validate_dob():
     in the specified format of DD/MM/YYYY.
     Checks if the date of birth reflects an age of less than 18
     years.
+    Checks if the date is in the future.
+    Return the date in the form of a sting.
     '''
 
     invalid = True
@@ -236,9 +264,9 @@ def validate_dob():
 
 def generate_reference_no(lname):
     '''
-    Generates a unique reference number for an entry on the waiting
-    list. User can enter this number to check their details and position
-    on the waiting list.
+    Generates a unique reference number for an entry on the waiting list. 
+    User can enter this number to check their details and position on the
+    waiting list.
     '''
 
     return lname + str(random.randrange(1000, 9999))
@@ -246,8 +274,8 @@ def generate_reference_no(lname):
 
 def date_diff(date):
     '''
-    Calculate the difference between a given date and today and returns
-    the result in the form of an integer number of days.
+    Calculates the difference between a given date and today.
+    Returns the result in the form of an integer number of days.
     '''
 
     return (datetime.now() - datetime.strptime(date, "%d/%m/%Y")).days
@@ -255,8 +283,8 @@ def date_diff(date):
 
 def age_section(str_dob):
     '''
-    Calculate the age of the person based on the input date. Returns
-    the appropriate section name for the age.
+    Calculates the age of the person based on the input date. 
+    Returns the appropriate section name for the age.
     '''
     age = date_diff(str_dob) / 365.25
     if age < 8:
@@ -271,20 +299,19 @@ def age_section(str_dob):
 
 def push_details(list):
     '''
-    Gets the list of details generated by the user and
-    pushes them to the next available row in the correct
-    worksheet.
+    Takes in a list of details generated by the Classes and pushs the list to
+    the next available row in the correct Google Sheets worksheet.
     '''
 
     worksheet = list[-1]
     try:
         SHEET.worksheet(worksheet).append_row(list)
-        print(f'Thank you, {list[3]} has been added to the {worksheet} '
+        print(f'Thank you, {list[4]} has been added to the {worksheet} '
               'waiting list!')
-        print('Your reference is: ' + list[-2])
+        print('Your reference is: ' + list[3])
         print('Please save this reference as you will need it to check your '
               'child\'s waiting\nlist position.')
-        print(f'We will be in touch when we have capacity for {list[3]} to '
+        print(f'We will be in touch when we have capacity for {list[4]} to '
               'join.')
     except Exception:
         print('We\'re sorry, there was a problem accessing the database.'
@@ -293,8 +320,10 @@ def push_details(list):
 
 def get_details():
     '''
-    Take in user input and check it against reference codes in the worksheet.
-    If it does return the associated waiting list position.
+    Takes in user input and checks it against reference codes in the worksheet.
+    Returns the associated waiting list position if a match is found.
+    Allows the user to return to the main menu after three incorrect matches
+    in a row.
     '''
 
     title = 'You chose: Check my child\'s position on the waiting list.'
@@ -303,7 +332,8 @@ def get_details():
     print(generate_line(title) + Style.RESET_ALL)
     print('Please enter the reference code you were given when you first '
           'registered\nyour child.\nIf you have forgotten your code, you '
-          'can return to the main menu by typing\n"menu" and hitting enter.')
+          'can return to the main menu by typing\n"menu" and hitting '
+          'enter.\n')
 
     count = 0
     invalid = True
@@ -315,7 +345,7 @@ def get_details():
         try:
             worksheets = ['Beavers', 'Cubs', 'Scouts', 'Ventures']
             for worksheet in worksheets:
-                refs = SHEET.worksheet(worksheet).col_values(7)
+                refs = SHEET.worksheet(worksheet).col_values(4)
                 if user_ref in refs:
                     index_of_details = refs.index(user_ref)
                     print(f'Your child is number {index_of_details} on the '
@@ -356,6 +386,7 @@ def generate_line(string_length):
 def choose_section():
     '''
     Function to allow admin user to choose which worksheet to edit.
+    Returns a string of the worksheet name based on the user's input.
     '''
 
     title = 'Admin Access Granted: Edit Waiting List'
@@ -390,8 +421,10 @@ def choose_section():
 
 def verify_admin():
     '''
-    Function to validate user input to match admin password allowing editing
+    Compares user input to a hashed password to allow the viewing and editing
     of waiting list details.
+    Allows the user to return to the main menu after three incorrect password
+    attempts in a row.
     '''
 
     title = 'You chose: Edit the waiting list.'
@@ -434,10 +467,11 @@ def verify_admin():
 
 def get_worksheet(worksheet):
     '''
-    Function to get the contents of a given worksheet in a list of lists
-    and present the content to the admin user.
-    If the list only contains the headings, tell the user that the waiting
-    list is empty and breaks out of the function.
+    Function to get the contents of a given worksheet in a list of lists and
+    present the content to the admin user.
+    If the list contains no data entres apart from the column headings, it 
+    informs the user that the waiting list is empty and breaks out of the 
+    function.
     '''
 
     if worksheet == 'Beavers':
@@ -487,21 +521,28 @@ def get_worksheet(worksheet):
 
 def print_rows(index, list):
     '''
-    Function to print data from a supplied list.
+    Function to print the waiting list data from a supplied list.
+    Prints one of three types of strings to keep outputs shorter than 80
+    characters:
+    - A long string containing the child's name, date of birth, parent's name
+      and email address
+    - A medium string containing the child's name, parent's name, and email
+      address
+    - A short string containing the child's name and parent's email address
     '''
 
     i = index
     for row in list:
         if row == list[0]:
             continue
-        string = (f'{i}: {row[3]} {row[4]} '
-                  f'- DOB: {row[5]} '
-                  f'- Parent Contact: {row[0]} {row[1]} {row[2]}')
+        string = (f'{i}: {row[4]} {row[5]} '
+                  f'- DOB: {row[6]} '
+                  f'- Parent Contact: {row[0]} {row[1]}, {row[2]}')
         if len(string) > 78:
-            medium_string = (f'{i}: {row[3]} {row[4]} '
-                             f'- Parent Contact: {row[0]} {row[1]} {row[2]}')
+            medium_string = (f'{i}: {row[4]} {row[5]} '
+                             f'- Parent Contact: {row[0]} {row[1]}, {row[2]}')
             if len(medium_string) > 78:
-                short_string = (f'{i}: {row[3]} {row[4]} '
+                short_string = (f'{i}: {row[4]} {row[5]} '
                                 f'- Parent Contact: {row[2]}')
                 print(short_string)
             else:
@@ -514,8 +555,10 @@ def print_rows(index, list):
 
 def delete_row(worksheet, list_of_rows):
     '''
-    Function to take in user unput of an index of a list of rows
-    and use gspread to delete that row in the google sheet spreadsheet.
+    Accepts an input from the user limited to a number corresponding to one of
+    the currently displayed waiting list entries.
+    Prints the child's name and asks the user to confirm deletion action.
+    Deletes the specified entry from the Google Sheet spreadsheet.
     '''
 
     row_number = 0
@@ -526,8 +569,8 @@ def delete_row(worksheet, list_of_rows):
             row_number = int(row_number)
             if row_number < len(list_of_rows) and row_number != 0:
                 print(f'You selected: '
-                      f'{list_of_rows[row_number][3]} '
-                      f'{list_of_rows[row_number][4]}')
+                      f'{list_of_rows[row_number][4]} '
+                      f'{list_of_rows[row_number][5]}')
                 confirm = validate_yes_no('Are you sure you want to delete '
                                           'this entry? (y/n)\n')
                 if not confirm:
@@ -557,8 +600,8 @@ def delete_row(worksheet, list_of_rows):
 
 def admin_access():
     '''
-    Function to run the neccessary proccess to verify admin status and allow
-    access to view and edit the waiting lists fully.
+    Runs the neccessary proccesses that verify admin status and allows access
+    to view and edit the waiting lists repeatedly.
     '''
 
     is_admin = verify_admin()
@@ -574,7 +617,7 @@ def admin_access():
                 delete = delete_row(section, list_of_rows)
             else:
                 delete = False
-        is_admin = validate_yes_no('\nDo yu want to edit another section?'
+        is_admin = validate_yes_no('\nDo you want to edit another section?'
                                    ' (y/n)\n')
 
 
