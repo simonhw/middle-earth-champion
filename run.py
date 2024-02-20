@@ -18,17 +18,18 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('ci_pp3_waiting_list')
 
+
 class Parent:
     '''
     Creates a new instance of Parent.
     '''
     def __init__(self, fname, lname, email, ref):
-        #Parent's personal details
+        '''Parent's personal details'''
         self.fname = fname
         self.lname = lname
         self.email = email
         self.ref = ref
-    
+
     def list(self):
         return [self.fname, self.lname, self.email, self.ref]
 
@@ -38,12 +39,12 @@ class Child:
     Creates a new instance of Child.
     '''
     def __init__(self, cfname, clname, dob, section):
-        #Child's personal details
+        '''Child's personal details'''
         self.cfname = cfname
         self.clname = clname
         self.dob = dob
         self.section = section
-    
+
     def list(self):
         return [self.cfname, self.clname, self.dob, self.section]
 
@@ -206,7 +207,7 @@ def validate_email():
 def validate_yes_no(message):
     '''
     Takes in a custom message which should ask for a response to a Yes/No
-    question. 
+    question.
     Validates the user's response to only be the letter y or the letter n and
     returns a True or False respectively.
     '''
@@ -264,7 +265,7 @@ def validate_dob():
 
 def generate_reference_no(lname):
     '''
-    Generates a unique reference number for an entry on the waiting list. 
+    Generates a unique reference number for an entry on the waiting list.
     User can enter this number to check their details and position on the
     waiting list.
     '''
@@ -283,7 +284,7 @@ def date_diff(date):
 
 def age_section(str_dob):
     '''
-    Calculates the age of the person based on the input date. 
+    Calculates the age of the person based on the input date.
     Returns the appropriate section name for the age.
     '''
     age = date_diff(str_dob) / 365.25
@@ -469,8 +470,8 @@ def get_worksheet(worksheet):
     '''
     Function to get the contents of a given worksheet in a list of lists and
     present the content to the admin user.
-    If the list contains no data entres apart from the column headings, it 
-    informs the user that the waiting list is empty and breaks out of the 
+    If the list contains no data entres apart from the column headings, it
+    informs the user that the waiting list is empty and breaks out of the
     function.
     '''
 
@@ -513,10 +514,9 @@ def get_worksheet(worksheet):
                 print_rows(1, list_of_rows)
 
             return list_of_rows
-    except Exception as e:
+    except Exception:
         print('We\'re sorry, there was a problem accessing the database. '
               'Please try again later.\n')
-        print(e.args)
 
 
 def print_rows(index, list):
@@ -589,11 +589,11 @@ def delete_row(worksheet, list_of_rows):
 
                 break
             else:
-                print(Fore.RED + 'elseInvalid choice! ' + Style.RESET_ALL +
+                print(Fore.RED + 'Invalid choice! ' + Style.RESET_ALL +
                       'You must select a row between 1 and '
                       f'{len(list_of_rows) - 1}.\n')
         except Exception:
-            print(Fore.RED + 'exceptInvalid choice! ' + Style.RESET_ALL +
+            print(Fore.RED + 'Invalid choice! ' + Style.RESET_ALL +
                   'You must select a row between 1 and '
                   f'{len(list_of_rows) - 1}.\n')
 
