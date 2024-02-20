@@ -75,7 +75,7 @@ This program is written completely in Python. The initial scope of the project w
 
 All of these goals were achieved in this version of the program.
 
-The user is greeted on running the program by a descriptive header welcoming them to the waiting list of the 101st Dublin Scout Group. This is a fictional group (currently not on the list of active scout groups).
+When the program launche, the user is greeted by a descriptive header welcoming them to the waiting list of the 101st Dublin Scout Group. This is a fictional group (currently not on the list of active scout groups).
 
 Clear instructions are given to the user explaining what to do next to use the program. Only four inputs are accepted: The numbers `1`, `2`, `3`, or `4`.
 
@@ -91,7 +91,7 @@ The user is then prompted to enter their first name, last name, contact email, c
 ![Entering details](assets/images/readme/enter-details.png)
 ![Confirming details](assets/images/readme/confirm-details.png)
 
-If the user enters `y`, the data is sent to the Google Sheets spreadsheet and a confirmation message is shown if successful. This message confirms which age section the child will join and the reference number that the user needs to use to check their position in the list.
+If the user enters `y`, a unique reference number is generated and two Class instances take in the user inputs and return a list of the values. This could also be achieved by simply appending the inputs to a list one by one but using the Classes makes the code look more elegant and tidy, and also provides evidence of my understanding of Python Classes. The lists are concatenated and sent to the Google Sheets spreadsheet. A confirmation message is shown if this process succeeds. This message also confirms which age section the child will join and the reference number that the user needs to use to check their position in the list.
 
 ![Details successfully pushed](assets/images/readme/details-pushed.png)
 
@@ -283,9 +283,6 @@ The use of bcrypt to hash the admin password was suggested by my CI mentor. This
 - [Creating Your First README - Kera Cudmore](https://github.com/kera-cudmore/readme-examples)
 
 ## To-do List
-- read through the readme
-- CI linter the code after any new changes
-- abstract out isadmin 
-- review docstrings
-- register details class 
 - add images for all bugs
+- final read through of the readme 
+- CI linter the code after any final changes
